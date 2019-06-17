@@ -1,5 +1,5 @@
 /**
- * @name: 判断数组最大的维度
+ * @name: 判断数组最大的维度，该方法有bug
  * @param: {array} [ array ] 数组
  * @returns [number]
  */
@@ -21,4 +21,4 @@ export default function deepth(array) {
   return deep;
 }
 
-//console.log(deepth([0, [1, [2, [3]]]])) // 1
+console.log(deepth([0, [1, [2, [3, [4]]]], [1, [2, [3]]]])); // 1

@@ -49,5 +49,3 @@ export default {
   hump,
   shousand
 };
-
-console.log(trim);

@@ -1,12 +1,15 @@
 /**
- * @description 扁平化数组
- *
- * @param {array} 需要偏平化的数组
- *
- * @returns [array] 新的数组
+ * @name  扁平化数组
+ * @param { array } [ array ] 需要偏平化的数组
+ * @param { deepth } [ number ] 深度
+ * @returns [array]
  */
 
 export default function flatten(array, deepth = 1) {
+  if (!Array.isArray(array)) {
+    console.error("[array] is not array");
+    return array;
+  }
   let arr = [];
   for (let n = 0; n < array.length; n++) {
     if (deepth > 1) {
@@ -22,4 +25,4 @@ export default function flatten(array, deepth = 1) {
   return arr;
 }
 
-//console.log(flatten([1,2,3]))
+//console.log(flatten([1, 2, [3]]));

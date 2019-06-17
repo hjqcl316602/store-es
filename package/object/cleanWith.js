@@ -9,25 +9,34 @@ import type from "../type";
  */
 
 export default function cleanWith(object, callback, context = this) {
-  if (!type.isObject(object)) return object;
   let keys = Object.keys(object);
-  let resObject = {};
-  if (keys.length === 0 || typeof callback !== "function") return object;
+  if (!type.isObject(object) || keys.length === 0) {
+    console.error("[object] is not object or  empty");
+    return object;
+  }
+  if (typeof callback !== "function") {
+    console.error("[callback] is not function");
+    return object;
+  }
+
+  let res = {};
   keys.forEach(key => {
     if (!callback.call(context, object[key], key, object)) {
-      resObject[key] = object[key];
+      res[key] = object[key];
     }
   });
-  return resObject;
+  return res;
 }
 
 // let object = {
-//   name: 'hjq',
+//   name: "hjq",
 //   age: 19,
-//   dd: ''
-// }
-// let arr = [1, 3, 4]
+//   dd: ""
+// };
+// let arr = [1, 3, 4];
 
-// console.log(cleanWith(object, function (item, key) {
-//   return item === ''
-// }))
+// console.log(
+//   cleanWith(object, function(item, key) {
+//     return item === "";
+//   })
+// );

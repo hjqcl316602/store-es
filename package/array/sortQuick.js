@@ -1,9 +1,7 @@
 /**
- * @description 数组排序 - 快速
- *
+ * @name 数组排序(快速)
  * @param {arr} [array] 数组
  * @param { bool } [boolean] 是否是升序
- *
  * @returns [array]
  */
 

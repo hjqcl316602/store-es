@@ -1,12 +1,83 @@
 # store-es
 
 ```js
-
  npm install store-es
-
 ```
 
 ## 对象式
+
+### array
+
+#### delayer
+
+- @name 树形结构数据转一维数组
+- @param {array} [array]
+- @returns [array]
+
+#### flatten
+
+- @name 扁平化数组
+- @param { array } [ array ] 需要偏平化的数组
+- @param { deepth } [ number ] 深度
+- @returns [array]
+
+#### isEqual
+
+- @name 验证两个数组的值是否相等
+- @msg 只支持一维，支持 NAN
+- @param { prev } [array ]
+- @param { next } [ array ]
+- @returns [boolean]
+
+#### shuffle
+
+- @name 数组乱序
+- @msg 使用 fisher-tayes 算法，目前最好的乱序方式，使得每个元素参数的概率一致
+- @param { array } [ array ] 数组
+- @return [ array ]
+
+#### sort
+
+- @name 数组排序
+- @param { arr } [ array ]
+- @param { type } [ number ][1] 排序类型 1 => 升序 2=>降序 3=> 随机
+- @returns [ array ]
+
+#### sortQuick
+
+- @name 数组排序(快速)
+- @param { arr } [ array ] 数组
+- @param { bool } [ boolean ] 是否是升序
+- @returns [array]
+
+#### sortSubbing
+
+- @name 数组排序(冒泡)
+- @msg 所有排序中速度最慢的
+- @param { arr } [ array ] 数组
+- @param { bool } [ boolean ] 是否是升序
+- @return [ array ]
+
+#### transpose
+
+- @name 数组置换
+- @param {array} [array] 需要置换的数组
+- @msg 目标数组必须是二维数组，并且每一个元素的长度一致，且不能为 0
+- @return [array]
+
+#### tree
+
+- @name 一维数组转树形结构数据
+- @msg 利用 js 的引用对象实现
+- @param { array } [array]
+- @param { pid } 根
+- @return [ array ]
+
+#### unique
+
+- @name 数组去重
+- @param { array } [array]
+- @returns [array]
 
 ### type
 

@@ -1,10 +1,9 @@
 /**
- * @description 数组排序 - 冒泡
- *
- * @param {arr} [array] 数组
- * @param { bool } [boolean] 是否是升序
- *
- * @returns [array]
+ * @name 数组排序(冒泡)
+ * @msg 所有排序中速度最慢的
+ * @param {arr} [ array] 数组
+ * @param { bool } [ boolean] 是否是升序
+ * @return [array]
  */
 
 export default function sortSubbing(arr, bool = true) {

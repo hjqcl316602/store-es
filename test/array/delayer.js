@@ -1,4 +1,4 @@
-import clean from "../object/clean";
+//import clean from "../object/clean";
 
 /**
  * @description 树形结构数据转一维数组
@@ -17,9 +17,7 @@ export default function delayer(array, ...args) {
   array.forEach(item => {
     let children = item["children"];
 
-    let rest = clean(item, ...args);
-
-    newArray.push(rest);
+    newArray.push(children);
 
     if (children) {
       newArray.push(...delayer(children, ...args));
