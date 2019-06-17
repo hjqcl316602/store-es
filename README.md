@@ -1,6 +1,21 @@
-# store-js-es
+# store-es
+
+```js
+
+ npm install store-es
+
+```
 
 ## 对象式
+
+### type
+
+- 方法
+  - browserType() => [ string ] || 获取浏览器的类型
+  - ios() => [ boolean ] || 判断客户端是否是 ios
+  - is(...args[any]) => [ function ] => [ boolean ] || 判断数据类型
+  - orientation() => [ string ] || 判断手机的横屏还是竖屏
+  - type(value[any]) => [ string ] || 获取数据的类型
 
 ### string
 

@@ -1,7 +1,6 @@
 /**
- * @description 判断手机的方向 orientation
- *
- * @returns [ string ] 'horizontal' => 横屏 'vertical' => 竖屏 '' => 未知
+ * @name: 判断手机的方向 orientation
+ * @return: [ string ] 'horizontal' => 横屏 'vertical' => 竖屏 '' => 未知
  */
 
 export default function orientation() {

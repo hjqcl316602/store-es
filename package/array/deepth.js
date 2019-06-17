@@ -1,26 +1,36 @@
 /**
- * @description 判断数组数组的维度
- *
- * @param {array} 数组
- *
+ * @name: 判断数组最深的维度
+ * @param: {array} [ array ] 数组
  * @returns [number]
  */
 
-export default function deepth(array) {
-  let deep = 0;
-  if (Array.isArray(array)) {
-    deep = 1;
+let deep = 0;
 
-    (function deepthArr(arr) {
-      for (let n = 0; n < arr.length; n++) {
-        if (Array.isArray(arr[n])) {
-          deep++;
-          deepthArr(arr[n]);
-        }
-      }
-    })(array);
+export default function deepth(array) {
+  for (let n = 0; n < array.length; n++) {
+    if (Array.isArray(array[n])) {
+      deep++;
+    }
   }
-  return deep;
+  console.log(deep);
+
+  // for( let n = 0 ; n < array.length;n++){
+  //    if( Array.isArray( array[n])){
+  //    }
+  // }
+  // let deep = 0;
+  // if (Array.isArray(array)) {
+  //   deep = 1;
+  //   (function deepthArr(arr) {
+  //     for (let n = 0; n < arr.length; n++) {
+  //       if (Array.isArray(arr[n])) {
+  //         deep++;
+  //         deepthArr(arr[n]);
+  //       }
+  //     }
+  //   })(array);
+  // }
+  // return deep;
 }
 
-//console.log(deepth([0, [1, [2, [3]]]])) // 1
+console.log(deepth([0, [1]])); // 1

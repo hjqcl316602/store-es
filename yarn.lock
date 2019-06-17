@@ -7207,6 +7207,17 @@ stealthy-require@^1.1.1:
   resolved "https://registry.npm.taobao.org/stealthy-require/download/stealthy-require-1.1.1.tgz#35b09875b4ff49f26a777e509b3090a3226bf24b"
   integrity sha1-NbCYdbT/SfJqd35QmzCQoyJr8ks=
 
+store-es@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/store-es/-/store-es-0.0.1.tgz#efd3f24b75cfdc570adc042a72a617d3c034a889"
+  integrity sha512-/lOVZr11OeugUNuU4ZUIvtGyF795qb4AoqBL7+IXwQ7s1iEIrrkxOOCDDBckdOmoKgI2mwKinoc4lZTmyiuHkw==
+  dependencies:
+    core-js "^2.6.5"
+    js-base64 "^2.5.1"
+    mathjs "^6.0.1"
+    store-js-es "^0.0.1"
+    vue "^2.6.10"
+
 store-js-es@^0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/store-js-es/-/store-js-es-0.0.1.tgz#d8da9cc03b9a4cc5b577f648db27aeba65ce0253"

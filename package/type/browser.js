@@ -1,7 +1,6 @@
 /**
- * @description 判断浏览器 的类型
- *
- * @returns [string]
+ * @name: 获取浏览器的类型
+ * @return: [ string ]
  */
 
 export default function browserType() {
@@ -35,3 +34,5 @@ export default function browserType() {
   if (isSafari) return "Safari";
   if (isChrome) return "Chrome";
 }
+
+//console.log(browserType());

@@ -1,7 +1,6 @@
 /**
- * @description 判断客户端是否是ios
- *
- * @returns [boolean]
+ * @name: 判断客户端是否是ios
+ * @return: [boolean]
  */
 
 export default function ios() {

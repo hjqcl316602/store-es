@@ -1,6 +1,6 @@
 {
-  "name": "store-js-es",
-  "version": "0.0.2",
+  "name": "store-es",
+  "version": "0.0.1",
   "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -13,7 +13,7 @@
     "core-js": "^2.6.5",
     "js-base64": "^2.5.1",
     "mathjs": "^6.0.1",
-    "store-js-es": "^0.0.1",
+    "store-es": "^0.0.1",
     "vue": "^2.6.10"
   },
   "devDependencies": {

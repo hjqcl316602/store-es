@@ -33,5 +33,4 @@ trim.storage = [
   { type: 3, lebal: "前空格" },
   { type: 4, lebal: "后空格" }
 ];
-
-console.log(trim("ss ss", 4));
+//console.log("huang");
