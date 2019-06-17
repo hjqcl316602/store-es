@@ -1,7 +1,8 @@
 /**
- * @name: 获取数据类型
- * @param : { value } [ any ]
- * @return: [ string ]
+ * @name  获取数据类型
+ * @param   { value } [ any ]
+ * @return  [ string ]
+ * @example type('null') => string type(0) => number
  */
 
 export default function type(value) {

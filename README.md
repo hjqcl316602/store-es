@@ -81,12 +81,35 @@
 
 ### type
 
-- 方法
-  - browserType() => [ string ] || 获取浏览器的类型
-  - ios() => [ boolean ] || 判断客户端是否是 ios
-  - is(...args[any]) => [ function ] => [ boolean ] || 判断数据类型
-  - orientation() => [ string ] || 判断手机的横屏还是竖屏
-  - type(value[any]) => [ string ] || 获取数据的类型
+#### browserType
+
+- @name 获取浏览器的类型
+- @return [ string ]
+
+#### ios
+
+- @name 判断客户端是否是 ios
+- @return [boolean]
+
+#### is
+
+- @name 获取数据类型
+- @param { ...args } [ array<string> ]
+- @return [ function ]
+- @param { value } [ any ]
+- @return [ boolean ]
+
+#### orientation
+
+- @name 判断手机的方向
+- @return [ string ] 'horizontal' => 横屏 'vertical' => 竖屏 '' => 未知
+
+#### type
+
+- @name 获取数据类型
+- @param { value } [ any ]
+- @return [ string ]
+- @example type('null') => string type(0) => number
 
 ### string
 

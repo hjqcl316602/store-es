@@ -1,6 +1,6 @@
 /**
- * @name: 获取浏览器的类型
- * @return: [ string ]
+ * @name  获取浏览器的类型
+ * @return  [ string ]
  */
 
 export default function browserType() {

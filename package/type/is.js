@@ -1,7 +1,9 @@
 /**
- * @name: 获取数据类型
- * @param:  { ...any }
- * @returns [function] => @return: [boolean]
+ * @name  获取数据类型
+ * @param   { ...args } [ array<string> ]
+ * @return [ function ]
+ * @param   { value } [ any ]
+ * @return  [ boolean ]
  */
 
 export default function is(...args) {
