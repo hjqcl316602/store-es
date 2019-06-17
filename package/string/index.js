@@ -1,3 +1,4 @@
+import connect from "./connect";
 import contains from "./contains";
 import containsWith from "./containsWith";
 import convert from "./convert";
@@ -22,6 +23,7 @@ import transfer from "./transfer";
 import trim from "./trim";
 
 export default {
+  connect,
   contains,
   containsWith,
   convert,

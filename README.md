@@ -113,6 +113,15 @@
 
 ### string
 
+#### connect
+
+- @name 每隔几位添加指定的连接符
+- @param { string } [ string ]
+- @param { connect } [ string ] 连接符
+- @param { len } [ number ] 每隔多少位
+- @return [ string ]
+- @example connect("13980464237"," ",4) => 139 8046 4237
+
 #### contains
 
 - @name 获取一个字符串包含指定的字符串的所有角标
