@@ -2,16 +2,17 @@ import type from "../type";
 /**
  * @name: 获取一个字符串包含指定的字符串的所有角标
  * @param : { string } [ string ]
- * @param : { prex } [ string ] 指定的字符串
+ * @param : { target } [ string ] 指定的字符串
  * @return: [ array ] 角标位置数组
  */
 
-export default function contains(string, prex) {
-  if (!type.isString(string) || !type.isString(prex)) {
-    throw new Error("string and regexp must be type of string");
-  }
+export default function contains(string, target) {
   let res = [];
-  let regex = new RegExp(`${prex}`, "g");
+  if (typeof string !== "string" || typeof target !== "string") {
+    console.error("[string] and [regexp] must be type of string");
+    return res;
+  }
+  let regex = new RegExp(`${target}`, "g");
   string.replace(regex, function(regex, index, string) {
     res.push(index);
   });

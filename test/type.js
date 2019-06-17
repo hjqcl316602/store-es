@@ -12,7 +12,7 @@ let values = [
   [10, 10] // '10,10'
 ];
 
-for (let n = 0; n < values.length; n++) {
-  let temp = values[n];
-  console.log(temp, String(temp), temp + "");
-}
+// for (let n = 0; n < values.length; n++) {
+//   let temp = values[n];
+//   console.log(temp, String(temp), temp + "");
+// }

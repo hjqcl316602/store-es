@@ -1,5 +1,5 @@
 /**
- * @description 将字符串转成对象的键
+ * @name: 将字符串转成合法的对象的键
  * 字符串要求
  * a.b.c形式，获取对象属性的时候用'.'，获取数组的时候可以使用'.0'，也可以使用a[0],
  * []只能是数组的角标0-9组成的字符串，并且 [] 中不能再存在 []
@@ -16,12 +16,15 @@
  * 如果属性名包含非法的标识符字符，则只能采用obj[“propertyName”]的形式；
  * 如果属性名是合法的标识符，读取时即可以采用obj.propertyName,也可以采用obj[“propertyName”]的形式；
  *
- * @param { string } [ string ]
+ * @param :{ string } [ string ]
  *
- * @returns [array]
+ * @return: [ array ]
  */
-export default function toPath(string) {
-  if (String(string) !== string) return [];
+export default function path(string) {
+  if (typeof string !== "string") {
+    console.error("[string] is not string");
+    return [];
+  }
 
   let regex = new RegExp(/\[(.*?)\]/, "g"); // '.'匹配除换行符外的任意字符
 
@@ -32,7 +35,7 @@ export default function toPath(string) {
   return string.split(".").filter(item => !!item);
 }
 
-//  let string = '.a[a].b[0.s..s].c[c].....' // => ['a','0','b','0',c','c']
+// let string = ".a[a].b[0.s..s].c[c]....."; // => ['a','0','b','0',c','c']
 
-// let arr = toPath(string)
-// console.log(arr)
+// let arr = toPath(string);
+// console.log(arr);

@@ -4,7 +4,7 @@
  * @Author: huangjunquan
  * @Date: 2019-05-24 09:13:26
  * @LastEditors: huangjunquan
- * @LastEditTime: 2019-06-12 11:20:41
+ * @LastEditTime: 2019-06-17 11:24:22
  */
 
 // 前瞻：
@@ -20,19 +20,23 @@
 
 /**
  * @name: 字符串转千分位
- * @msg: 判断字符串是否存在'.'，存在则使用Number(value).toLocaleString()，否则正则替换
- * @param {string} [string]
+ * @msg : 判断字符串是否存在'.'，存在则使用Number(value).toLocaleString()，否则正则替换
+ * @param: { string } [ string,number ]
  * @return: [string]
  */
-export default function toShousand(string) {
-  if (String(string) !== string) return string;
+export default function shousand(string) {
+  if (typeof string !== "string" && typeof string !== "number") {
+    console.error("[string] is not string or number");
+    return string;
+  }
+  string = String(string);
   return /\./g.test(string)
     ? Number(string).toLocaleString()
     : string.replace(/(\d)(?=(\d{3})+$)/g, "$1,");
 }
 
-// let string = toShousand('12345678900.99')
-// console.log(string)
+// let string = shousand(123456788);
+// console.log(string);
 
 // 查找 junquan前面的huang
 //  let regex = /huang(?=junquan)/

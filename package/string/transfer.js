@@ -1,14 +1,16 @@
 /**
- * @description 字符串的转义
- *
- * @param {str}
+ * @name: 字符串的转义
+ * @param: {string} [ string ]
+ * @return : [ string ]
  */
 
-export default function transfer(str) {
-  if (String(str) !== str) return str;
-  str = str.replace(/&/gi, "&amp;");
-  str = str.replace(/</gi, "&lt;");
-  str = str.replace(/>/gi, "&gt;");
-  str = str.replace(" ", "&nbsp;");
-  return str;
+export default function transfer(string) {
+  if (typeof string !== "string") return string;
+  string = string.replace(/&/gi, "&amp;");
+  string = string.replace(/</gi, "&lt;");
+  string = string.replace(/>/gi, "&gt;");
+  string = string.replace(" ", "&nbsp;");
+  return string;
 }
+
+// console.log(transfer("< >"));

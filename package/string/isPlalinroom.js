@@ -6,9 +6,8 @@
 
 export default function plalinroom(string) {
   if (typeof string !== "string" || string.length < 2) {
-    throw new Error(
-      "string  must be type of string ,and its length must be greater than 2 "
-    );
+    console.error("[string] is not string  or its length less than 2 ");
+    return false;
   }
   return (
     string
@@ -18,4 +17,4 @@ export default function plalinroom(string) {
   );
 }
 
-//console.log(plalinroom("hjf"));
+//console.log(plalinroom(false));

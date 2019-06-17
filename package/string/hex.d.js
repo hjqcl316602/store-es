@@ -1,4 +1,4 @@
-import readUTF from "./readUTF";
+import readUTF from "./readUTF.d";
 
 /**
  * @description 16进制转字符串

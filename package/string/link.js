@@ -1,16 +1,16 @@
 /**
- * @description 驼峰字符串转链接字符串
- *
- * @param {string} [string]
- *
- * @returns [string]
+ * @name: 驼峰字符串转链接字符串
+ * @param: {string} [string]
+ * @return: [string]
  */
 export default function toLink(string) {
-  if (String(string) !== string) return string;
-  if (!/^[A-z]+$/.test(string)) return string;
+  if (typeof string !== "string" || !/^[A-z]+$/.test(string)) {
+    console.error("[string] is not string  or its not [a-zA-Z]");
+    return string;
+  }
   return string.replace(/([A-Z])/g, function(a, b, c) {
     return "-" + b.toLowerCase();
   });
 }
 
-//console.log(toLink('backGroundColor'))
+//console.log(toLink("asashAHjjasHsa"));

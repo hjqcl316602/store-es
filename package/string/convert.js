@@ -1,4 +1,3 @@
-import types from "../type";
 /**
  * @name: 字符串的转换
  * @param : {str} [ string ]
@@ -6,25 +5,14 @@ import types from "../type";
  * @return: [ string ]
  */
 
-let storages = [
-  { type: 1, lebal: "首字母大写，剩余的小写" },
-  { type: 2, lebal: "首字母小写，剩余的大写" },
-  { type: 3, lebal: "大写转小写，小写转大写" },
-  { type: 4, lebal: "全部大写" },
-  { type: 5, lebal: "全部小写" }
-];
-
-export default function convert(string, type = 4) {
-  if (!types.isString(string)) {
-    throw new Error("string must be type of string");
+export default function convert(string, type) {
+  if (typeof string !== "string") {
+    console.error("[string] must be type of string");
+    return string;
   }
-  if (
-    !types.isNumber(type) ||
-    storages.findIndex(storage => storage["type"] === type) === -1
-  ) {
-    throw new Error(
-      "Type must be in [1,2,3,4,5],and it must be type of number"
-    );
+  if (convert.storages.findIndex(storage => storage["type"] === type) === -1) {
+    console.error("[type] is not in [1,2,3,4,5]");
+    type = 4;
   }
 
   switch (type) {
@@ -60,4 +48,12 @@ export default function convert(string, type = 4) {
   }
 }
 
-//console.log(convert("sSs", 3));
+convert.storages = [
+  { type: 1, lebal: "首字母大写，剩余的小写" },
+  { type: 2, lebal: "首字母小写，剩余的大写" },
+  { type: 3, lebal: "大写转小写，小写转大写" },
+  { type: 4, lebal: "全部大写" },
+  { type: 5, lebal: "全部小写" }
+];
+
+//console.log(convert("sSs", -1));

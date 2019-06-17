@@ -5,10 +5,7 @@
  */
 
 export default function isRequire(string) {
-  if (typeof string !== "string") {
-    throw new Error("参数[string]必须是字符串类型");
-  }
-  return /^[\s\S]+$/.test(string);
+  return typeof string === "string" && /^[\s\S]+$/.test(string);
 }
 
-//console.log(isRequire("")); => false
+//console.log(isRequire("s")); // false

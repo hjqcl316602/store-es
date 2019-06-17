@@ -5,12 +5,13 @@ import isPlalinroom from "./isPlalinroom";
 import isRepeat from "./isRepeat";
 import isStart from "./isStart";
 import isEnd from "./isEnd";
+import isCenter from "./isCenter";
 import isContain from "./isContain";
 
 import random from "./random";
 import randomColor from "./randomColor";
-import hex from "./hex";
-import readUTF from "./readUTF";
+// import hex from "./hex";
+// import readUTF from "./readUTF";
 import trim from "./trim";
 import transfer from "./transfer";
 import contains from "./contains";
@@ -31,12 +32,11 @@ export default {
   isRepeat,
   isStart,
   isEnd,
+  isCenter,
   isContain,
 
   random,
   randomColor,
-  hex,
-  readUTF,
   trim,
   transfer,
   contains,

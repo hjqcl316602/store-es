@@ -1,11 +1,14 @@
 /**
- * @description 生成随机字符串
- *
- * @param {n} 指定长度 ， 默认长度为16
+ * @name: 生成随机字符串
+ * @param: { n } [ number ] 指定长度 ， 默认长度为16
+ * @return: [ string ]
  */
 
-export default function random(n = 16) {
-  if (!(Number.isInteger(n) && n > 0)) return "";
+export default function random(n) {
+  if (!(Number.isInteger(n) && n > 0)) {
+    console.error("[n] is not integer or less than 1");
+    n = 16;
+  }
   let standard = "abcdefghijklmnopqrstuvwxyz9876543210";
   let len = standard.length;
   let result = "";
@@ -15,4 +18,4 @@ export default function random(n = 16) {
   return result;
 }
 
-//console.log(random(16))
+//console.log(random(16));
