@@ -1,7 +1,8 @@
 /**
- * @name: 验证字符串是否是连续的
- * @param : { string } [ string ]
- * @return: [ boolean ]
+ * @name 验证字符串是否是连续的
+ * @param  { string } [ string ]
+ * @return [ boolean ]
+ * @example isContinue("12") => true isContinue('abcdef') => true
  */
 
 export default function isContinue(string) {

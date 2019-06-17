@@ -1,7 +1,8 @@
 /**
- * @name: 验证是否是重复的字组成的字符串
- * @param ： { string  } [ string ] 字符串，长度应不少于2位
- * @return: [ boolean ]
+ * @name 验证是否是重复的字组成的字符串，即由一个字符串组成的字符串
+ * @param  { string  } [ string ] 字符串，长度应不少于2位
+ * @return [ boolean ]
+ * @exampale isRepeat('aa') => true
  */
 
 export default function isRepeat(string) {

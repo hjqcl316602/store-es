@@ -1,7 +1,8 @@
 /**
- * @name: 判断一个字符串是否是回文字符串
- * @param : { string } [ string ]
- * @returns [ boolean ]
+ * @name 判断一个字符串是否是回文字符串
+ * @param  { string } [ string ]
+ * @return [ boolean ]
+ * @example plalinroom("aha")=> true
  */
 
 export default function plalinroom(string) {
@@ -17,4 +18,4 @@ export default function plalinroom(string) {
   );
 }
 
-//console.log(plalinroom(false));
+//console.log(plalinroom("aha"));

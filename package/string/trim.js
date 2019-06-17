@@ -1,8 +1,13 @@
 /**
- * @name: 字符串的空格去除
- * @param: {string} [ string ] 字符串
- * @param: {type} [ 1,2,3,4] 类型
- * @return:[ string ]
+ * @name  字符串的空格去除
+ * @msg String.prototype.trim 只能删除字符串开头的空白
+ * @param  {string} [ string ] 字符串
+ * @param  {type} [ 1,2,3,4] 类型
+ * { type: 1, lebal: "所有空格" }
+ * { type: 2, lebal: "前后空格" }
+ * { type: 3, lebal: "前空格" }
+ * { type: 4, lebal: "后空格" }
+ * @return [ string ]
  */
 
 export default function trim(string, type) {

@@ -1,25 +1,23 @@
-import type from "../type";
-
 /**
- * @name: 返字符串中匹配正则表达式的值
- * @msg : replace的callback函数的参数的个数由正则表达式决定的 1.第一个 ： 正则表达式结果;2.倒数第二个：角标;3.倒数第一个：字符串本身;4.剩余的：正则表达式匹配的结果
- * @param : { string }  [ string ]
- * @param : { regexp } [ regexp ]
- * @return: [ array<object> ]
+ * @name 返字符串中匹配正则表达式的值
+ * @msg  replace的callback函数的参数的个数由正则表达式决定的 1.第一个 ： 正则表达式结果;2.倒数第二个：角标;3.倒数第一个：字符串本身;4.剩余的：正则表达式匹配的结果
+ * @param  { string }  [ string ]
+ * @param  { regexp } [ regexp ]
+ * @return [ array<object> ]
  */
 
 export default function containsWith(string, regexp) {
   let res = [];
   if (typeof string !== "string") {
-    console.error("[string] must be type of string");
-    return res;
-  }
-  if (!type.isRegexp(regexp)) {
-    console.error("[regexp] must be not type of regexp");
+    console.error("[string] is not string");
     return res;
   }
 
-  if (String(string) !== string) return res;
+  if (!(regexp instanceof RegExp)) {
+    console.error("[regexp] is not regexp");
+    return res;
+  }
+
   let newRegex = new RegExp(regexp);
   string.replace(newRegex, function(...args) {
     res.push({
@@ -31,6 +29,8 @@ export default function containsWith(string, regexp) {
   });
   return res;
 }
+// let a = /\{(.*?)\}/g;
+// console.log(a instanceof RegExp);
 
 // 获取字符串中{}中的值
 // let string = "a{b}c{d}e{f}";

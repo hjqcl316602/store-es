@@ -1,8 +1,8 @@
 /**
- * @name: 验证一个字符串是否存在某字符串的中部
- * @param : { string } [ string ]
- * @param : { target } [ string ]
- * @return: [ boolean]
+ * @name 验证一个字符串是否存在某字符串的中部
+ * @param  { string } [ string ]
+ * @param  { target } [ string ]
+ * @return [ boolean]
  */
 
 export default function isCenter(string, target) {

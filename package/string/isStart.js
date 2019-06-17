@@ -1,8 +1,9 @@
 /**
- * @name: 验证一个字符串是否是以指定的值开头
- * @param: { string } [ string ]
- * @param: { prex} [ string ]
- * @return:[ boolean ]
+ * @name  验证一个字符串是否是以指定的值开头
+ * @param  { string } [ string ]
+ * @param  { prex} [ string ]
+ * @return [ boolean ]
+ * @example  isStart("huang", "hu") => true
  */
 
 export default function isStart(string, target) {
@@ -13,4 +14,4 @@ export default function isStart(string, target) {
   return string.slice(0, target.length) === target;
 }
 
-//console.log(isStart("huang"));
+//console.log(isStart("huang", "hu"));

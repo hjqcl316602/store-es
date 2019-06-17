@@ -1,7 +1,8 @@
 /**
- * @name: 字符串的转义
- * @param: {string} [ string ]
- * @return : [ string ]
+ * @name 字符串的转义
+ * @param {string} [ string ]
+ * @return  [ string ]
+ * @example transfer("< >") => &lt;&nbsp;&gt;
  */
 
 export default function transfer(string) {
@@ -13,4 +14,4 @@ export default function transfer(string) {
   return string;
 }
 
-// console.log(transfer("< >"));
+console.log(transfer("< >"));

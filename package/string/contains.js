@@ -1,15 +1,14 @@
-import type from "../type";
 /**
- * @name: 获取一个字符串包含指定的字符串的所有角标
- * @param : { string } [ string ]
- * @param : { target } [ string ] 指定的字符串
- * @return: [ array ] 角标位置数组
+ * @name  获取一个字符串包含指定的字符串的所有角标
+ * @param   { string } [ string ]
+ * @param   { target } [ string ] 指定的字符串
+ * @return  [ array ] 角标位置数组
  */
 
 export default function contains(string, target) {
   let res = [];
   if (typeof string !== "string" || typeof target !== "string") {
-    console.error("[string] and [regexp] must be type of string");
+    console.error("[string] or [regexp] is not string");
     return res;
   }
   let regex = new RegExp(`${target}`, "g");

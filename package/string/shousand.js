@@ -4,7 +4,7 @@
  * @Author: huangjunquan
  * @Date: 2019-05-24 09:13:26
  * @LastEditors: huangjunquan
- * @LastEditTime: 2019-06-17 11:24:22
+ * @LastEditTime: 2019-06-17 18:25:15
  */
 
 // 前瞻：
@@ -19,10 +19,12 @@
 // (?:)表示非捕获分组，和捕获分组唯一的区别在于，非捕获分组匹配的值不会保存起来
 
 /**
- * @name: 字符串转千分位
- * @msg : 判断字符串是否存在'.'，存在则使用Number(value).toLocaleString()，否则正则替换
- * @param: { string } [ string,number ]
- * @return: [string]
+ * @name 字符串转千分位
+ * @msg  判断字符串是否存在'.'，存在则使用Number(value).toLocaleString()，否则正则替换
+ * @param { string } [ string,number ]
+ * @return [ string ]
+ * @example shousand(123456788) => 123,456,788
+ * @example shousand(123456788.11) => 123,456,788.11
  */
 export default function shousand(string) {
   if (typeof string !== "string" && typeof string !== "number") {

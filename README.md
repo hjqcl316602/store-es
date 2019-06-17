@@ -113,28 +113,195 @@
 
 ### string
 
-- 方法
-  - contains(string[string],target[string]) => [ array ] || 获取一个字符串包含指定的字符串的所有角标
-  - containsWith(string[string],regexp[regexp]) => [ array ] || 返字符串中匹配正则表达式的值
-  - convert(string[string],type[number[1,2,3,4]]) => [ string] || 字符串的转换
-  - hump(string[string]) => [ string ] || 驼峰字符串转链接字符串
-  - isCenter(string[string],target[string]) => [ boolean ] || 验证一个字符串是否存在某字符串的中部
-  - isContain(string[string], target[string]) => [ boolean ] || 获取一个字符串包含指定的字符串
-  - isContinue(string[string]) => [ string ] || 验证字符串是否是连续的
-  - isEnd(string[string], target[string]) => [ boolean ] || 验证一个字符串是否是以指定的值结尾
-  - plalinroom(string[string]) => [ boolean ] || 判断一个字符串是否是回文字符串
-  - isRepeat(string[string]) => [ boolean ] || 验证是否是重复的字组成的字符串
-  - isRequire(string[string]) => [ boolean ] || 验证字符串是否是有值
-  - isSpace(string[string]) => [ boolean ] || 判断一个字符串中是否存在空白
-  - isStart(string[string], target[string]) => [ boolean ] || 验证一个字符串是否是以指定的值开头
-  - link(string[string]) => [ string ] || 驼峰字符串转链接字符串
-  - match(string[string], regexp[string]) => [ array ] || 按指定的正则表达式提取字符串中满足条件的值
-  - path(string[string]) => [ array ] || 将字符串转成合法的对象的键
-  - random(n[number]) => [ string ] || 生成随机字符串
-  - randomColor(isOpacity[ boolean ]) => [ string ] || 随机生成颜色字符串
-  - shousand(string[string,number]) => [ string ] || 字符串转千分位
-  - transfer(string[string]) => [ string ] || 字符串的转义
-  - trim(string[string], type[number]) => [ string ] || 字符串的空格去除
+#### contains
+
+- @name 获取一个字符串包含指定的字符串的所有角标
+- @param { string } [ string ]
+- @param { target } [ string ] 指定的字符串
+- @return [ array ] 角标位置数组
+
+#### containsWith
+
+- @name 返字符串中匹配正则表达式的值
+- @msg replace 的 callback 函数的参数的个数由正则表达式决定的 1.第一个 ： 正则表达式结果;2.倒数第二个：角标;3.倒数第一个：字符串本身;4.剩余的：正则表达式匹配的结果
+- @param { string } [ string ]
+- @param { regexp } [ regexp ]
+- @return [ array<'object'> ]
+
+#### convert
+
+- @name 字符串的转换
+- @param {string} [ string ]
+- @param { type } [ number<1,2,3,4,5> ]
+- { type: 1, lebal: "首字母大写，剩余的小写" },
+- { type: 2, lebal: "首字母小写，剩余的大写" },
+- { type: 3, lebal: "大写转小写，小写转大写" },
+- { type: 4, lebal: "全部大写" },
+- { type: 5, lebal: "全部小写" }
+- @return [ string ]
+
+#### hump
+
+- @name 驼峰字符串转链接字符串
+- @msg 每个链接的单词必须是由[ a-z ] 组成的字符串；链接符号必须是"-"
+- @param { string } [ string ]
+- @return [ string ]
+
+#### isCenter
+
+- @name 验证一个字符串是否存在某字符串的中部
+- @param { string } [ string ]
+- @param { target } [ string ]
+- @return [ boolean]
+
+#### isContain
+
+- @name 验证一个字符串包含指定的字符串
+- @param { string } [ string ]
+- @param { target } [ string ]
+- @return [ boolean ]
+
+#### isContinue
+
+- @name 验证字符串是否是连续的
+- @param { string } [ string ]
+- @return [ boolean ]
+- @example isContinue("12") => true isContinue('abcdef') => true
+
+#### isEnd
+
+- @name 验证一个字符串是否是以指定的值结尾
+- @param { string } [ string ]
+- @param { target } [ string ]
+- @return [ boolean ]
+- @exampale isEnd("huang", "ang")=> true
+
+#### plalinroom
+
+- @name 判断一个字符串是否是回文字符串
+- @param { string } [ string ]
+- @return [ boolean ]
+- @example plalinroom("aha")=> true
+
+#### isRepeat
+
+- @name 验证是否是重复的字组成的字符串，即由一个字符串组成的字符串
+- @param { string } [ string ] 字符串，长度应不少于 2 位
+- @return [ boolean ]
+- @exampale isRepeat('aa') => true
+
+#### isRequire
+
+- @name 验证字符串是否是有值
+- @param { string } [ string ]
+- @return [ boolean ]
+- @example isRequire("s") => true
+- @example isRequire("") => false
+- @example isRequire(0) => false
+- @example isRequire(" ") => true
+
+#### isSpace
+
+- @name 判断一个字符串中是否存在空白
+- @param {string} [ string ]
+- @return [ boolean ]
+- @msg String.prototype.trim 只能删除字符串开头的空白
+- @example isSpace("fff fff") => true
+- @example isSpace("") => false
+
+#### isStart
+
+- @name 验证一个字符串是否是以指定的值开头
+- @param { string } [ string ]
+- @param { prex} [ string ]
+- @return [ boolean ]
+- @example isStart("huang", "hu") => true
+
+#### link
+
+- @name 驼峰字符串转链接字符串
+- @param {string} [string]
+- @msg 只能是[ a-zA-Z ] 组成的字符串
+- @return [string]
+- @example link("asashAHjjasHsa") => asash-a-hjjas-hsa
+
+#### match
+
+- @name: 按指定的正则表达式提取字符串中满足条件的值
+- @param: { string } [ string ]
+- @param: { regexp } [ regexp ]
+- @return: [ array ]
+- @example match('1123sss222ssss222',/[a-z]{3,}/g) => ["sss", "ssss"]
+
+#### path
+
+- @name 将字符串转成合法的对象的键
+- @msg
+- a.b.c 形式，获取对象属性的时候用'.'，获取数组的时候可以使用'.0'，也可以使用 a[0],
+- []只能是数组的角标 0-9 组成的字符串，并且 [] 中不能再存在 []
+- 不能以'.'开头，且不能有连续的'.'
+- 对象的属性名需要满足 js 变量命名规则
+- JS 标识符的命名规则，即变量的命名规则：
+- 标识符只能由字母、数字、下划线和‘\$’组成
+- 数字不可以作为标识符的首字符
+- 对象属性的命名规则
+- 通过[]操作符为对象添加属性时，属性名称可以是任何字符串（包括只包含空格的字符串和空字符串）；
+- 通过.操作符为对象添加属性时，属性名称必须是合法的标识符名称；
+- 如果属性名包含非法的标识符字符，则只能采用 obj[“propertyName”]的形式；
+- 如果属性名是合法的标识符，读取时即可以采用 obj.propertyName,也可以采用 obj[“propertyName”]的形式；
+- @param { string } [ string ]
+- @return [ array ]
+- @example path(".a[a].b[0.s..s].c[c].....") => ['a','0','b','0','c','c']
+
+#### random
+
+- @name 生成随机字符串
+- @param { n } [ number ] 指定长度 ， 默认长度为 16
+- @return [ string ]
+- @example random(16) => n568c2cjdbdi3oop
+
+#### randomColor
+
+- @name 随机生成颜色字符串
+- @param { isOpacity } [ boolean ] 是否需要透明度
+- @return [string]
+- @example randomColor(true) => rgba(226,180,173,0.3421123393946621)
+- @example randomColor() => rgba(226,180,173)
+
+#### shousand
+
+- @name 字符串转千分位
+- @msg 判断字符串是否存在'.'，存在则使用 Number(value).toLocaleString()，否则正则替换
+- @param { string } [ string,number ]
+- @return [ string ]
+- @example shousand(123456788) => 123,456,788
+- @example shousand(123456788.11) => 123,456,788.11
+
+#### space
+
+- @name 验证一个字符串是否是空白字符串
+- @param { string } string
+- @return [ boolean ]
+- @example space(" ") => true
+
+#### transfer
+
+- @name 字符串的转义
+- @param {string} [ string ]
+- @return [ string ]
+- @example transfer("< >") => "&lt &nbsp &gt "
+
+#### trim
+
+- @name 字符串的空格去除
+- @msg String.prototype.trim 只能删除字符串开头的空白
+- @param {string} [ string ] 字符串
+- @param {type} [ 1,2,3,4] 类型
+- { type: 1, lebal: "所有空格" }
+- { type: 2, lebal: "前后空格" }
+- { type: 3, lebal: "前空格" }
+- { type: 4, lebal: "后空格" }
+- @return [ string ]
 
 ## 类式（需要实例化）
 

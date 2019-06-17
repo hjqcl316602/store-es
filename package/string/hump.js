@@ -1,7 +1,7 @@
 /**
- * @name: 驼峰字符串转链接字符串
- * @param : { string }  [ string ] 条件：1.每个链接的单词必须是由[ a-z ] 组成的字符串，2.链接符号必须是"-"
- * @return: [ string ]
+ * @name 驼峰字符串转链接字符串
+ * @param  { string }  [ string ] 条件：1.每个链接的单词必须是由[ a-z ] 组成的字符串，2.链接符号必须是"-"
+ * @return [ string ]
  */
 export default function hump(string) {
   if (typeof string !== "string") {

@@ -1,8 +1,8 @@
 /**
- * @name: 获取一个字符串包含指定的字符串
- * @param :{ string } [ string ]
- * @param : { target } [ string ]
- * @return : [ boolean ]
+ * @name 获取一个字符串包含指定的字符串
+ * @param { string } [ string ]
+ * @param  { target } [ string ]
+ * @return  [ boolean ]
  */
 
 export default function isContain(string, target) {

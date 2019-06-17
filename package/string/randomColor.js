@@ -1,7 +1,9 @@
 /**
- * @name: 随机生成颜色字符串
- * @param: { isOpacity } [ boolean ] 是否需要透明度
- * @return: [string]
+ * @name  随机生成颜色字符串
+ * @param  { isOpacity } [ boolean ] 是否需要透明度
+ * @return  [string]
+ * @example randomColor(true) => rgba(226,180,173,0.3421123393946621)
+ * @example randomColor() => rgba(226,180,173)
  */
 
 export default function randomColor(isOpacity) {

@@ -1,7 +1,8 @@
 /**
- * @name: 生成随机字符串
- * @param: { n } [ number ] 指定长度 ， 默认长度为16
- * @return: [ string ]
+ * @name  生成随机字符串
+ * @param  { n } [ number ] 指定长度 ， 默认长度为16
+ * @return  [ string ]
+ * @example random(16) => n568c2cjdbdi3oop
  */
 
 export default function random(n) {

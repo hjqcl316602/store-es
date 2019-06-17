@@ -21,4 +21,4 @@ export default function deepth(array) {
   return deep;
 }
 
-console.log(deepth([0, [1, [2, [3, [4]]]], [1, [2, [3]]]])); // 1
+//console.log(deepth([0, [1, [2, [3, [4]]]], [1, [2, [3]]]])); // 1
