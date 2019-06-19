@@ -14,4 +14,4 @@ export default function transfer(string) {
   return string;
 }
 
-console.log(transfer("< >"));
+//console.log(transfer("< >"));

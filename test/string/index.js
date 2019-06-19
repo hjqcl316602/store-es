@@ -18,6 +18,7 @@ import path from "./path";
 import random from "./random";
 import randomColor from "./randomColor";
 import space from "./space";
+import reverse from "./reverse";
 import shousand from "./shousand";
 import transfer from "./transfer";
 import trim from "./trim";
@@ -42,8 +43,9 @@ export default {
   path,
   random,
   randomColor,
-  shousand,
   space,
+  reverse,
+  shousand,
   transfer,
   trim
 };

@@ -12,6 +12,7 @@ import cleanWith from "./cleanWith";
 import clone from "./clone";
 import assign from "./assign";
 import copy from "./copy";
+import create from "./create";
 
 export default {
   isPlain,
@@ -26,5 +27,6 @@ export default {
 
   clone,
   assign,
-  copy
+  copy,
+  create
 };

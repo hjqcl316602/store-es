@@ -6,7 +6,7 @@
  * @return [ string ]
  * @example connect("13980464237"," ",4) => 139 8046 4237
  */
-export default function connect(string, connect, len) {
+export default function connect(string, connect, len, start = true) {
   if (typeof string !== "string") {
     console.error("[string] is not string");
     return string;
