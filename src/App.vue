@@ -11,7 +11,6 @@
 import HelloWorld from "./components/HelloWorld.vue";
 import { string, Calc, Image$, dom } from "../package/index";
 let image = new Image$();
-
 export default {
   name: "app",
   components: {
