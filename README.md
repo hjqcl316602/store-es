@@ -56,7 +56,7 @@
 - @name 数组排序-快速
 - @msg 不支持对象元素
 - @param { array } [ array ]
-- @param { isUp } [ boolean ] 是否是升序
+- @param { isUp = true } [ boolean ] 是否是升序
 - @return: [ array ]
 
 #### sort.quick.with
@@ -78,7 +78,7 @@
 - 持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较。
 - 冒泡排序总的平均时间复杂度为 O(n^2)
 - @param {arr} [ array] 数组
-- @param { bool } [ boolean] 是否是升序
+- @param { isUp = true } [ boolean] 是否是升序
 - @return [array]
 
 #### template
@@ -86,7 +86,7 @@
 - @name: 生成一个数组模板
 - @param { start =0 } [ number<int>]开始值
 - @param { len = 10 } [ number<int> ]长度
-- @param { isUp =false } [ boolean ] 是否是向上递增，否则向下递减
+- @param { isUp = true } [ boolean ] 是否是向上递增，否则向下递减
 - @return: array<number>
 
 #### template.string

@@ -22,7 +22,7 @@ export default function sort(array = [], isUp = true) {
  * @name 数组排序-快速
  * @msg 不支持对象元素
  * @param { array } [ array ]
- * @param { isUp } [ boolean ] 是否是升序
+ * @param { isUp = true } [ boolean ] 是否是升序
  * @return: [ array ]
  */
 
@@ -91,7 +91,7 @@ sort.quick.with = function(
  * 持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较。
  * 冒泡排序总的平均时间复杂度为O(n^2)
  * @param {arr} [ array] 数组
- * @param { bool } [ boolean] 是否是升序
+ * @param { isUp = true } [ boolean] 是否是升序
  * @return [array]
  */
 sort.subbing = function(array = [], isUp = true) {

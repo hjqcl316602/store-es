@@ -2,7 +2,7 @@
  * @name: 生成一个数组模板
  * @param { start =0 } [ number<int>]开始值
  * @param { len =10 } [ number<int> ]长度
- * @param { isUp =false } [ boolean ] 是否是向上递增，否则向下递减
+ * @param { isUp = true } [ boolean ] 是否是向上递增，否则向下递减
  * @return: array<number>
  */
 
