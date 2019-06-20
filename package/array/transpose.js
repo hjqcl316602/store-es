@@ -1,25 +1,20 @@
 /**
  * @name 数组置换
  * @param {array} [array] 需要置换的数组
- * @msg 目标数组必须是二维数组，并且每一个元素的长度一致，且不能为0
+ * @msg 目标数组必须是二维数组，并且每一个元素的长度一致
  * @return  [array]
  */
 
 export default function transpose(array) {
-  // 判断是否是数组，并且长度不能为0
-  if (!Array.isArray(array) || array.length === 0) {
-    console.error("[array] is not array or its length is 0");
-    return array;
+  // 判断是否是数组
+  if (!Array.isArray(array)) {
+    throw new Error("The argument must be array.");
   }
   // 判断是否是二维数组
-  if (!transpose.isDimen(array)) {
-    console.error("[array] is not dimen array");
-    return array;
-  }
-  // 判断元素的长度是否一致，并且不能为0
-  if (!transpose.isEqual(array)) {
-    console.error(" length of [array] item is not equal or length is 0");
-    return array;
+  if (!transpose.isDimen(array) || !transpose._isEqualLen(array)) {
+    throw new Error(
+      "The argument must be dimen array,and this item length must be equal."
+    );
   }
 
   let resArr = [];
@@ -35,8 +30,16 @@ export default function transpose(array) {
   return resArr;
 }
 
-// 判断数组是否是二维数组
+/**
+ * @name 判断数组是二维数组
+ * @msg 子元素全部是数组组成的数组
+ * @param { array } [ array ]
+ * @return [boolean]
+ */
 transpose.isDimen = function(array) {
+  if (!Array.isArray(array)) {
+    throw new Error("The argument must be array.");
+  }
   for (let n = 0; n < array.length; n++) {
     if (!Array.isArray(array[n])) {
       return false;
@@ -46,14 +49,14 @@ transpose.isDimen = function(array) {
 };
 
 // 判断数组子元素的长度是否一致，并长度不能为0
-transpose.isEqual = function(array) {
+transpose._isEqualLen = function(array) {
   let len = array[0].length;
   for (let n = 1; n < array.length; n++) {
-    if (array[n].length === 0 || array[n].length !== len) {
+    if (array[n].length !== len) {
       return false;
     }
   }
   return true;
 };
 
-//console.log(transpose([[1, 11], [11, 1], [2, 22]]));
+//console.log(transpose([[1, 2], [4, 5, 6], [7, 8, 9]]));

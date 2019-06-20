@@ -32,52 +32,117 @@
 #### shuffle
 
 - @name 数组乱序
-- @msg 使用 fisher-tayes 算法，目前最好的乱序方式，使得每个元素参数的概率一致
+- @msg 使用 fisher-tayes 算法，目前最好的乱序方式，使得每个元素参与的概率一致
 - @param { array } [ array ] 数组
 - @return [ array ]
+
+#### shuffle.sort
+
+- @name 数组乱序
+- @msg 该方式乱序不完全，由于每个元素参与的次数不一致
+- @param { array }
+- @return:[ array ]
 
 #### sort
 
 - @name 数组排序
-- @param { arr } [ array ]
-- @param { type } [ number ][1] 排序类型 1 => 升序 2=>降序 3=> 随机
-- @returns [ array ]
+- @msg 不支持对象类型元素,会改变原数组的顺序
+- @param { array } [ array ]
+- @param { isUp = true } [ boolean ] 是否是升序
+- @return [ array ]
 
-#### sortQuick
+#### sort.quick
 
-- @name 数组排序(快速)
-- @param { arr } [ array ] 数组
-- @param { bool } [ boolean ] 是否是升序
-- @returns [array]
+- @name 数组排序-快速
+- @msg 不支持对象元素
+- @param { array } [ array ]
+- @param { isUp } [ boolean ] 是否是升序
+- @return: [ array ]
 
-#### sortSubbing
+#### sort.quick.with
+
+- @name 数组排序-快速
+- @msg 支持对象元素的排序
+- @param { array } [array]
+- @param { callback } [ function ] 通过指定的函数，参数 (prev,next,array)
+- @param { context } [ any ] 执行方法的执行上下文
+- @return:[ array ]
+
+#### sort.subbing
 
 - @name 数组排序(冒泡)
 - @msg 所有排序中速度最慢的
-- @param { arr } [ array ] 数组
-- @param { bool } [ boolean ] 是否是升序
-- @return [ array ]
+- 比较相邻的元素。如果第一个比第二个大，就交换他们两个。
+- 对每一对相邻元素做同样的工作，从开始第一对到结尾的最后一对。在这一点，最后的元素应该会是最大的数。
+- 针对所有的元素重复以上的步骤，除了最后一个。
+- 持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较。
+- 冒泡排序总的平均时间复杂度为 O(n^2)
+- @param {arr} [ array] 数组
+- @param { bool } [ boolean] 是否是升序
+- @return [array]
+
+#### template
+
+- @name: 生成一个数组模板
+- @param { start =0 } [ number<int>]开始值
+- @param { len = 10 } [ number<int> ]长度
+- @param { isUp =false } [ boolean ] 是否是向上递增，否则向下递减
+- @return: array<number>
+
+#### template.string
+
+- @name: 生成一个指定长度的数组，每个元素并由指定长度字符串组成
+- @param { len = 10 } [ number<int> ] 指定长度数组
+- @param { charLen = 4 } [ number<int> ] 指定长度的字符串元素
+- @return: [ array<number>]
+
+#### times
+
+- @name 数组中元素出现的次数信息统计
+- @msg 不支持对象类型[ objecy,array ]统计，支持 NaN
+- @param { array = [] } [ array ]
+- @return: [ array<object> ]
+
+#### times.max
+
+- @name 判断数组中出现最多次数的值
+- @param { array = [] } [ array ]
+- @return:[ array<object> ]
+
+#### times.min
+
+- @name 判断数组中出现最少次数的值
+- @param { array = [] } [ array ]
+- @return:[ array<object> ]
 
 #### transpose
 
 - @name 数组置换
 - @param {array} [array] 需要置换的数组
-- @msg 目标数组必须是二维数组，并且每一个元素的长度一致，且不能为 0
+- @msg 目标数组必须是二维数组，并且每一个元素的长度一致
 - @return [array]
+
+#### transpose.isDimen
+
+- @name 判断数组是二维数组
+- @msg 子元素全部是数组组成的数组
+- @param { array } [ array ]
+- @return [boolean]
 
 #### tree
 
 - @name 一维数组转树形结构数据
-- @msg 利用 js 的引用对象实现
+- @msg 利用 js 的引用对象实现，会修改原本的数组
 - @param { array } [array]
-- @param { pid } 根
+- @param { pid } [ string ] 根的 pid 值
 - @return [ array ]
 
 #### unique
 
 - @name 数组去重
-- @param { array } [array]
-- @returns [array]
+- @msg 只支持 object 类型
+- @param {array} [array]
+- @return [array]
 
 ### type
 

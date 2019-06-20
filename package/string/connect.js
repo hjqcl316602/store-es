@@ -35,18 +35,18 @@ export default function connect(string, connect, len, start = true) {
   }
 }
 
-console.log(
-  connect(
-    "13980464237",
-    " ",
-    4
-  )
-);
+// console.log(
+//   connect(
+//     "13980464237",
+//     " ",
+//     4
+//   )
+// );
 
-console.log(
-  connect(
-    "6221886510045738674",
-    " ",
-    4
-  )
-);
+// console.log(
+//   connect(
+//     "6221886510045738674",
+//     " ",
+//     4
+//   )
+// );

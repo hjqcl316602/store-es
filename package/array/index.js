@@ -3,10 +3,11 @@ import flatten from "./flatten";
 import isEqual from "./isEqual";
 import shuffle from "./shuffle";
 import sort from "./sort";
-import sortQuick from "./sortQuick";
-import sortSubbing from "./sortSubbing";
+import template from "./template";
+import times from "./times";
 import transpose from "./transpose";
 import tree from "./tree";
+import truly from "./truly";
 import unique from "./unique";
 
 export default {
@@ -15,9 +16,10 @@ export default {
   isEqual,
   shuffle,
   sort,
-  sortQuick,
-  sortSubbing,
+  template,
+  times,
   transpose,
   tree,
+  truly,
   unique
 };

@@ -1,18 +1,20 @@
 /**
  * @name 一维数组转树形结构数据
- * @msg 利用js的引用对象实现
- * @param {array} [array]
- * @param {pid} 根
+ * @msg 利用js的引用对象实现，会修改原本的数组
+ * @param {array} [ array ]
+ * @param { pid } [ string ] 根
  * @return [ array ]
  */
 
 // 对象引用的方式
 export default function tree(array, pid = "") {
   if (!Array.isArray(array)) {
-    console.error("[array] is not array");
-    return array;
+    throw new Error("The first argument must be array.");
   }
-  let newArr = JSON.parse(JSON.stringify(array)); // 防止污染原本的数据
+  if (typeof pid !== "string") {
+    throw new Error("The second argument must be string.");
+  }
+
   array.forEach(ele => {
     let arr = array.filter(item => item["pid"] === ele["id"]);
     if (arr.length > 0) {

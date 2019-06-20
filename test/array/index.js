@@ -1,57 +1,60 @@
-import isArray from "./isArray";
-import isRequire from "./isRequire";
-import isEqual from "./isEqual";
+import clean from "./clean";
+import deepth from "./deepth";
+import delayer from "./delayer";
+import diffrence from "./diffrence";
+import each from "./each";
+import every from "./every";
+import filter from "./filter";
+import findIndex from "./findIndex";
+import flatten from "./flatten";
 
-import transpose from "./transpose";
+import halfSearch from "./halfSearch";
+import include from "./include";
+import isArray from "./isArray";
+import isEqual from "./isEqual";
+import isRequire from "./isRequire";
+import map from "./map";
+import reduce from "./reduce";
+import reverse from "./reverse";
 import shuffle from "./shuffle";
 import sort from "./sort";
 import sortQuick from "./sortQuick";
 import sortSubbing from "./sortSubbing";
-import halfSearch from "./halfSearch";
+import template from "./template";
+import times from "./times";
+import transpose from "./transpose";
+import tree from "./tree";
+import truly from "./truly";
 import unique from "./unique";
 import uniqueWith from "./uniqueWith";
-import reverse from "./reverse";
-import flatten from "./flatten";
-import deepth from "./deepth";
-
-import reduce from "./reduce";
-import filter from "./filter";
-import clean from "./clean";
-import findIndex from "./findIndex";
-import include from "./include";
-import map from "./map";
-import each from "./each";
-import every from "./every";
-
-import delayer from "./delayer";
-import tree from "./tree";
 
 export default {
+  clean,
+  deepth,
+  delayer,
+  diffrence,
+  each,
+  every,
+  filter,
+  findIndex,
+  flatten,
+  halfSearch,
+  include,
   isArray,
-  isRequire,
   isEqual,
-
-  transpose,
+  isRequire,
+  map,
+  reduce,
+  reverse,
   shuffle,
   sort,
   sortQuick,
   sortSubbing,
-  halfSearch,
-  reverse,
-  flatten,
-  deepth,
-
-  reduce,
-  clean,
-  filter,
-  findIndex,
+  template,
+  times,
+  transpose,
+  tree,
+  truly,
   unique,
-  uniqueWith,
-  include,
-  map,
-  each,
-  every,
-
-  delayer,
-  tree
+  uniqueWith
 };
