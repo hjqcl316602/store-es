@@ -101,19 +101,19 @@
 - @name 数组中元素出现的次数信息统计
 - @msg 不支持对象类型[ objecy,array ]统计，支持 NaN
 - @param { array = [] } [ array ]
-- @return: [ array<object> ]
+- @return: [ array<'object'> ]
 
 #### times.max
 
 - @name 判断数组中出现最多次数的值
 - @param { array = [] } [ array ]
-- @return:[ array<object> ]
+- @return:[ array<'object'> ]
 
 #### times.min
 
 - @name 判断数组中出现最少次数的值
 - @param { array = [] } [ array ]
-- @return:[ array<object> ]
+- @return:[ array<'object'> ]
 
 #### transpose
 

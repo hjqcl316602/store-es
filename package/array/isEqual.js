@@ -1,7 +1,7 @@
 /**
  * @name 验证两个数组的值是否相等
  * @msg 只支持一维，支持NAN
- * @param { prev }  [array ]
+ * @param { prev }  [ array ]
  * @param { next } [ array ]
  * @returns [boolean]
  */
