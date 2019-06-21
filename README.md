@@ -151,6 +151,17 @@
 - @name 获取浏览器的类型
 - @return [ string ]
 
+#### equal
+
+- @name 判断两个数据的属性值是否相等
+- @param { prev } [ number,string,boolean,null,undefined,array,object ]
+- @param { next } [ number,string,boolean,null,undefined,array,object ]
+- @msg 只支持 number,string,boolean,null,undefined,array,object 类型的数据比较，如果需要比较 symbol、function，可以强制转为 string 之后再比较，作用不大，所以放弃了对他们的比较
+- @msg 支持多维度的 array 和 object 类型，但其子元素类型也必须要满足在这些类型中
+- @return: [ boolean ]
+- @example //console.log(equal(NaN, NaN)); => true
+- @example //console.log(equal([NaN, { name: true }], [NaN, { name: true }])); => true
+
 #### ios
 
 - @name 判断客户端是否是 ios

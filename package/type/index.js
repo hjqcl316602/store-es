@@ -1,8 +1,9 @@
-import is from "./is";
-import type from "./type";
-import ios from "./ios";
 import browser from "./browser";
+import equal from "./equal";
+import ios from "./ios";
+import is from "./is";
 import orientation from "./orientation";
+import type from "./type";
 
 const isNumber = is("number");
 const isString = is("string");
@@ -16,8 +17,13 @@ const isNil = is("null", "undefined");
 const isRegexp = is("regexp");
 
 export default {
+  browser,
+  equal,
+  ios,
   is,
+  orientation,
   type,
+
   isNumber,
   isString,
   isFunction,
@@ -27,9 +33,5 @@ export default {
   isObject,
   isArray,
   isNil,
-  isRegexp,
-
-  ios,
-  browser,
-  orientation
+  isRegexp
 };
