@@ -1,15 +1,7 @@
 import type from "./type";
 
 // 支持的数据类型
-const support = [
-  "number",
-  "string",
-  "boolean",
-  "null",
-  "undefined",
-  "array",
-  "object"
-];
+const support = ["number", "string", "boolean", "null", "undefined", "array", "object"];
 
 // 数据是否在支持的数据类型中
 const isCheck = function(value) {
@@ -29,22 +21,13 @@ const isCheck = function(value) {
 
 export default function equal(prev, next) {
   if (!isCheck(prev) || !isCheck(next)) {
-    throw new Error(
-      "The first argument and second argument type must be in [ number,string,boolean,null,undefined,array,object ]"
-    );
+    throw new Error("The first argument and second argument type must be in [ number,string,boolean,null,undefined,array,object ]");
   }
   let prevType = type(prev);
   let nextType = type(next);
   if (prevType !== nextType) return false;
-  if (
-    prevType === "string" ||
-    prevType === "boolean" ||
-    prevType === "null" ||
-    prevType === "undefined"
-  )
-    return prev === next;
-  if (prevType === "number")
-    return prev === next || (Number.isNaN(prev) && Number.isNaN(next));
+  if (prevType === "string" || prevType === "boolean" || prevType === "null" || prevType === "undefined") return prev === next;
+  if (prevType === "number") return prev === next || (Number.isNaN(prev) && Number.isNaN(next));
   if (prevType === "object") {
     let prevKeys = Object.keys(prev);
     let nextKeys = Object.keys(next);

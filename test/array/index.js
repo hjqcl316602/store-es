@@ -2,6 +2,8 @@ import clean from "./clean";
 import deepth from "./deepth";
 import delayer from "./delayer";
 import diffrence from "./diffrence";
+import dimen from "./dimen";
+import dimension from "./dimension";
 import each from "./each";
 import every from "./every";
 import filter from "./filter";
@@ -33,6 +35,8 @@ export default {
   deepth,
   delayer,
   diffrence,
+  dimen,
+  dimension,
   each,
   every,
   filter,

@@ -1,4 +1,5 @@
 import delayer from "./delayer";
+import dimen from "./dimen";
 import flatten from "./flatten";
 import shuffle from "./shuffle";
 import sort from "./sort";
@@ -11,6 +12,7 @@ import unique from "./unique";
 
 export default {
   delayer,
+  dimen,
   flatten,
   shuffle,
   sort,
