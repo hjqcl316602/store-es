@@ -11,6 +11,7 @@ import fun from "./fun/index.js";
 import number from "./number/index.js";
 import regex from "./regex/index.js";
 import ajax from "./ajax/index.js";
+import util from "./util/index.js";
 
 /**
  * 类式 - 需要实例化才能使用
@@ -25,24 +26,5 @@ import Check from "./check/index.js";
 import EventEmeitter from "./event-emeitter/index.js";
 import Image$ from "./image/index.js";
 import Calc from "./calc/index.js";
-export {
-  ajax,
-  date,
-  type,
-  array,
-  object,
-  dom,
-  string,
-  fun,
-  number,
-  regex,
-  Storage,
-  Cookie,
-  Hex,
-  Url,
-  Query,
-  Check,
-  EventEmeitter,
-  Image$,
-  Calc
-};
+
+export { ajax, date, type, array, object, dom, string, fun, number, regex, util, Storage, Cookie, Hex, Url, Query, Check, EventEmeitter, Image$, Calc };

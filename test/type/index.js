@@ -1,8 +1,5 @@
 import browser from "./browser";
-import clone from "./clone";
-import copy from "./copy";
-import equal from "./equal";
-import extend from "./extend";
+
 import ios from "./ios";
 import is from "./is";
 import orientation from "./orientation";
@@ -21,10 +18,7 @@ const isRegexp = is("regexp");
 
 export default {
   browser,
-  clone,
-  copy,
-  equal,
-  extend,
+
   ios,
   is,
   orientation,

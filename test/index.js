@@ -11,6 +11,7 @@ import fun from "./fun";
 import number from "./number";
 import regex from "./regex";
 import ajax from "./ajax";
+import util from "./util";
 
 /**
  * 类式 - 需要实例化才能使用

@@ -1,4 +1,4 @@
-import type from "./type";
+import type from "../type/type";
 
 // 支持的数据类型
 const support = ["number", "string", "boolean", "null", "undefined", "array", "object"];

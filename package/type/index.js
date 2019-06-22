@@ -1,5 +1,5 @@
 import browser from "./browser";
-import equal from "./equal";
+
 import ios from "./ios";
 import is from "./is";
 import orientation from "./orientation";
@@ -18,7 +18,7 @@ const isRegexp = is("regexp");
 
 export default {
   browser,
-  equal,
+
   ios,
   is,
   orientation,

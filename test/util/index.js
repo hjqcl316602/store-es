@@ -1,3 +1,9 @@
-// copy clone assign 深拷贝的时候均只考虑数组和对象
+import clone from "./clone";
+import equal from "./equal";
+import extend from "./extend";
 
-export default {};
+export default {
+  clone,
+  equal,
+  extend
+};

@@ -1,9 +1,11 @@
 /**
  * @name 数据的克隆
+ * @msg 支持对[ object , array ]的深拷贝，即和源数据之间不存在引用关系
  * @param { target } [ any ] 目标数据
  * @return [ any ]
+ * @example clone({ name: ["", 2, 3, 5] }) => { name: ["", 2, 3, 5] }
  */
-import type from "./type";
+import type from "../type/type";
 export default function clone(target) {
   if (type(target) === "array") {
     let res = [];

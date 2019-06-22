@@ -129,55 +129,6 @@
 - @param {array} [array]
 - @return [array]
 
-### type
-
-#### browserType
-
-- @name 获取浏览器的类型
-- @return [ string ]
-
-#### clone
-
-- @name 数据的克隆
-- @param { target } [ any ] 目标数据
-- @return [ any ]
-
-#### equal
-
-- @name 判断两个数据的属性值是否相等
-- @param { prev } [ number,string,boolean,null,undefined,array,object ]
-- @param { next } [ number,string,boolean,null,undefined,array,object ]
-- @msg 只支持 number,string,boolean,null,undefined,array,object 类型的数据比较，如果需要比较 symbol、function，可以强制转为 string 之后再比较，作用不大，所以放弃了对他们的比较
-- @msg 支持多维度的 array 和 object 类型，但其子元素类型也必须要满足在这些类型中
-- @return: [ boolean ]
-- @example //console.log(equal(NaN, NaN)); => true
-- @example //console.log(equal([NaN, { name: true }], [NaN, { name: true }])); => true
-
-#### ios
-
-- @name 判断客户端是否是 ios
-- @return [boolean]
-
-#### is
-
-- @name 获取数据类型
-- @param { ...args } [ array<string> ]
-- @return [ function ]
-- @param { value } [ any ]
-- @return [ boolean ]
-
-#### orientation
-
-- @name 判断手机的方向
-- @return [ string ] 'horizontal' => 横屏 'vertical' => 竖屏 '' => 未知
-
-#### type
-
-- @name 获取数据类型
-- @param { value } [ any ]
-- @return [ string ]
-- @example type('null') => string type(0) => number
-
 ### string
 
 #### connect
@@ -378,6 +329,91 @@
 - { type: 3, lebal: "前空格" }
 - { type: 4, lebal: "后空格" }
 - @return [ string ]
+
+### type
+
+#### browserType
+
+- @name 获取浏览器的类型
+- @return [ string ]
+
+#### ios
+
+- @name 判断客户端是否是 ios
+- @return [boolean]
+
+#### is
+
+- @name 获取数据类型
+- @param { ...args } [ array<string> ]
+- @return [ function ]
+- @param { value } [ any ]
+- @return [ boolean ]
+
+#### orientation
+
+- @name 判断手机的方向
+- @return [ string ] 'horizontal' => 横屏 'vertical' => 竖屏 '' => 未知
+
+#### type
+
+- @name 获取数据类型
+- @param { value } [ any ]
+- @return [ string ]
+- @example type('null') => string type(0) => number
+
+### util
+
+#### clone
+
+- @name 数据的克隆
+- @msg 支持对[ object , array ]的深拷贝，即和源数据之间不存在引用关系
+- @param { target } [ any ] 目标数据
+- @return [ any ]
+- @example clone({ name: ["", 2, 3, 5] }) => { name: ["", 2, 3, 5] }
+
+#### equal
+
+- @name 判断两个数据的属性值是否相等
+- @param { prev } [ number,string,boolean,null,undefined,array,object ]
+- @param { next } [ number,string,boolean,null,undefined,array,object ]
+- @msg 只支持 number,string,boolean,null,undefined,array,object 类型的数据比较，如果需要比较 symbol、function，可以强制转为 string 之后再比较，作用不大，所以放弃了对他们的比较
+- @msg 支持多维度的 array 和 object 类型，但其子元素类型也必须要满足在这些类型中
+- @return: [ boolean ]
+- @example //console.log(equal(NaN, NaN)); => true
+- @example //console.log(equal([NaN, { name: true }], [NaN, { name: true }])); => true
+
+#### extend
+
+- @name 数据拷贝-向后
+- @msg 针对引用关系的数据，源数据中存在目标数据没有的属性，则添加该属性，若有该属性，则覆盖该属性值。
+  - 返回的新数据与目标数据和源数据均不存在引用关系
+  - 原始数据类型：number,string,boolean,null,undefined,function,symbol
+  - 引用数据类型：array,object
+- @rule
+  - 原始 1 + 原始 2 => 当原始 2 为 null 时，返回原始 1，否则原始 2 | extend(1, null) => 1 | extend(1, true ) => true
+  - 原始 + 引用 => 原始 | extend(1, [1,2,3]) => 1 | extend(1, { name : 1 } ) =>1
+  - 引用 + 原始 => 只对引用类型数据进行深复制即可
+    - array + 原始 | extend( [1,2,3] , 1 ) => [ 1,2,3]
+    - object + 原始 | extend( { name : 1 } , 1 ) => { name ： 1 }
+  - 引用 + 引用
+    - array1 + array2 => array 向前复制和追加 | extend( [ 1,2,3] ,[1,2,4,5,6] ) => [ 1,2,4,5,6]
+    - array + object => 只对 array 进行深复制即可 | extend( [ 1,2,3] ,{ name : 1 } ) => [1,2,3]
+    - object + array => 只对 object 进行深复制即可 | extend( { a:1,b:2} ,[1,2,4,5,6] ) => { a:1,b:2}
+    - object1 + object2 => object2 向前复制和追加 | extend( { a:1,b:2} , { b : 3 , c : 4 , e : null } ) => { a : 1 , b : 3 , c : 4 , e : undefined }
+- @param { prev } [ number,string,boolean,null,undefined,array,object ,function,symbol ]
+- @param { next } [ number,string,boolean,null,undefined,array,object ,function,symbol ]
+- @return [ number,string,boolean,null,undefined,array,object ,function,symbol ]
+
+#### extend.replace
+
+- @name 数据拷贝-向前
+- @msg 和 extend 同理，区别在于，后者和前者的属性名一致，则替换，否则不替换，也不追加
+- @param { prev }
+- @param { next }
+- @return [ any ]
+- @example extend.replace([1, 2, 3, 4], [true, false, 2, 3, 4, 5, 6]) => [ true,false,2,3]
+- @example extend.replace({ a: 1, b: 2, c: 3 }, { a: true, b: null, d: undefined, e: "'" }) => { a: true, b: 2, c: 3 }
 
 ## 类式（需要实例化）
 
