@@ -4,7 +4,7 @@
  * @Author: huangjunquan
  * @Date: 2019-06-12 11:17:47
  * @LastEditors: huangjunquan
- * @LastEditTime: 2019-06-12 18:31:14
+ * @LastEditTime: 2019-06-24 10:57:12
  * @msg:对象转字符串，字符串转对象后，数字和布尔均会变成字符串
  */
 
@@ -15,9 +15,9 @@ const commaRE = /%2C/g;
 export default function Query() {}
 
 /**
- * @name: 编码
- * @param : { string } [ string ]
- * @return: [ string ]
+ * @name 编码
+ * @param  { string } [ string ]
+ * @return [ string ]
  */
 
 Query.prototype.encode = function(string) {
@@ -27,17 +27,17 @@ Query.prototype.encode = function(string) {
 };
 
 /**
- * @name: 解码
- * @param : { string } [ string ]
- * @return: [ string ]
+ * @name 解码
+ * @param  { string } [ string ]
+ * @return [ string ]
  */
 
 Query.prototype.decode = decodeURIComponent;
 
 /**
- * @name: 对象转字符串
- * @param : { obj } [ object ]
- * @return: [ string ]
+ * @name 对象转字符串
+ * @param  { obj } [ object ]
+ * @return [ string ]
  */
 
 Query.prototype.stringify = function stringify(obj) {
@@ -78,9 +78,9 @@ Query.prototype.stringify = function stringify(obj) {
 };
 
 /**
- * @name: 字符串转对象
- * @param : { query } [ string ]
- * @return: [ object ]
+ * @name 字符串转对象
+ * @param  { query } [ string ]
+ * @return [ object ]
  */
 
 Query.prototype.parse = function parse(query) {

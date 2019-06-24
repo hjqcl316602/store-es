@@ -5,23 +5,30 @@ import format from "../date/format";
  * @Author: huangjunquan
  * @Date: 2019-06-12 11:17:47
  * @LastEditors: huangjunquan
- * @LastEditTime: 2019-06-12 17:45:24
+ * @LastEditTime: 2019-06-24 11:19:16
  * @msg:暂时只能存储的数据类型 string boolean number null  object array  not function symbol undefined
  */
 /**
- * @param :  { isLocal } [ boolean ] [ true,false ] 是否是本地存储
+ * @name 本地存储
+ * @param :  { isLocal } [ boolean ] 是否是本地永久存储
  */
 
 export default function Storage(isLocal = true) {
+  if (typeof isLocal !== "boolean") {
+    throw new Error("The argument must be boolean.");
+  }
   this.isLocal = typeof isLocal === "boolean" ? isLocal : true;
   this.storage = window[`${this.isLocal ? "local" : "session"}Storage`];
 }
 /**
- * @name:获取存储信息
- * @param : { key } [ string ] 关键字
- * @return: { any }
+ * @name 获取存储信息
+ * @param  { key } [ string ] 关键字
+ * @return [ promise ]
  */
 Storage.prototype.getItem = function(key) {
+  if (typeof key !== "string") {
+    throw new Error("The argument must be string.");
+  }
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       try {
@@ -36,13 +43,16 @@ Storage.prototype.getItem = function(key) {
 };
 
 /**
- * @name: 存储信息
- * @param : { key }
- * @param : { value }
- * @return:
+ * @name 存储信息
+ * @param  { key }
+ * @param  { value }
+ * @return [ promise ]
  */
 
 Storage.prototype.setItem = function(key, value) {
+  if (typeof key !== "string") {
+    throw new Error("The first argument must be string.");
+  }
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       try {
@@ -64,17 +74,20 @@ Storage.prototype.setItem = function(key, value) {
 };
 
 /**
- * @name: 移除存储信息
- * @param : { key } [ string ]
- * @return:
+ * @name  移除指定关键字存储信息
+ * @param  { key } [ string ]
+ * @return [ promise ]
  */
 
 Storage.prototype.removeItem = function(key) {
+  if (typeof key !== "string") {
+    throw new Error("The first argument must be string.");
+  }
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       try {
         this.storage.removeItem(key);
-        resolve(key);
+        resolve(this);
       } catch (e) {
         reject(e);
       }
@@ -83,7 +96,7 @@ Storage.prototype.removeItem = function(key) {
 };
 
 /**
- * @name: 清除存储信息
+ * @name  清除存储信息
  */
 
 Storage.prototype.clear = function() {
@@ -91,7 +104,7 @@ Storage.prototype.clear = function() {
     setTimeout(() => {
       try {
         this.storage.clear();
-        resolve();
+        resolve(this);
       } catch (e) {
         reject(e);
       }
@@ -99,14 +112,11 @@ Storage.prototype.clear = function() {
   });
 };
 
-// test
+// // test
 // let storage = new Storage(true);
 
-// storage.setItem("message", null);
-
-// storage
-//   .getItem("message")
-//   .then(res => {
-//     console.log(res);
-//   })
-//   .catch(err => {});
+// storage.setItem("message", { name: "web-app" });
+// storage.getItem("message").then(res => {
+//   console.log(res);
+// });
+// storage.clear();

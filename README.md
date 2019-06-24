@@ -88,6 +88,14 @@
 - @param { charLen = 4 } [ number<int> ] 指定长度的字符串元素
 - @return: [ array<number>]
 
+#### template.of
+
+- @name 填充相同值的元素的指定长度的数组
+- @param { len = 10 } [ len ] 数组的指定长度
+- @param { callback } [ function ] 指定函数
+- @param { context = this } [ any ] 函数执行上下文
+- @return:[ array ]
+
 #### times
 
 - @name 数组中元素出现的次数信息统计
@@ -419,20 +427,59 @@
 
 ### Calc
 
-- 描述
+- 解决 js 中 0.1 + 0.2 != 0.3
+- 解决大数相乘的问题，js 的数字存在安全数范围，
+- 超过安全数范围的计算会出现不正确的运算，判断安全数，是小数点移除之后判断，即 12.345 => 12345
 
-  - 解决 js 中 0.1 + 0.2 != 0.3
-  - 解决大数相乘的问题，js 的数字存在安全数范围，
-  - 超过安全数范围的计算会出现不正确的运算，判断安全数，是小数点移除之后判断，即 12.345 => 12345
+#### add
 
-- 方法
+- @name 加法运算
+- @msg
+- 安全性：在数字是 number 类型时，数字的值在 [ -Math.pow(2,53)-1,Math.pow(2,53)-1] 之内
+- @param { prev } [ number | string ]
+- @param { next } [ number | string ]
+- @condition
+- 1.参数必须是字符串和数字类型形式
+- 2.通过 Nmber()强制后，不能是 NaN，即过滤出可以进行计算的数字，可以是 '3e+10'=> 300 '.2'=>0.2 ''等不规则的数字
+- 3.找到两数的小数点后面的最大长度，得到一个 Math.pow(10,len)数，将这个数分别乘以该数，再判断两数的安全性
+- 4.判断两数之和的安全性
+- @return [string]
+- @example add(0.1,0.2) => 0.3
 
-  - add( prev[number|string],next[number|string]) => ( string ) || 加法运算
-  - minus( prev[number|string],next[number|string]) => ( string ) || 减法运算
-  - mul( prev[number|string],next[number|string]) => ( string ) || 乘法运算
-  - div( prev[number|string],next[number|string]) => ( string ) || 除法运算
-  - bigIntAdd(prev[number|string],next[number|string]) => ( string ) || 大数的加法
-  - bigIntMul(prev[number|string],next[number|string]) => ( string )|| 大数的乘法
+#### minus
+
+- @name 减法运算
+- @param { prev } [ number | string ]
+- @param { next } [ number | string ]
+- @return [ string ]
+
+#### mul
+
+- @name 乘法运算
+- @param { prev } [ number | string ]
+- @param { next } [ number | string ]
+- @return [ string ]
+
+#### div
+
+- @name 除法运算
+- @param { prev } [ number | string ]
+- @param { next } [ number | string ]
+- @return [ string ]
+
+#### bigIntAdd
+
+- @name 大整数相加
+- @param { prev } [ number | string ]
+- @param { next } [ number | string ]
+- @return [ string ]
+
+#### bigIntMul
+
+- @name 大整数相乘
+- @param { prev } [ number | string ]
+- @param { next } [ number | string ]
+- @return [ string ]
 
 ### Image\$
 
@@ -459,63 +506,136 @@
 
 ### Storage([local=true])
 
-参数[ local ]是否是本地存储信息
-只能存储 除 undefined function symbol 类型之外的数据
+- 参数[ local ]是否是本地永久存储信息
+- 只能存储 除 undefined function symbol 类型之外的数据
+- 异步方式
 
-- 方法
+#### setItem
 
-  - setItem(key[string],value[any]) => ( promise ) => ( any ) || 存储信息
-  - getItem(key[string]) => ( promise ) => ( any ) || 获取存储信息
-  - removeItem(key[string]) => ( promise ) => ( null ) || 移除指定的信息
-  - clear() => ( promise ) => ( null ) || 全部清除
+- @name 获取存储信息
+- @param { key } [ string ] 关键字
+- @return [ promise ]
+
+#### getItem
+
+- @name 存储信息
+- @param { key }
+- @param { value }
+- @return [ promise ]
+
+#### getItem
+
+- @name 移除指定关键字存储信息
+- @param { key } [ string ]
+- @return [ promise ]
+
+#### clear
+
+- @name 清除存储信息
+
+```js
+let storage = new Storage(true);
+
+storage.setItem("message", { name: "web-app" });
+storage.getItem("message").then(res => {
+  console.log(res);
+});
+storage.clear();
+```
 
 ### Query
 
-- 缺点
+- 互转之后，数字和布尔均会变成字符串
 
-  - 互转之后，数字和布尔均会变成字符串
+#### encode
 
-- 方法
+- @name 编码
+- @param { string } [ string ]
+- @return [ string ]
 
-  - encode( string[string]) => ( string ) || 字符串编码
-  - decode( string[string]) => ( string ) || 字符串解码
-  - stringify(obj[object]) => ( string ) || 对象转字符串
-  - parse(query[string]) => ( oject ) || 字符串转对象
+#### decode
+
+- @name 解码
+- @param { string } [ string ]
+- @return [ string ]
+
+#### stringify
+
+- @name 对象转字符串
+- @param { obj } [ object ]
+- @return [ string ]
+
+#### parse
+
+- @name 字符串转对象
+- @param { query } [ string ]
+- @return [ object ]
 
 ### Check
 
-- 优点
+- 链式调用，每个方法均返回当前实例
+- 一个数据验证失败则后续的数据不进行验证
 
-  - 链式调用，每个方法均返回当前实例
-  - 一个数据验证失败则后续的数据不进行验证
+#### set
 
-- 方法
+- @name 绑定当前验证的数据
+- @param { data } [ string ] 验证数据
+- @param { isRequire } [ boolean ] 是否是必填项
+- @param { message } [ string ] 错误提示语
+- @return [ object ] 当前实例
 
-  - set(data[string]) => ( object ) || 绑定当前验证的数据
-  - require(message[string]) || 当前验证的数据是必填项，(message)错误提示信息
-  - len(message[string],len[number]) || 验证当前数据的长度是否是指定的长度
-  - rangeLen(message[string],min[number],max[number]) || 验证当前数据的长度是否是指定的长度范围
-  - minLen(message[string],min[number]) || 验证当前数据的长度是否是不少于指定长度
-  - maxLen(message[string],max[number]) || 验证当前数据的长度是否是不超过指定长度
-  - regex(message[string],type[string]) || 按指定的正则表达式验证数据
-  - check(message[string],callback[function]) || 以自定义回调函数验证数据
+#### len
 
-- 使用
+- @name 数据长度是否是指定长度
+- @param { message } [ string ] 错误提示语
+- @param { len } [ number ] 指定长度
+- @return [ object ]
+
+#### minLen
+
+- @name 数据长度是否大于指定长度
+- @param { message } [ string ] 错误提示语
+- @param { min } [ number ] 最小长度
+- @return [ object ]
+
+#### maxLen
+
+- @name 数据是否在最大长度范围值内
+- @param { message } [ string ] 错误提示语
+- @param { max } [ number ] 最大长度
+- @return [ object ]
+
+#### rangeLen
+
+- @name 数据是否在指定的范围内
+- @param { message } [ string ] 错误提示语
+- @param { min } [ number ] 最小长度
+- @param { max } [ number ] 最大长度
+- @return [ object ]
+
+#### regex
+
+- @name 通过指定的正则表达式验证数据
+- @param { message } [ string ] 错误提示语
+- @param { type } [ string ] 指定的正则类型
+- @return [ object ]
+
+#### check
+
+- @name 通过指定的函数验证数据
+- @param { message } [ string ] 错误提示语
+- @param { callback } [ function ] 指定的函数
+- @return [ object ]
 
 ```js
 let check = new Check()
-  .set("12")
-  .maxLen("10wei", 10)
-  .set("黄军泉黄军泉")
-  .require("dhsdsjdhjs")
-  .regex("中文", "chinese")
-  .rangeLen("2-3", 2, 6)
-  .check("开头必须是黄", value => value.startsWith("黄"))
-  .set("黄军泉黄军泉")
-  .require("dhsdsjdhjs")
-  .regex("中文", "chinese")
-  .rangeLen("2-3", 2, 6)
-  .check("开头必须是黄", value => value.startsWith("黄"));
+  .set("", true, "该数据是必填项")
+  .check("长度不少于4", function(value, regex) {
+    return value.length >= 4;
+  })
+  .regex("格式错误", "chinese")
+  .set("1398046423")
+  .regex("格式错误", "mobile");
 
 console.log(check);
 console.log(check.pass, check.message);

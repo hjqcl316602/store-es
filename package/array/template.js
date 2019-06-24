@@ -11,14 +11,10 @@ export default function template(start = 0, len = 10, isUp = true) {
     throw new Error("The first argument must be integer number.");
   }
   if (!Number.isInteger(len) || len <= 0) {
-    throw new Error(
-      "The first argument must be be integer number and it must be greate than 0."
-    );
+    throw new Error("The first argument must be be integer number and it must be greate than 0.");
   }
   if (typeof isUp !== "boolean") {
-    throw new Error(
-      "The third argument must be boolean,and this normal is false."
-    );
+    throw new Error("The third argument must be boolean,and this normal is false.");
   }
   let res = [];
   if (isUp) {
@@ -40,9 +36,7 @@ export default function template(start = 0, len = 10, isUp = true) {
  */
 template._random = function(n = 16) {
   if (!Number.isInteger(n) || n <= 0) {
-    throw new Error(
-      "The first argument must be integer number and it must be greater than 0,and this normal is 16."
-    );
+    throw new Error("The first argument must be integer number and it must be greater than 0,and this normal is 16.");
   }
   let standard = "abcdefghijklmnopqrstuvwxyz9876543210";
   let len = standard.length;
@@ -61,18 +55,26 @@ template._random = function(n = 16) {
  */
 template.string = function(len = 10, charLen = 4) {
   if (!Number.isInteger(len) || len <= 0) {
-    throw new Error(
-      "The first argument must be integer number and it must be greater than 0,and this normal is 10."
-    );
+    throw new Error("The first argument must be integer number and it must be greater than 0,and this normal is 10.");
   }
   if (!Number.isInteger(charLen) || charLen < 1) {
-    throw new Error(
-      "The second argument must be integer number and it must be greater than 0,and this normal is 4."
-    );
+    throw new Error("The second argument must be integer number and it must be greater than 0,and this normal is 4.");
   }
   let res = [];
   for (let n = 0; n < len; n++) {
     res.push(template._random(charLen));
   }
   return res;
+};
+
+/**
+ * @name 填充相同值的元素的指定长度的数组
+ * @param { len = 10 } [ len ] 数组的指定长度
+ * @param { callback } [ function ] 指定函数
+ * @param { context = this } [ any ] 函数执行上下文
+ * @return:[ array ]
+ */
+
+template.of = function(len = 10, callback = function() {}, context = this) {
+  return Array.apply(null, Array(len)).map(() => callback.call(context));
 };
