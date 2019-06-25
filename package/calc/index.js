@@ -4,7 +4,7 @@
  * @Author: huangjunquan
  * @Date: 2019-06-11 18:07:02
  * @LastEditors: huangjunquan
- * @LastEditTime: 2019-06-25 12:18:49
+ * @LastEditTime: 2019-06-25 14:17:16
  * @msg: 安全性：
  */
 import template from "../array/template";
@@ -155,5 +155,5 @@ Calc.prototype.mul = function(prev, next) {
   return resFormat;
 };
 
-let calc = new Calc();
-console.log(calc.mul("123456", "0.123456"));
+// let calc = new Calc();
+// console.log(calc.mul("123456", "0.123456"));

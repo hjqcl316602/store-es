@@ -1,35 +1,77 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg=" Welcome to Your Vue.js App" />
-    <input type="file" @change="change" />
-    <button ref="btn">单击</button>
+    <div class="main" v-if="false">
+      <div class="main-child">
+        <div class="main-child-child">
+          <div class="list blue" v-for="item in 4" :key="item">list {{ item }}</div>
+        </div>
+      </div>
+      <div class="center red">center</div>
+      <div class="main-child">
+        <div class="main-child-child2">
+          <div class="list green" v-for="item in 3" :key="item">list {{ item }}</div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue"
-import { string, Calc, Image$, dom } from "../package/index"
-let image = new Image$()
+import { string, Calc, Image$, dom } from "../package/index";
+let image = new Image$();
 export default {
   name: "app",
-  components: {
-    HelloWorld,
-  },
+  components: {},
   mounted() {},
   methods: {
-    change(e) {},
-  },
-}
+    change(e) {}
+  }
+};
 </script>
 
 <style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.main {
+  width: 100%;
+  height: 350px;
+}
+.center {
+  height: 100px;
+  width: 100%;
+}
+.main-child {
+  height: 350px;
+  width: 100%;
+  position: relative;
+}
+.main-child-child {
+  max-height: 100%;
+  overflow: auto;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  background: green;
+}
+.main-child-child2 {
+  max-height: 100%;
+  overflow: auto;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: blue;
+}
+.list {
+  height: 50px;
+  border: 1px solid #000;
+}
+.red {
+  background: red;
+}
+.blue {
+  background: blue;
+}
+.green {
+  background: green;
 }
 </style>

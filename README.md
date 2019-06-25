@@ -651,6 +651,109 @@ console.log(check);
 console.log(check.pass, check.message);
 ```
 
+### Hex
+
+#### escape
+
+- @name 16 进制编码
+- @msg 不支持中文编码，以及中文相关的标点符号等，适合单纯的数字和英文字母组成的字符串
+- @param { string } [ string ]
+- @return [ string ]
+
+#### usescape
+
+- @name 16 进制解码
+- @msg 必须要要使用 encode 编码的字符串才能进行解
+- @param { string } [ string ] 16 进制编码字符串
+- @return [ string ]
+
+#### encodeURI
+
+- @name 字符串转 16 进制
+- @msg 该方式是通过将每个字符串转成对应的 16 进制，并以指定的连接符连接
+- 支持任何字符串
+- @param { string } [ string ]
+- @param { concat = ',' } [ string ]
+- @return [ string ]
+
+#### decodeURI
+
+- @name 字符串转 16 进制
+- @msg 必须要使用 encodeURI 编码的字符串
+- @param { string } [ string ]
+- @param { concat = ',' } [ string ]
+- @return [ string ]
+
+#### decodeComponent
+
+- @name 16 进制转字符串
+- @param { string }
+- @return [ string]
+
+#### readUTF
+
+- @name 中文编码处理
+- @param { arr }
+- @return [ string ]
+
+```js
+let hex = new Hex();
+console.log(hex.encode("!@#$%^&**())"));
+console.log(hex.decode(hex.encode("ZAQXSWCDE<>?_+{}''[]【】，,+|")));
+console.log(hex.encodeURI("!@#$%^%^"));
+
+console.log(hex.decodeURI(hex.encodeURI("hjqhj 很少见三 化建设局啊")));
+let str =
+  "7B2262616E6B5265616C4E616D65223A22E9BB84E5869BE6B389222C22616C69706179223A223133393830343634323337222C22616C69706179436F646555726C223A22687474703A2F2F74726164652E627374636861696E2E636F6D2F75706C6F61642F38623364346337632D663735662D343636372D393161362D3430373330366436636563642E6A7067222C22666565223A2231303030222C226D6F62696C65223A223135393238343039323834222C22776563686174223A22222C2271725765436F646555726C223A22222C22616C697061795265616C4E616D65223A22E9BB84E5869BE6B389222C22616C6970617955726C223A2268747470733A2F2F71722E616C697061792E636F6D2F666B78303132393966686772617A62343970796C306462222C22636172644E6F223A2236323231383836353130303435373338363734222C2262616E6B223A22E4B8ADE59BBDE982AEE694BFE582A8E89384E993B6E8A18C222C227375624D656D4964223A223130222C2277656368617455726C223A22222C226D656D4964223A2233227D";
+let decodeComponent = hex.decodeComponent(str);
+```
+
+### EventEmeitter
+
+发布、订阅模式
+
+#### addListener
+
+- @name: 监听名为 type 的事件
+- @param { type } [ string ]
+- @param { fn } [ function ]
+- @return: 当前实例
+
+#### emit
+
+- @name 触发名为 type 的事件
+- @param { type } [string]
+- @param { ...args } [ any ]
+- @return 当前实例
+
+#### removeListener
+
+- @name: 移除监听事件
+- @param {type} 事件名
+- @return: 当前实例
+
+```js
+let evt = new EventEmeitter();
+evt
+  .addListener("click", function(...params) {
+    console.log(params.length);
+  })
+  .emit("click", ...[1, 2, 3, 4]);
+evt.addListener("click", function(...params) {
+  console.log(params[1]);
+});
+console.log(evt);
+evt
+  .addListener("click", function(...params) {
+    console.log(params);
+  })
+  .emit("click", "name");
+
+evt.removeListener("click");
+console.log(evt);
+console.log(evt);
+```
+
 ## 其他
 
 ### regex

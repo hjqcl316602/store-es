@@ -4,7 +4,7 @@
  * @Author: huangjunquan
  * @Date: 2019-05-24 11:24:11
  * @LastEditors: huangjunquan
- * @LastEditTime: 2019-06-12 11:47:41
+ * @LastEditTime: 2019-06-25 14:21:54
  */
 
 export default function EventEmeitter() {
@@ -12,17 +12,17 @@ export default function EventEmeitter() {
 }
 /**
  * @name: 监听名为type的事件
- * @msg:
- * @param {type}
+ * @param { type } [ string ]
+ * @param { fn } [ function ]
  * @return: 当前实例
  */
 EventEmeitter.prototype.addListener = function(type, fn) {
-  if (typeof type !== "string" || !type) {
-    throw new TypeError("参数1，必须是非空字符串！");
+  if (typeof type !== "string" || type === "") {
+    throw new Error("The first argument must be string and it must be not empty.");
   }
 
   if (typeof fn !== "function") {
-    throw new TypeError("参数2，必须是function类型！");
+    throw new Error("The second argument must be function.");
   }
 
   let handler = this.events.get(type);
@@ -36,18 +36,18 @@ EventEmeitter.prototype.addListener = function(type, fn) {
   return this;
 };
 /**
- * @name: 触发名为type的事件
- * @msg:
- * @param {type} [string]
- * @return: 当前实例
+ * @name 触发名为type的事件
+ * @param { type } [string]
+ * @param { ...args } [ any ]
+ * @return 当前实例
  */
 EventEmeitter.prototype.emit = function(type, ...args) {
-  if (typeof type !== "string" || !type) {
-    throw new TypeError("参数1，必须是非空字符串！");
+  if (typeof type !== "string" || type === "") {
+    throw new Error("The first argument must be string and it must be not empty.");
   }
   let handler = this.events.get(type);
   if (!handler) {
-    throw new TypeError("还未绑定监听事件" + type + "！");
+    throw new Error("The event " + type + " is not addListener.");
   }
 
   if (Array.isArray(handler)) {
@@ -61,31 +61,13 @@ EventEmeitter.prototype.emit = function(type, ...args) {
 };
 /**
  * @name: 移除监听事件
- * @msg:
  * @param {type} 事件名
  * @return: 当前实例
  */
 EventEmeitter.prototype.removeListener = function(type) {
-  if (typeof type !== "string" || !type) {
-    throw new TypeError("参数1，必须是非空字符串！");
+  if (typeof type !== "string" || type === "") {
+    throw new Error("The first argument must be string and it must be not empty.");
   }
   this.events.delete(type);
 };
 
-// let evt = new  EventEmeitter()
-// evt.addListener('click',function(...params){
-//   console.log(params.length)
-// })
-// evt.addListener('click',function(...params){
-//   console.log(params[1])
-// })
-// console.log(evt)
-// evt.addListener('click',function(...params){
-
-//   console.log(params)
-// })
-// .emit('click','name')
-
-// evt.removeListener('click')
-// console.log(evt)
-//console.log(evt)
