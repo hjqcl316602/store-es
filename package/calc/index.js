@@ -4,7 +4,7 @@
  * @Author: huangjunquan
  * @Date: 2019-06-11 18:07:02
  * @LastEditors: huangjunquan
- * @LastEditTime: 2019-06-25 14:17:16
+ * @LastEditTime: 2019-06-25 17:52:05
  * @msg: 安全性：
  */
 import template from "../array/template";
@@ -46,7 +46,27 @@ Calc.prototype.format = function(string) {
   string = string.replace(/\.$/, "");
   return string.length === 0 ? "0" : string;
 };
-
+/**
+ * @name 是否是合法的可计算的我数字
+ * @msg
+ * 1.以'0'开头，若后面没有有小数点，则'0'本身；若后面有小数点，则小数点后面有至少一位的数字
+ * 2.不以'0'开头，后面跟任意位的数字，若有小数点，后面至少需要一位以上的数字
+ * @param { string } [ string ]
+ * @return [ boolean ]
+ * @example isFreeNumber("0.0") => true
+ * @example isFreeNumber("0.") => false
+ * @example isFreeNumber("001") => false
+ * @example isFreeNumber(".0") => false
+ * @example isFreeNumber("-1") => false
+ * @example isFreeNumber("+1") => false
+ */
+Calc.prototype.isFreeNumber = function(string) {
+  if (typeof string !== "string") {
+    throw new Error("The argument must be string.");
+  }
+  let regex = /(^[0](\.[0-9]+)?$)|(^[1-9]([0-9]+)?(\.[0-9]+)?$)/; ///(^0\.([0-9]*)?[1-9]+([0-9]*)?$)|(^[0]{1}$)|(^[1-9]([0-9]+)?(\.[0-9]+)?$)/;
+  return regex.test(string);
+};
 /**
  * @name 加法运算
  * @param { prev } [ number | string ]
@@ -63,6 +83,9 @@ Calc.prototype.format = function(string) {
 Calc.prototype.add = function(prev, next) {
   if (typeof prev !== "string" || typeof next !== "string") {
     throw new Error("The first and second argument must be string.");
+  }
+  if (!this.isFreeNumber(prev) || this.isFreeNumber(next)) {
+    throw new Error("The first and second argument must be free number.");
   }
   let prevSplit = prev.split("."),
     nextSplit = next.split(".");
@@ -125,7 +148,9 @@ Calc.prototype.mul = function(prev, next) {
   if (typeof prev !== "string" || typeof next !== "string") {
     throw new Error("The first and second argument must be string.");
   }
-
+  if (!this.isFreeNumber(prev) || !this.isFreeNumber(next)) {
+    throw new Error("The first and second argument must be free number.");
+  }
   let prevSplit = prev.split("."),
     nextSplit = next.split(".");
   let prevIntLen = prevSplit[0].length,
@@ -156,4 +181,5 @@ Calc.prototype.mul = function(prev, next) {
 };
 
 // let calc = new Calc();
-// console.log(calc.mul("123456", "0.123456"));
+// console.log(calc.isFreeNumber("0.123456"));
+// console.log(calc.mul("123456.7", "0.1"));

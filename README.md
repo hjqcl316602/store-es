@@ -491,6 +491,21 @@
 - @return string
 - @example console.log(calc.format("000.0001"));=> '0.0001'
 
+#### isFreeNumber
+
+- @name 是否是合法的可计算的我数字
+- @msg
+- 1.以'0'开头，若后面没有小数点，则'0'本身；若后面有小数点，则小数点后面有至少一位的数字
+- 2.不以'0'开头，后面跟任意位的数字，若有小数点，后面至少需要一位以上的数字
+- @param { string } [ string ]
+- @return [ boolean ]
+- @example isFreeNumber("0.0") => true
+- @example isFreeNumber("0.") => false
+- @example isFreeNumber("001") => false
+- @example isFreeNumber(".0") => false
+- @example isFreeNumber("-1") => false
+- @example isFreeNumber("+1") => false
+
 ### Image\$
 
 - 方法
@@ -513,6 +528,29 @@
   - getCompressAspect( src[string],width[number], height[number], [ type[string] = "image/png" ]) => ( promise ) => ( string[base64]) || 按指定高宽压缩图片
   - getCompressRatio( src[string],[ ratio[number] = 1 ,type [string]= "image/png"]) => ( promise ) => ( string[base64]) || 按指定体积压缩图片
   - getCompressSize(src[string], [size[number] = 200 \* 1024, range[number] = 100, type[string] = "image/png"]) => ( promise ) => ( string[base64]) || 按指定体积压缩图片
+
+```js
+let image = new Image$();
+let src = "http://img2.imgtn.bdimg.com/it/u=298887015,2313380003&fm=26&gp=0.jpg";
+image.getSize(src).then(res => {
+  console.log(image.transformSize(res));
+});
+image.getType(src).then(res => {
+  console.log(res);
+});
+image.getCompressAspect(src, 50, 50).then(res => {
+  console.log(res);
+});
+image.getCompressHeight(src, 50).then(res => {
+  console.log(res);
+});
+image.getCompressWidth(src, 50).then(res => {
+  console.log(res);
+});
+image.getCompressSize(src, 10 * 1024, 100).then(res => {
+  console.log(res);
+});
+```
 
 ### Storage([local=true])
 

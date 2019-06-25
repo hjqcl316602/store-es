@@ -13,6 +13,9 @@
         </div>
       </div>
     </div>
+    <div>
+      <input type="file" @change="change" />
+    </div>
   </div>
 </template>
 
