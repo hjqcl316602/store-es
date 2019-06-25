@@ -4,7 +4,7 @@
  * @Author: huangjunquan
  * @Date: 2019-05-24 09:13:26
  * @LastEditors: huangjunquan
- * @LastEditTime: 2019-06-17 18:25:15
+ * @LastEditTime: 2019-06-25 12:21:37
  */
 
 // 前瞻：
@@ -32,9 +32,7 @@ export default function shousand(string) {
     return string;
   }
   string = String(string);
-  return /\./g.test(string)
-    ? Number(string).toLocaleString()
-    : string.replace(/(\d)(?=(\d{3})+$)/g, "$1,");
+  return /\./g.test(string) ? Number(string).toLocaleString() : string.replace(/(\d)(?=(\d{3})+$)/g, "$1,");
 }
 
 // let string = shousand(123456788);

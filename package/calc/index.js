@@ -4,111 +4,105 @@
  * @Author: huangjunquan
  * @Date: 2019-06-11 18:07:02
  * @LastEditors: huangjunquan
- * @LastEditTime: 2019-06-24 18:39:58
+ * @LastEditTime: 2019-06-25 12:18:49
  * @msg: 安全性：
  */
 import template from "../array/template";
+import insert from "../string/insert";
 /**
  * @name 数字计算
+ *
  * @msg
+ * 解决js 中 0.1 + 0.2 != 0.3
+ * 为何不支持数字？
+ * 因为有些特殊的数字会自动转为科学计数，并且存在安全数范围。
+ * 自动转为科学计数，当数值为整数时，后面有21个0时， 9000000000000000000000 => 9e+21 ； 当数值为浮点数时，一个不为0的数前面有7个0时，0.0000001 => 1e-7
  * @return [ object ]
- * @care
- * 1.自动转为科学计数，当数值为整数时，后面有21个0时， 9000000000000000000000 => 9e+21 ； 当数值为浮点数时，一个不为0的数前面有7个0时，0.0000001 => 1e-7，需要将科学计数转为正常的数值进行计算
- * 2.安全数：[-Math.pow(2,53)+1] - [ Math.pow(2,53)-1 ] 之内为安全数
- * 3.当两数计算时，如果采用原生计算，需要先判断两数是否是安全数范围，否则得到的数不完全正确，但是当数是科学计数会增加复杂性，解决办法：入参只能是字符串
  */
 
 export default function Calc() {}
+/**
+ * @name 数字格式化
+ * @msg
+ * 1.是否存在'.'，若存在，去掉开头和结尾的0，否则，只去掉开头的0
+ * 2.当以'.'开头，则前面补'0'
+ * 3.当以'.'结尾，则去掉结尾的'.'
+ * 4.若为空，则返回0
+ * @param { string } [ string]
+ * @return string
+ * @example console.log(calc.format("000.0001"));=> '0.0001'
+ */
+Calc.prototype.format = function(string) {
+  if (typeof string !== "string") {
+    throw new Error("The first argument must be string.");
+  }
+  if (string.indexOf(".") > -1) {
+    string = string.replace(/(0+)$/, "");
+  }
+  string = string.replace(/^(0+)/, "");
+  if (string.startsWith(".")) {
+    string = "0" + string;
+  }
+  string = string.replace(/\.$/, "");
+  return string.length === 0 ? "0" : string;
+};
 
 /**
  * @name 加法运算
  * @param { prev } [ number | string ]
  * @param { next } [ number | string ]
  * @return [string]
- * @example add(0.1,0.2) => 0.3
+ * @example console.log(calc.add("1.123", "0.877")); // => 2
+ * @example console.log(calc.add("0.1", "0.2")); // 0.3
+ * @example console.log(calc.add("0.1", "1.23")); // => 1.33
+ * @example console.log(calc.add("1000", "0.0001")); //=>1000.0001
+ * @example console.log(calc.add("00001", "1")); // => 2
+ * @example console.log(calc.add("99999999999999999", "1")); //=> 1000000000000000
  */
 
 Calc.prototype.add = function(prev, next) {
   if (typeof prev !== "string" || typeof next !== "string") {
     throw new Error("The first and second argument must be string.");
   }
-  console.log(prev, next);
-  let prevSlotLen = prev.split(".")[1] ? prev.split(".")[1].length : 0;
-  let nextSlotLen = next.split(".")[1] ? next.split(".")[1].length : 0;
-  let maxSlotLen = Math.max(prevSlotLen, nextSlotLen);
-  console.log(prevSlotLen, nextSlotLen);
-  let slotMinus = prevSlotLen - nextSlotLen;
-  let slotZero = template.of(Math.abs(slotMinus), () => "0").join("");
-  if (slotMinus > 0) {
-    next = next + slotZero;
-  } else if (slotMinus < 0) {
-    prev = prev + slotZero;
+  let prevSplit = prev.split("."),
+    nextSplit = next.split(".");
+  let prevIntLen = prevSplit[0].length,
+    nextIntLen = nextSplit[0].length,
+    minusIntLen = prevIntLen - nextIntLen,
+    maxIntLen = Math.max(prevIntLen, nextIntLen);
+  let prevFloatLen = prevSplit[1] ? prevSplit[1].length : 0,
+    nextFloatLen = nextSplit[1] ? nextSplit[1].length : 0,
+    minusFloatLen = prevFloatLen - nextFloatLen,
+    maxFloatLen = Math.max(prevFloatLen, nextFloatLen);
+  // 进行整数部分0的补位
+  let intZero = template.of(Math.abs(minusIntLen), () => "0").join("");
+  if (minusIntLen > 0) {
+    next = intZero + next;
+  } else if (minusIntLen < 0) {
+    prev = intZero + prev;
+  }
+  // 进行浮点数部分0的补位
+  let floatZero = template.of(Math.abs(minusFloatLen), () => "0").join("");
+  if (minusFloatLen > 0) {
+    next = next + floatZero;
+  } else if (minusFloatLen < 0) {
+    prev = prev + floatZero;
   }
   next = next.replace(".", "");
   prev = prev.replace(".", "");
   prev = prev.split("").reverse();
   next = next.split("").reverse();
-  console.log(prev, next);
-  let len = Math.max(prev.length, next.length);
   let resArr = [];
-  for (let i = 0; i < len; i++) {
-    let adds = Number(prev[i] || 0) + Number(next[i] || 0) + Number(resArr[i] || 0);
-
-    resArr[i] = adds % 10;
-    resArr[i + 1] = (adds - (adds % 10)) / 10;
+  for (let i = 0; i < prev.length; i++) {
+    let addRes = Number(prev[i] || 0) + Number(next[i] || 0) + Number(resArr[i] || 0);
+    resArr[i] = addRes % 10;
+    let res = (addRes - (addRes % 10)) / 10;
+    res > 0 ? (resArr[i + 1] = res) : null;
   }
   let res = resArr.reverse().join("");
-  let res2 = +res === 0 ? "0" : res.replace(/^0+/, "");
-  let res3 = maxSlotLen !== 0 ? res2.substring(0, res2.length - maxSlotLen) + "." + res2.substring(res2.length - maxSlotLen) : res2;
-  return res3.startsWith(".") ? "0" + res3 : res3;
-};
+  let resSlot = insert(res, res.length - maxFloatLen, ".");
 
-/**
- * @name 减法运算
- * @param { prev } [ number | string ]
- * @param { next } [ number | string ]
- * @return [ string ]
- */
-
-Calc.prototype.minus = function(prev, next) {
-  if (typeof prev !== "number" && typeof prev !== "string") {
-    throw new Error("The first argument must be number or string.");
-  }
-
-  if (Number.isNaN(Number(prev))) {
-    throw new Error("The first argument must be valid number.");
-  }
-  if (typeof next !== "number" && typeof next !== "string") {
-    throw new Error("The second argument must be number or string.");
-  }
-
-  if (Number.isNaN(Number(next))) {
-    throw new Error("The second argument must be valid number.");
-  }
-
-  var prevSlot, nextSlot, multiple;
-  try {
-    prevSlot = prev.toString().split(".")[1].length;
-  } catch (f) {
-    prevSlot = 0;
-  }
-  try {
-    nextSlot = next.toString().split(".")[1].length;
-  } catch (f) {
-    nextSlot = 0;
-  }
-  multiple = Math.pow(10, Math.max(prevSlot, nextSlot));
-
-  let prevSloted = prev * multiple;
-  let nextSloted = next * multiple;
-  if (!Number.isSafeInteger(prevSloted)) {
-    throw new Error("The first argument must be safeInteger while it formated");
-  }
-  if (!Number.isSafeInteger(nextSloted)) {
-    throw new Error("The second argument must be safeInteger while it formated");
-  }
-
-  return (prevSloted - nextSloted) / multiple;
+  return this.format(resSlot);
 };
 
 /**
@@ -123,114 +117,43 @@ Calc.prototype.minus = function(prev, next) {
  * @param { prev } [ number | string ]
  * @param { next } [ number | string ]
  * @return [ string ]
+ * @example console.log(calc.mul("0.1", "0.7")); => '0.07'
+ * @example console.log(calc.mul("123456", "0.123456")); => '15241.383936'
  */
 
 Calc.prototype.mul = function(prev, next) {
-  if ((typeof prev !== "string" && typeof prev !== "number") || (typeof next !== "string" && typeof next !== "number")) {
-    throw new Error("The argument must pass through condition 1.");
-  }
-  if (Number.isNaN(Number(prev)) || Number.isNaN(Number(next))) {
-    throw new Error("The argument must pass through condition 2.");
-  }
-  let prevString = Number(prev).toString();
-  let prevIntString = prevString.replace(".", "");
-  let prevIntNumber = Number(prevIntString);
-
-  let nextString = Number(next).toString();
-  let nextIntString = nextString.replace(".", "");
-  let nextIntNumber = Number(nextIntString);
-
-  if (!Number.isSafeInteger(prevIntNumber) || !Number.isSafeInteger(nextIntNumber)) {
-    throw new Error("The argument must pass through condition 3.");
-  }
-  let slot = 0;
-  slot += prevString.split(".")[1] ? prevString.split(".")[1].length : 0;
-  slot += nextString.split(".")[1] ? nextString.split(".")[1].length : 0;
-  let muls = prevIntNumber * nextIntNumber;
-  if (!Number.isSafeInteger(muls)) {
-    throw new Error("The result must pass through condition 4.");
-  }
-  return muls / Math.pow(10, slot);
-};
-
-/**
- * @name 除法运算
- * @param  { prev } [ number | string ]
- * @param  { next } [ number | string ]
- * @return [ string ]
- */
-
-Calc.prototype.div = function(a, b) {
-  var c,
-    d,
-    e = 0,
-    f = 0;
-  try {
-    e = a.toString().split(".")[1].length;
-  } catch (g) {
-    e = 0;
-  }
-  try {
-    f = b.toString().split(".")[1].length;
-  } catch (g) {
-    f = 0;
-  }
-  return (c = Number(a.toString().replace(".", ""))), (d = Number(b.toString().replace(".", ""))), this.mul(c / d, Math.pow(10, f - e));
-};
-
-/**
- * @name 大整数相加
- * @param  { prev } [ number | string ]
- * @param  { next } [ number | string ]
- * @return [ string ]
- */
-
-Calc.prototype.bigIntAdd = function(prev, next) {
   if (typeof prev !== "string" || typeof next !== "string") {
-    throw new Error("The first argument and second argument must be string.");
+    throw new Error("The first and second argument must be string.");
   }
-  if (!/^[0-9]+$/.test(prev) || !/^[0-9]+$/.test(next)) {
-    throw new Error("The first argument and second argument must be [0-9] string.");
-  }
-  prev = prev.split("").reverse();
-  next = next.split("").reverse();
-  let len = Math.max(prev.length, next.length);
-  let resArr = [];
-  for (let i = 0; i < len; i++) {
-    let adds = Number(prev[i] || 0) + Number(next[i] || 0) + Number(resArr[i] || 0);
 
-    resArr[i] = adds % 10;
-    resArr[i + 1] = (adds - (adds % 10)) / 10;
-  }
-  let res = resArr.reverse().join("");
-  return +res === 0 ? "0" : res.replace(/^0+/, "");
-};
-
-/**
- * @name 大整数相乘
- * @param  { prev } [ number | string ]
- * @param  { next } [ number | string ]
- * @return [ string ]
- */
-
-Calc.prototype.bigIntMul = function(prev, next) {
-  if (typeof prev !== "string" || typeof next !== "string") {
-    throw new Error("The first argument and second argument must be string.");
-  }
-  if (!/^[0-9]+$/.test(prev) || !/^[0-9]+$/.test(next)) {
-    throw new Error("The first argument and second argument must be [0-9] string.");
-  }
-  let resArr = [];
+  let prevSplit = prev.split("."),
+    nextSplit = next.split(".");
+  let prevIntLen = prevSplit[0].length,
+    nextIntLen = nextSplit[0].length,
+    minusIntLen = prevIntLen - nextIntLen,
+    maxIntLen = Math.max(prevIntLen, nextIntLen);
+  let prevFloatLen = prevSplit[1] ? prevSplit[1].length : 0,
+    nextFloatLen = nextSplit[1] ? nextSplit[1].length : 0,
+    addFloatLen = prevFloatLen + nextFloatLen,
+    maxFloatLen = Math.max(prevFloatLen, nextFloatLen);
+  prev = prev.replace(".", "");
+  next = next.replace(".", "");
+  let res = [];
   for (let n = prev.length - 1; n >= 0; n--) {
     for (let k = next.length - 1; k >= 0; k--) {
-      let value = Number(prev[n] || 0) * Number(next[k] || 0) + (resArr[n + k + 1] || 0);
-      resArr[n + k + 1] = value % 10;
-      resArr[n + k] = (value - (value % 10)) / 10;
+      let value = Number(prev[n] || 0) * Number(next[k] || 0) + (res[n + k + 1] || 0);
+
+      let value1 = value % 10;
+      let value2 = (value - value1) / 10;
+      res[n + k + 1] = value1;
+      res[n + k] = value2 + Number(res[n + k] || 0);
     }
   }
-  let res = resArr.join("");
-  return +res === 0 ? "0" : res.replace(/^0+/, "");
+  let resJoin = res.join("");
+  let resInsert = insert(resJoin, resJoin.length - addFloatLen, ".");
+  let resFormat = this.format(resInsert);
+  return resFormat;
 };
 
 let calc = new Calc();
-console.log(calc.add("123.0", "1234.0"));
+console.log(calc.mul("123456", "0.123456"));

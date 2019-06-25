@@ -182,6 +182,22 @@
 - @param { string } [ string ]
 - @return [ string ]
 
+#### insert
+
+- @name 向字符串指定的角标后面插入指定字符串
+- @param { string } [ string ] 目标字符串
+- @param { index } [ number ] 角标值
+- @param { target } [ string ] 插入的字符串
+- @return [ string ]
+
+#### insert.code
+
+- @name 向字符串指定的字符串后面插入指定字符串
+- @param { string } [ string ] 目标字符串
+- @param { code } [ string ] 目标位置字符串
+- @param { target } [ string ] 插入的字符串
+- @return [ string ]
+
 #### isCenter
 
 - @name 验证一个字符串是否存在某字符串的中部
@@ -427,59 +443,53 @@
 
 ### Calc
 
+- @msg
 - 解决 js 中 0.1 + 0.2 != 0.3
-- 解决大数相乘的问题，js 的数字存在安全数范围，
-- 超过安全数范围的计算会出现不正确的运算，判断安全数，是小数点移除之后判断，即 12.345 => 12345
+- 为何不支持数字？
+- 因为有些特殊的数字会自动转为科学计数，并且存在安全数范围。
+- 自动转为科学计数，当数值为整数时，后面有 21 个 0 时， 9000000000000000000000 => 9e+21 ； 当数值为浮点数时，一个不为 0 的数前面有 7 个 0 时，0.0000001 => 1e-7
+- @return [ object ]
 
 #### add
 
 - @name 加法运算
-- @msg
-- 安全性：在数字是 number 类型时，数字的值在 [ -Math.pow(2,53)-1,Math.pow(2,53)-1] 之内
 - @param { prev } [ number | string ]
 - @param { next } [ number | string ]
-- @condition
-- 1.参数必须是字符串和数字类型形式
-- 2.通过 Nmber()强制后，不能是 NaN，即过滤出可以进行计算的数字，可以是 '3e+10'=> 300 '.2'=>0.2 ''等不规则的数字
-- 3.找到两数的小数点后面的最大长度，得到一个 Math.pow(10,len)数，将这个数分别乘以该数，再判断两数的安全性
-- 4.判断两数之和的安全性
 - @return [string]
-- @example add(0.1,0.2) => 0.3
-
-#### minus
-
-- @name 减法运算
-- @param { prev } [ number | string ]
-- @param { next } [ number | string ]
-- @return [ string ]
+- @example console.log(calc.add("1.123", "0.877")); // => 2
+- @example console.log(calc.add("0.1", "0.2")); // 0.3
+- @example console.log(calc.add("0.1", "1.23")); // => 1.33
+- @example console.log(calc.add("1000", "0.0001")); //=>1000.0001
+- @example console.log(calc.add("00001", "1")); // => 2
+- @example console.log(calc.add("99999999999999999", "1")); //=> 1000000000000000
 
 #### mul
 
 - @name 乘法运算
+- @msg
+- 小数与整数的积也不能得到期望值，1.2334567 \* 1000 = 1233.4567000000002
+- @condition
+- 1.参数必须是字符串和数字类型形式
+- 2.通过 Nmber()强制后，不能是 NaN,即筛选出可以进行计算的数字，可以是 '3e+10'=> 300 '.2'=>0.2 ''
+- 3.替换掉字符串中的'.'后，再强制转换为数字后必须是在安全数之内，即在[ -Math.pow(2,53)-1,Math.pow(2,53)-1]之间的数字
+- 4.两数乘积也必须要安全数范围之内
 - @param { prev } [ number | string ]
 - @param { next } [ number | string ]
 - @return [ string ]
+- @example console.log(calc.mul("0.1", "0.7")); => '0.07'
+- @example console.log(calc.mul("123456", "0.123456")); => '15241.383936'
 
-#### div
+#### format
 
-- @name 除法运算
-- @param { prev } [ number | string ]
-- @param { next } [ number | string ]
-- @return [ string ]
-
-#### bigIntAdd
-
-- @name 大整数相加
-- @param { prev } [ number | string ]
-- @param { next } [ number | string ]
-- @return [ string ]
-
-#### bigIntMul
-
-- @name 大整数相乘
-- @param { prev } [ number | string ]
-- @param { next } [ number | string ]
-- @return [ string ]
+- @name 数字格式化
+- @msg
+- 1.是否存在'.'，若存在，去掉开头和结尾的 0，否则，只去掉开头的 0
+- 2.当以'.'开头，则前面补'0'
+- 3.当以'.'结尾，则去掉结尾的'.'
+- 4.若为空，则返回 0
+- @param { string } [ string]
+- @return string
+- @example console.log(calc.format("000.0001"));=> '0.0001'
 
 ### Image\$
 

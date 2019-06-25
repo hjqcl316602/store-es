@@ -3,6 +3,7 @@ import contains from "./contains";
 import containsWith from "./containsWith";
 import convert from "./convert";
 import hump from "./hump";
+import insert from "./insert";
 import isCenter from "./isCenter";
 import isContain from "./isContain";
 import isContinue from "./isContinue";
@@ -29,6 +30,7 @@ export default {
   containsWith,
   convert,
   hump,
+  insert,
   isCenter,
   isContain,
   isContinue,
