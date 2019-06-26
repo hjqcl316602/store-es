@@ -1,5 +1,5 @@
-import isPlain from "./isPlain";
+import check from "./check";
 
 export default {
-  isPlain
+  check
 };

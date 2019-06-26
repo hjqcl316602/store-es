@@ -1,14 +1,14 @@
 <template>
   <div id="app">
-    <div class="main" v-if="false">
+    <div ref="main" class="main" id="main">
       <div class="main-child">
-        <div class="main-child-child">
-          <div class="list blue" v-for="item in 4" :key="item">list {{ item }}</div>
+        <div class="main-child-child" ref="main-child">
+          <div class="list blue" v-for="item in 10" :key="item">list {{ item }}</div>
         </div>
       </div>
       <div class="center red">center</div>
       <div class="main-child">
-        <div class="main-child-child2">
+        <div class="main-child-child2 ">
           <div class="list green" v-for="item in 3" :key="item">list {{ item }}</div>
         </div>
       </div>
@@ -16,16 +16,20 @@
     <div>
       <input type="file" @change="change" />
     </div>
+    <button ref="btn">单击</button>
   </div>
 </template>
 
 <script>
-import { string, Calc, Image$, dom } from "../package/index";
-let image = new Image$();
+import { domer } from "../package/index";
+import { setTimeout } from "timers";
+console.log(domer);
 export default {
   name: "app",
   components: {},
-  mounted() {},
+  mounted() {
+    console.log(domer.offseter.client(this.$refs["main"]));
+  },
   methods: {
     change(e) {}
   }
@@ -35,14 +39,14 @@ export default {
 <style>
 .main {
   width: 100%;
-  height: 350px;
+  height: 550px;
 }
 .center {
-  height: 100px;
+  height: 50px;
   width: 100%;
 }
 .main-child {
-  height: 350px;
+  height: 250px;
   width: 100%;
   position: relative;
 }

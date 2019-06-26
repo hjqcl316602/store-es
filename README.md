@@ -6,6 +6,55 @@
 
 ## 对象式
 
+### domer
+
+#### checker
+
+- @name 判断一个值是否是 dom 元素
+- @param { elem } [ any ]
+- @return [ boolean ]
+
+#### classer
+
+#### listener
+
+#### queryer
+
+### object
+
+#### check
+
+- @name 验证一个数据是否是对象
+- @param { object } [ any ]
+- @return [ boolean ]
+- @example check({})=> true
+
+#### check.empty
+
+- @name 验证一个对象地方是空对象
+- @msg 没有自身属性
+- @param { object } [ object ]
+- @return [ boolean ]
+- @example check.empty({}) => true
+
+#### check.plain
+
+- @name 验证一个数据是否是纯对象
+- @msg 该对象是通过 {} 和 new Object()方式创建
+- @msg Object.getPrototypeOf 不能获取 [ undefined,null ]的原型，所以使用了 try catch
+- @param { object } [ any ]
+- @return [ boolean ]
+- @example check.plain({}) => true
+- @example check.plain(new Object()) => true
+- @example check.plain("") => false
+
+#### check.plain.simple
+
+- @name 验证一个数据是否是纯对象
+- @msg 该对象是通过 {} 和 new Object()方式创建
+- @param { object } [ any ]
+- @return [ boolean ]
+
 ### array
 
 #### delayer

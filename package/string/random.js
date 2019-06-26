@@ -47,4 +47,4 @@ random.color.hex = function() {
   return "#" + Math.floor(Math.random() * 0xffffff).toString(16);
 };
 
-console.log(random.color.hex());
+//console.log(random.color.hex());
