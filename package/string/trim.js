@@ -1,41 +1,52 @@
 /**
- * @name  字符串的空格去除
+ * @name  字符串的空格去除-整体
  * @msg String.prototype.trim 只能删除字符串开头的空白
  * @param  {string} [ string ] 字符串
- * @param  {type} [ 1,2,3,4] 类型
- * { type: 1, lebal: "所有空格" }
- * { type: 2, lebal: "前后空格" }
- * { type: 3, lebal: "前空格" }
- * { type: 4, lebal: "后空格" }
  * @return [ string ]
  */
 
-export default function trim(string, type) {
+export default function trim(string) {
   if (typeof string !== "string") {
-    console.error("[string] is not string");
-    return string;
+    throw new Error("The argument must be string.");
   }
-  if (trim.storage.findIndex(item => item["type"] === type) === -1) {
-    console.error("[type] is not in [1,2,3,4]");
-    type = 1;
-  }
-  switch (type) {
-    case 1:
-      return string.replace(/\s+/g, "");
-    case 2:
-      return string.replace(/(^\s*)|(\s*$)/g, "");
-    case 3:
-      return string.replace(/(^\s*)/g, "");
-    case 4:
-      return string.replace(/(\s*$)/g, "");
-    default:
-      return string;
-  }
+  return string.replace(/\s+/g, "");
 }
-trim.storage = [
-  { type: 1, lebal: "所有空格" },
-  { type: 2, lebal: "前后空格" },
-  { type: 3, lebal: "前空格" },
-  { type: 4, lebal: "后空格" }
-];
-//console.log("huang");
+
+/**
+ * @name  字符串的空格去除-开头 
+ * @param  {string} [ string ] 字符串
+ * @return [ string ]
+ */
+
+trim.start = function(string) {
+  if (typeof string !== "string") {
+    throw new Error("The argument must be string.");
+  }
+  return string.replace(/(^\s*)/g, "");
+};
+
+/**
+ * @name  字符串的空格去除-尾部 
+ * @param  {string} [ string ] 字符串
+ * @return [ string ]
+ */
+
+trim.end = function(string) {
+  if (typeof string !== "string") {
+    throw new Error("The argument must be string.");
+  }
+  return string.replace(/(\s*$)/g, "");
+};
+
+/**
+ * @name  字符串的空格去除-两侧 
+ * @param  {string} [ string ] 字符串
+ * @return [ string ]
+ */
+
+trim.both = function(string) {
+  if (typeof string !== "string") {
+    throw new Error("The argument must be string.");
+  }
+  return string.replace(/(^\s*)|(\s*$)/g, "");
+};

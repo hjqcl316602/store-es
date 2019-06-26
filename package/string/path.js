@@ -22,8 +22,7 @@
  */
 export default function path(string) {
   if (typeof string !== "string") {
-    console.error("[string] is not string");
-    return [];
+    throw new Error("The argument must be string.");
   }
 
   let regex = new RegExp(/\[(.*?)\]/, "g"); // '.'匹配除换行符外的任意字符

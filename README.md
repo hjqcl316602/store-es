@@ -139,14 +139,104 @@
 
 ### string
 
+#### check
+
+- @name 验证字符串是否是有值
+- @param { string } [ string ]
+- @return [ boolean ]
+- @example check("s") => true
+- @example check("") => false
+- @example check(0) => false
+- @example check(" ") => true
+
+#### check.contain
+
+- @name 验证字符串是否是包含指定的字符串
+- @param { string } [ string ]
+- @return [ boolean ]
+- @example check.contain("huang","hua") => true
+
+#### check.continue
+
+- @name 验证字符串是否是连续的
+- @param { string } [ string ]
+- @return [ boolean ]
+- @example check.continue("123") => true
+- @example check.continue("abc") => true
+
+#### check.repeat
+
+- @name 验证字符串是否是重复的-全部是由一个字符组成
+- @param { string } [ string ]
+- @return [ boolean ]
+- @example check.repeat("aaa")=>true
+- @example check.repeat("abc")=>false
+
+#### check.center
+
+- @name 验证字符串中部是否是指定的字符串
+- @param { string } [ string ]
+- @return [ boolean ]
+- @example check.center("huang","a") => true
+
+#### check.end
+
+- @name 验证字符串尾部是否是指定的字符串
+- @param { string } [ string ]
+- @param { target } [ string ]
+- @return [ boolean ]
+- @example check.end("huang","ng") => true
+
+#### check.start
+
+- @name 验证字符串开头是否是指定的字符串
+- @param { string } [ string ]
+- @param { target } [ string ]
+- @return [ boolean ]
+- @example check.start("hjq", "hj") => true
+
+#### check.plalin
+
+- @name 验证字符串是否是回文字符串
+- @param { string } [ string ]
+- @return [ boolean ]
+- @example check.plalin("121") => true
+
+#### check.space
+
+- @name 验证字符串是否存在空白字符
+- @param { string } [ string ]
+- @return [ boolean ]
+- @example check.space("121 ") => true
+- @example check.space(" ") => true
+
+#### check.space.whole
+
+- @name 验证字符串是否全部是空白字符组成
+- @param { string } [ string ]
+- @return [ boolean ]
+- @example check.space.whole(" ") => true
+- @example check.space.whole("") => false
+
 #### connect
 
 - @name 每隔几位添加指定的连接符
 - @param { string } [ string ]
-- @param { connect } [ string ] 连接符
-- @param { len } [ number ] 每隔多少位
+- @param { connect = '-' } [ string ] 连接符
+- @param { len = 4 } [ number ] 每隔多少位
+- @param { start = true } [ boolean ] 是否是从开头计算
 - @return [ string ]
 - @example connect("13980464237"," ",4) => 139 8046 4237
+- @msg exp1(?=exp2) 查找 exp2 前面的 exp1 || (?<=exp2)exp1 查找 exp2 后面的 exp1 || exp1(?!exp2) 查找后面不是 exp2 的 exp1 || (?<!=exp2)exp1 查找前面不是 exp2 的 exp1
+
+#### connect.start
+
+- @name 每隔几位添加指定的连接符-从开始计数
+- @param { string } [ string ]
+- @param { connect = '-' } [ string ] 连接符
+- @param { len = 4 } [ number ] 每隔多少位
+- @return [ string ]
+- @example connect("13980464237"," ",4) => 1398 0464 237
 
 #### contains
 
@@ -154,8 +244,18 @@
 - @param { string } [ string ]
 - @param { target } [ string ] 指定的字符串
 - @return [ array ] 角标位置数组
+- @example console.log(contains("insssinsssins", "s")); => [2,3,3,7,8,9,12]
 
-#### containsWith
+#### contains.exec
+
+- @name 获取一个字符串包含指定的字符串的所有角标
+- @msg 循环方式
+- @param { string } [ string ]
+- @param { target } [ string ] 指定的字符串
+- @return [ array ] 角标位置数组
+- @example console.log(contains("insssinsssins", "s")); => [2,3,3,7,8,9,12]
+
+#### contains.with
 
 - @name 返字符串中匹配正则表达式的值
 - @msg replace 的 callback 函数的参数的个数由正则表达式决定的 1.第一个 ： 正则表达式结果;2.倒数第二个：角标;3.倒数第一个：字符串本身;4.剩余的：正则表达式匹配的结果
@@ -165,22 +265,59 @@
 
 #### convert
 
-- @name 字符串的转换
+- @name 字符串的转换-全部大写
 - @param {string} [ string ]
-- @param { type } [ number<1,2,3,4,5> ]
-- { type: 1, lebal: "首字母大写，剩余的小写" },
-- { type: 2, lebal: "首字母小写，剩余的大写" },
-- { type: 3, lebal: "大写转小写，小写转大写" },
-- { type: 4, lebal: "全部大写" },
-- { type: 5, lebal: "全部小写" }
 - @return [ string ]
+- @example convert("sSs") => 'SSS'
+
+#### convert.upper
+
+- @name 字符串的转换-全部大写
+- @param {string} [ string ]
+- @return [ string ]
+- @example convert.upper("sSs") => 'SSS'
+
+#### convert.lower
+
+- @name 字符串的转换-全部小写
+- @param {string} [ string ]
+- @return [ string ]
+- @example convert.lower("sSs") => 'sss'
+
+#### convert.upperStart
+
+- @name 字符串的转换-首字母大写，其他的小写
+- @param {string} [ string ]
+- @return [ string ]
+- @example convert.upperStart("sSs") => 'Sss'
+
+#### convert.lowerStart
+
+- @name 字符串的转换-首字母小写，其他的大写
+- @param {string} [ string ]
+- @return [ string ]
+- @example convert.lowerStart("sSs") => 'sSS'
+
+#### convert.switch
+
+- @name 字符串的转换-大写转小写，小写转大写
+- @param {string} [ string ]
+- @return [ string ]
+- @example convert.switch("sSs") => 'SsS'
 
 #### hump
 
 - @name 驼峰字符串转链接字符串
-- @msg 每个链接的单词必须是由[ a-z ] 组成的字符串；链接符号必须是"-"
 - @param { string } [ string ]
 - @return [ string ]
+- @example hump('name-name') => nameName
+
+#### hump.spread
+
+- @name 驼峰字符串转链接字符串
+- @param {string} [string]
+- @return [string]
+- @example hump.spread("asashAHjjasHsa") => asash-a-hjjas-hsa
 
 #### insert
 
@@ -197,92 +334,6 @@
 - @param { code } [ string ] 目标位置字符串
 - @param { target } [ string ] 插入的字符串
 - @return [ string ]
-
-#### isCenter
-
-- @name 验证一个字符串是否存在某字符串的中部
-- @param { string } [ string ]
-- @param { target } [ string ]
-- @return [ boolean]
-
-#### isContain
-
-- @name 验证一个字符串包含指定的字符串
-- @param { string } [ string ]
-- @param { target } [ string ]
-- @return [ boolean ]
-
-#### isContinue
-
-- @name 验证字符串是否是连续的
-- @param { string } [ string ]
-- @return [ boolean ]
-- @example isContinue("12") => true isContinue('abcdef') => true
-
-#### isEnd
-
-- @name 验证一个字符串是否是以指定的值结尾
-- @param { string } [ string ]
-- @param { target } [ string ]
-- @return [ boolean ]
-- @exampale isEnd("huang", "ang")=> true
-
-#### plalinroom
-
-- @name 判断一个字符串是否是回文字符串
-- @param { string } [ string ]
-- @return [ boolean ]
-- @example plalinroom("aha")=> true
-
-#### isRepeat
-
-- @name 验证是否是重复的字组成的字符串，即由一个字符串组成的字符串
-- @param { string } [ string ] 字符串，长度应不少于 2 位
-- @return [ boolean ]
-- @exampale isRepeat('aa') => true
-
-#### isRequire
-
-- @name 验证字符串是否是有值
-- @param { string } [ string ]
-- @return [ boolean ]
-- @example isRequire("s") => true
-- @example isRequire("") => false
-- @example isRequire(0) => false
-- @example isRequire(" ") => true
-
-#### isSpace
-
-- @name 判断一个字符串中是否存在空白
-- @param {string} [ string ]
-- @return [ boolean ]
-- @msg String.prototype.trim 只能删除字符串开头的空白
-- @example isSpace("fff fff") => true
-- @example isSpace("") => false
-
-#### isStart
-
-- @name 验证一个字符串是否是以指定的值开头
-- @param { string } [ string ]
-- @param { prex} [ string ]
-- @return [ boolean ]
-- @example isStart("huang", "hu") => true
-
-#### link
-
-- @name 驼峰字符串转链接字符串
-- @param {string} [string]
-- @msg 只能是[ a-zA-Z ] 组成的字符串
-- @return [string]
-- @example link("asashAHjjasHsa") => asash-a-hjjas-hsa
-
-#### match
-
-- @name: 按指定的正则表达式提取字符串中满足条件的值
-- @param: { string } [ string ]
-- @param: { regexp } [ regexp ]
-- @return: [ array ]
-- @example match('1123sss222ssss222',/[a-z]{3,}/g) => ["sss", "ssss"]
 
 #### path
 
@@ -311,13 +362,25 @@
 - @return [ string ]
 - @example random(16) => n568c2cjdbdi3oop
 
-#### randomColor
+#### random.color
 
 - @name 随机生成颜色字符串
 - @param { isOpacity } [ boolean ] 是否需要透明度
 - @return [string]
 - @example randomColor(true) => rgba(226,180,173,0.3421123393946621)
 - @example randomColor() => rgba(226,180,173)
+
+#### random.color.hex
+
+- @name 随机生成颜色字符串-16 进制字符串
+- @return [string]
+- @example random.color.hex() => #3e7fce
+
+#### reverse
+
+- @name: 字符串反向
+- @param { string } string
+- @return: [string]
 
 #### shousand
 
@@ -328,13 +391,6 @@
 - @example shousand(123456788) => 123,456,788
 - @example shousand(123456788.11) => 123,456,788.11
 
-#### space
-
-- @name 验证一个字符串是否是空白字符串
-- @param { string } string
-- @return [ boolean ]
-- @example space(" ") => true
-
 #### transfer
 
 - @name 字符串的转义
@@ -344,14 +400,27 @@
 
 #### trim
 
-- @name 字符串的空格去除
+- @name 字符串的空格去除-整体
 - @msg String.prototype.trim 只能删除字符串开头的空白
 - @param {string} [ string ] 字符串
-- @param {type} [ 1,2,3,4] 类型
-- { type: 1, lebal: "所有空格" }
-- { type: 2, lebal: "前后空格" }
-- { type: 3, lebal: "前空格" }
-- { type: 4, lebal: "后空格" }
+- @return [ string ]
+
+#### trim.start
+
+- @name 字符串的空格去除-开头
+- @param {string} [ string ] 字符串
+- @return [ string ]
+
+#### trim.end
+
+- @name 字符串的空格去除-尾部
+- @param {string} [ string ] 字符串
+- @return [ string ]
+
+#### trim.both
+
+- @name 字符串的空格去除-两侧
+- @param {string} [ string ] 字符串
 - @return [ string ]
 
 ### type
@@ -508,26 +577,140 @@
 
 ### Image\$
 
-- 方法
+#### getFileMessage
 
-  - getFileMessage( file[file] ) => ( object ) || 获取本地文件资源的详细信息
-  - getFileBlob(file[file]) => ( promise) => ( string ) || 获取本地资源文件的二进制流
-  - getFileBase64(file[file]) => ( promise ) => ( string ) || 获取本地资源文件的 base64 格式文件
-  - getBase64Type(base64[string]) => ( string ) || 获取 based64 文件的类型
-  - getBase64Size(base64[string]) => ( number ) || 获取 based64 文件的体积 （字节大小）
-  - getBlobSize(src[string],[type[string]='image/png']) => ( promise) => ( number ) || 获取图片资源的体积（该体积不是源文件的体积）
-  - getType(src[string]) => ( promise ) => ( string ) || 获取资源（图片）的类型
-  - getSize(src[string]) => ( promise ) => ( number ) || 获取资源（图片）的体积
-  - transformSize(size[number]) => ( object ) || 文件尺寸的转化
-  - getAspect(src[string]) => ( promise ) = ( object ) || 获取资源的高宽
-  - transformBase64(src[string],[ type[string] = 'image/png'] ) => ( promise ) => ( string )
-  - transformBlob( src[string] ,[ type[string] = "image/png"]) => ( promise ) => ( blob ) || 将图片的格式转换为 blob 格式
-  - getCompressQuality( src[string] ,[ quality[number] = 0.7 ,type[string] = "image/png" ])=> ( promise ) => ( string[base64]) || 按指定质量压缩图片
-  - getCompressWidth( src[string] ,width[number],[ type[string] = "image/png" ]) => ( promise ) => ( string[base64]) || 按指定宽度压缩图片
-  - getCompressHeight( src[string] , height[number],[ type[string] = "image/png" ]) => ( promise ) => ( string[base64]) || 按指定高度压缩图片
-  - getCompressAspect( src[string],width[number], height[number], [ type[string] = "image/png" ]) => ( promise ) => ( string[base64]) || 按指定高宽压缩图片
-  - getCompressRatio( src[string],[ ratio[number] = 1 ,type [string]= "image/png"]) => ( promise ) => ( string[base64]) || 按指定体积压缩图片
-  - getCompressSize(src[string], [size[number] = 200 \* 1024, range[number] = 100, type[string] = "image/png"]) => ( promise ) => ( string[base64]) || 按指定体积压缩图片
+- @name 获取本地文件资源的详细信息
+- @param { file } [ file ]
+- @return { object }
+
+#### getFileBlob
+
+- @name 获取本地资源文件的二进制流
+- @msg : 可以获取图片的二进制流直接用于页面显示
+- @param { file } [ file ]
+- @return [ promise ] => [ string ]
+
+#### getFileBase64
+
+- @name 获取本地资源文件的 base64 数据
+- @param { file } [ file ]
+- @return [ promise ] => [ string ]
+
+#### getBase64Type
+
+- @name 获取 based64 文件的类型
+- @param { base64 } [ string ]
+- @return { string }
+
+#### getBase64Size
+
+- @name 获取 base64 格式的图片的体积
+- @msg 必须是 base64 格式图片地址
+- @param { base64 } [ string ]
+- @return [ number ] 字节大小
+
+#### getBlobSize
+
+- @name 获取图片资源的体积
+- @msg 该方式不能获取源图片的体积，得到的是转换成 blob 格式之后的体积，由于 jpg、gif 等格式的图片转换成 png 格式体积会变化
+- @param { src } [ string ] 图片地址
+- @param { type } [ string ]
+- @return [ promise ] => [ number ]
+
+#### getType
+
+- @name 获取图片资源的类型
+- @msg 通过 http 请求该图片，获取该请求下的一些信息
+- @param { src } [ string ] 图片路径
+- @return [ promise ]
+
+#### getSize
+
+- @name 获取资源的体积
+- @msg 该方式能正确的获取资源的体积
+- @param { src } [ string ] 图片路径
+- @return [ promise ]
+
+#### transformSize
+
+- @name 尺寸格式化
+- @param { size } [ number ]
+- @return [ object ]
+
+#### getAspect
+
+- @name 获取图片的高宽
+- @param { src } [ string ] 图片地址 [ 访问路径式，based4 式，二进制式]
+- @return [ object ]
+
+#### transformBase64
+
+- @name 图片转 base64 格式
+- @param { src } [ string ]
+- @param { type = image/png } [ string ]
+- @return { string }
+- @msg JPG 转 PNG 文件大小通常会增加 5 倍以上，这是因为 JPG 是有损压缩，而 PNG 是无损压缩。
+- JPG 转为 PNG 图片的质量不会有变化，但大小会增加很多；而 PNG 转 JPG，会损失掉透明的部分（因为 JPG 不支持图片的透明），但文件大小会减少很多，根据不同的压缩比，可以达到 10 倍的压缩比
+
+#### transformBlob
+
+- @name 图片转 blob 格式
+- @param { src } [ string ]
+- @param { type = image/png } [ string ]
+- @return { string }
+- @msg 除 png 之外的图片尺寸都会变化
+
+#### getCompressQuality
+
+- @name 图片压缩-按质量
+- @param { src } [ string ]
+- @param { quality } [number] 压缩后的质量
+- @param { type = image/png } [ string ] 文件的类型，最好是先知道文件的类型，相同类型之间的压缩会更准确
+- @return: [ string ] base64
+
+#### getCompressWidth
+
+- @name 图片压缩-指定宽
+- @param { src } [ string ]
+- @param { width } [ number ]
+- @param { type = image/png } [ string ]
+- @return [ string ] base64
+
+#### getCompressHeight
+
+- @name 图片压缩-指定高度
+- @param { src } [ string ]
+- @param { height } [ number ]
+- @param { type = image/png } [ string ]
+- @return [ string ] base64
+
+#### getCompressAspect
+
+- @name 图片压缩=指定高和宽
+- @param { src } [ string ]
+- @param { width } [ number ]
+- @param { height } [ number ]
+- @param { type = image/png } [ string ]
+- @return: [ string ] base64
+- @msg 图片会被挤压
+
+#### getCompressRatio
+
+- @name 图片压缩-指定比率
+- @param { src } [ string ]
+- @param { ratio } [ number ]
+- @param { type = image/png } [ string ]
+- @return [ string ] base64
+
+#### getCompressSize
+
+- @name 图片压缩-指定体积的图片
+- @msg Base64 编码要求把 3 个 8 位字节（3 _ 8=24）转化为 4 个 6 位的字节（4 _ 6=24），之后在 6 位的前面补两个 0，形成 8 位一个字节的形式。 如果剩下的字符不足 3 个字节，则用 0 填充，输出字符使用’=’，因此编码后输出的文本末尾可能会出现 1 或 2 个’=’
+- @param { src } [ string ] 图片地址
+- @param { size = 200 \* 1024 } [ number ] | 200 \* 1024 压缩到指定的大小 需要精确到 Bytes
+- @param { range = 100 } [number ] | 10 \* 1024 容错范围即可 需要精确到 Bytes
+- @param { type = image/png } [ string ]
+- @return [ string ] base64
 
 ```js
 let image = new Image$();

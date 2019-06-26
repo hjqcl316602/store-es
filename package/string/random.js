@@ -19,4 +19,32 @@ export default function random(n) {
   return result;
 }
 
-//console.log(random(16));
+/**
+ * @name  随机生成颜色字符串
+ * @param  { isOpacity } [ boolean ] 是否需要透明度
+ * @return  [string]
+ * @example random.color(true) => rgba(226,180,173,0.3421123393946621)
+ * @example random.color() => rgba(226,180,173)
+ */
+
+random.color = function(isOpacity) {
+  if (typeof isOpacity !== "boolean") {
+    throw new Error("The argument must be boolean.");
+  }
+  let r = Math.floor(Math.random() * 256);
+  let g = Math.floor(Math.random() * 256);
+  let b = Math.floor(Math.random() * 256);
+  let a = Math.random();
+  return isOpacity ? `rgba(${r},${g},${b},${a})` : `rgb(${r},${g},${b})`;
+};
+
+/**
+ * @name  随机生成颜色字符串-16进制字符串
+ * @return  [string]
+ * @example random.color.hex() => #3e7fce
+ */
+random.color.hex = function() {
+  return "#" + Math.floor(Math.random() * 0xffffff).toString(16);
+};
+
+console.log(random.color.hex());

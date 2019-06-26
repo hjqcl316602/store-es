@@ -6,8 +6,7 @@
 
 export default function reverse(string) {
   if (typeof string !== "string") {
-    console.error("[string] is not string");
-    return string;
+    throw new Error("The argument must be string.");
   }
   return string
     .split("")

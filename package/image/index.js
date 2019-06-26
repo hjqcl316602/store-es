@@ -6,7 +6,7 @@ import is from "../type/is";
  * @Author: huangjunquan
  * @Date: 2019-05-24 16:01:02
  * @LastEditors: huangjunquan
- * @LastEditTime: 2019-06-25 18:37:40
+ * @LastEditTime: 2019-06-26 09:14:02
  */
 const isFile = is("file");
 
@@ -318,9 +318,9 @@ Image$.prototype.getAspect = function(src) {
 /**
  * @name  图片转base64格式
  * @param  { src } [ string ]
- * @param   { type } [ string ]
+ * @param   { type = image/png } [ string ]
  * @return  { string }
- * @msg: JPG转PNG文件大小通常会增加5倍以上，这是因为JPG是有损压缩，而PNG是无损压缩。
+ * @msg  JPG转PNG文件大小通常会增加5倍以上，这是因为JPG是有损压缩，而PNG是无损压缩。
  * JPG转为PNG图片的质量不会有变化，但大小会增加很多；而PNG转JPG，会损失掉透明的部分（因为JPG不支持图片的透明），但文件大小会减少很多，根据不同的压缩比，可以达到10倍的压缩比
  */
 
@@ -360,7 +360,8 @@ Image$.prototype.transformBase64 = function(src, type = "image/png") {
 
 /**
  * @name  图片转blob格式
- * @param { src }
+ * @param { src } [ string ]
+ * @param { type = image/png } [ string ]
  * @return  { string }
  * @msg   除png之外的图片尺寸都会变化
  */
@@ -405,8 +406,9 @@ Image$.prototype.transformBlob = function(src, type = "image/png") {
 
 /**
  * @name 图片压缩-按质量
+ * @param { src } [ string ]
  * @param { quality } [number] 压缩后的质量
- * @param { type } [type] 文件的类型，最好是先知道文件的类型，相同类型之间的压缩会更准确
+ * @param { type = image/png } [ string ] 文件的类型，最好是先知道文件的类型，相同类型之间的压缩会更准确
  * @return: [ string ] base64
  */
 Image$.prototype.getCompressQuality = function(src, quality = 0.7, type = "image/png") {

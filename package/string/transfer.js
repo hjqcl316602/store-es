@@ -6,7 +6,9 @@
  */
 
 export default function transfer(string) {
-  if (typeof string !== "string") return string;
+  if (typeof string !== "string") {
+    throw new Error("The argument must be string.");
+  }
   string = string.replace(/&/gi, "&amp;");
   string = string.replace(/</gi, "&lt;");
   string = string.replace(/>/gi, "&gt;");
