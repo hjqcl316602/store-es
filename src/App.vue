@@ -1,77 +1,56 @@
 <template>
   <div id="app">
-    <div ref="main" class="main" id="main">
-      <div class="main-child">
-        <div class="main-child-child" ref="main-child">
-          <div class="list blue" v-for="item in 10" :key="item">list {{ item }}</div>
-        </div>
-      </div>
-      <div class="center red">center</div>
-      <div class="main-child">
-        <div class="main-child-child2 ">
-          <div class="list green" v-for="item in 3" :key="item">list {{ item }}</div>
-        </div>
-      </div>
+    <div class="inner blue" ref="inner">
+      <p>height.document : {{ height.document }}</p>
+      <p>height.window : {{ height.window }}</p>
+      <p>height.inner : {{ height.inner }}</p>
     </div>
-    <div>
-      <input type="file" @change="change" />
-    </div>
-    <button ref="btn">单击</button>
   </div>
 </template>
 
 <script>
 import { domer } from "../package/index";
-import { setTimeout } from "timers";
-console.log(domer);
+//console.log(domer);
 export default {
   name: "app",
+  data() {
+    return {
+      height: {
+        document: 0,
+        window: 0,
+        inner: 0
+      }
+    };
+  },
   components: {},
   mounted() {
-    console.log(domer.offseter.client(this.$refs["main"]));
+    this.$nextTick(() => {
+      this.height.document = domer.heighter(document);
+      this.height.window = domer.heighter(window);
+      this.height.inner = domer.heighter(this.$refs["inner"]);
+      let bool = domer.checker(this.$refs["inner"]);
+      console.log(bool);
+    });
   },
   methods: {
+    hanlder() {},
     change(e) {}
   }
 };
 </script>
 
 <style>
-.main {
-  width: 100%;
-  height: 550px;
+.outer {
+  padding: 20px;
+  height: 500px;
 }
-.center {
-  height: 50px;
-  width: 100%;
+.inner {
+  height: 400px;
+  padding: 20px;
+  border: 10px solid black;
+  margin-bottom: 20px;
 }
-.main-child {
-  height: 250px;
-  width: 100%;
-  position: relative;
-}
-.main-child-child {
-  max-height: 100%;
-  overflow: auto;
-  position: absolute;
-  width: 100%;
-  bottom: 0;
-  left: 0;
-  background: green;
-}
-.main-child-child2 {
-  max-height: 100%;
-  overflow: auto;
-  position: absolute;
-  width: 100%;
-  top: 0;
-  left: 0;
-  background: blue;
-}
-.list {
-  height: 50px;
-  border: 1px solid #000;
-}
+
 .red {
   background: red;
 }

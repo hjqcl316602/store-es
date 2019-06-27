@@ -1,4 +1,9 @@
 import checker from "./checker";
+
+// window 和 element 元素的属性区别
+// 1. window.pageYOffset表示文档在窗口左上角垂直方向上的滚动像素，element没有该属性
+// 2. element.scrollTop 表示该元素文档被卷的像素，可读写 element.scrollTop = 100 可直接设置被卷的像素，window没有该属性
+
 /**
  * @name 获取指定的元素的高度
  * @param { element } [ element ] 目标元素
@@ -51,4 +56,9 @@ offseter.client.width = function() {
   return clientWidth;
 };
 
+offseter.window = function() {
+  return window.outerHeight;
+};
+// console.log(offseter.window(), window.innerHeight);
+// console.log(document.body.offsetHeight, document.body.clientHeight, document.documentElement.clientHeight);
 export default offseter;
