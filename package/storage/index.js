@@ -1,11 +1,11 @@
-import format from "../date/format";
+import formater from "../dater/formater";
 /*
  * @Descripttion: 本地存储
  * @version: 0.0.1
  * @Author: huangjunquan
  * @Date: 2019-06-12 11:17:47
  * @LastEditors: huangjunquan
- * @LastEditTime: 2019-06-24 11:19:16
+ * @LastEditTime: 2019-06-28 15:14:08
  * @msg:暂时只能存储的数据类型 string boolean number null  object array  not function symbol undefined
  */
 /**
@@ -57,7 +57,7 @@ Storage.prototype.setItem = function(key, value) {
     setTimeout(() => {
       try {
         let result = {};
-        result.time = format(new Date(), "yyyy-MM-dd HH:mm:ss");
+        result.time = formater(new Date(), "yyyy-MM-dd HH:mm:ss");
         result.path = window.location.href;
         result.type = Object.prototype.toString
           .call(value)

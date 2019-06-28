@@ -1,41 +1,30 @@
 <template>
   <div id="app">
-    <div class="outer blue" ref="outer">
-      <div class="inner green">
-        <div v-for="item in 10" :key="item">{{ item }}</div>
-      </div>
-    </div>
+    <input type="file" @change="change" />
   </div>
 </template>
 
 <script>
-import { domer } from "../package/index";
-//console.log(domer);
+import { domer, imager } from "../package/index";
+console.log(imager);
 export default {
   name: "app",
   data() {
-    return {
-      height: {
-        document: 0,
-        window: 0,
-        inner: 0
-      },
-      scroller: {
-        top: 0
-      }
-    };
+    return {};
   },
   components: {},
   mounted() {
-    this.$nextTick(() => {
-      console.log(domer.queryer.byClassName("inner"));
-      console.log(domer.queryer.byIdName("app"));
-      console.log(domer.queryer.byTagName("body"));
-    });
+    this.$nextTick(() => {});
   },
   methods: {
     hanlder() {},
-    change(e) {}
+    change(e) {
+      let file = e.target.files[0];
+      let message = imager.filer.baser(file).then(res => {
+        console.log(res);
+        console.log(imager.baser.size(res));
+      });
+    }
   }
 };
 </script>

@@ -618,7 +618,7 @@ domer.scroller.top(this.$refs["outer"], scrollHeight);
 - @return [ string ]
 - @example type('null') => string type(0) => number
 
-### util
+### lang
 
 #### clone
 
@@ -670,6 +670,165 @@ domer.scroller.top(this.$refs["outer"], scrollHeight);
 - @return [ any ]
 - @example extend.replace([1, 2, 3, 4], [true, false, 2, 3, 4, 5, 6]) => [ true,false,2,3]
 - @example extend.replace({ a: 1, b: 2, c: 3 }, { a: true, b: null, d: undefined, e: "'" }) => { a: true, b: 2, c: 3 }
+
+### imager
+
+#### baser
+
+- @name 判断字符串是否是 base64 格式图片文件
+- @param { string } [ string ]
+- @return [ boolean ]
+
+#### baser.typer
+
+- @name 获取 based64 图片文件的类型
+- @param { base64 } [ string ] base64 格式的图片路径
+- @return { string }
+
+#### baser.sizer
+
+- @name 获取 base64 图片文件的体积
+- @msg 必须是 base64 格式图片地址
+- @param { base64 } [ string ]
+- @return [ number ] 字节大小
+
+#### compressser.qualityer
+
+- @name 图片压缩-按质量
+- @param { src } [ string ]
+- @param { quality } [number] 压缩后的质量
+- @param { type = image/png } [ string ] 文件的类型，最好是先知道文件的类型，相同类型之间的压缩会更准确
+- @return: [ promise ] => [ string<base64>]
+
+#### compressser.widther
+
+- @name 图片压缩-指定宽
+- @param { src } [ string ]
+- @param { width } [ number ]
+- @param { type = image/png } [ string ]
+- @return [ promise ] => [ string<base64>]
+
+#### compressser.heighter
+
+- @name 图片压缩-指定高度
+- @param { src } [ string ]
+- @param { height } [ number ]
+- @param { type = image/png } [ string ]
+- @return [ promise ] => [ string<base64>]
+
+#### compressser.sizer
+
+- @name 图片压缩=指定高和宽
+- @param { src } [ string ]
+- @param { width } [ number ]
+- @param { height } [ number ]
+- @param { type = image/png } [ string ]
+- @return: [ promise ] => [ string<base64>]
+- @msg 图片会被挤压
+
+#### compressser.ratioer
+
+- @name 图片压缩-指定比率
+- @param { src } [ string ]
+- @param { ratio = 1.0 } [ number ]
+- @param { type = image/png } [ string ]
+- @return [ promise ] => [ string<base64>]
+
+#### compressser.valumer
+
+- @name 图片压缩-指定体积的图片
+- @msg Base64 编码要求把 3 个 8 位字节（3 _ 8=24）转化为 4 个 6 位的字节（4 _ 6=24），之后在 6 位的前面补两个 0，形成 8 位一个字节的形式。 如果剩下的字符不足 3 个字节，则用 0 填充，输出字符使用’=’，因此编码后输出的文本末尾可能会出现 1 或 2 个’=’
+- @param { src } [ string ] 图片地址
+- @param { size = 200 _ 1024 } [ number ] | 200 _ 1024 压缩到指定的大小 需要精确到 Bytes
+- @param { range = 100 } [number ] | 10 \* 1024 容错范围即可 需要精确到 Bytes
+- @param { type = image/png } [ string ]
+- @return [ promise ] => [ string<base64>]
+
+#### filer
+
+- @name 获取本地文件资源的详细信息
+- @param { file } [ file ]
+- @return { object }
+- bytes: 62661
+- fileType: "jpg"
+- lastUpdateDate: "2018-10-17 09:08:17"
+- name: "zly (18)"
+- size: 61
+- sizeUnit: "KB"
+- subType: "jpeg"
+- type: "image"
+
+#### filer.blober
+
+- @name 获取本地资源文件的二进制流
+- @msg : 可以获取图片的二进制流直接用于页面显示
+- @param { file } [ file ]
+- @return [ promise ] => [ string ]
+
+#### filer.baser
+
+- @name 获取本地资源文件的 base64 数据
+- @param { file } [ file ]
+- @return [ promise ] => [ string ]
+
+#### formater
+
+- @name 尺寸格式化
+- @param { size } [ number ]
+- @return [ object ]
+- value 值
+- unit 单位
+
+#### sizer
+
+- @name 获取图片的高宽
+- @param { src } [ string ] 图片地址 [ 访问路径式，based4 式，二进制式]
+- @return [ promise ] => [ number ]
+- @example sizer("http://img5.imgtn.bdimg.com/it/u=1128579105,2742690848&fm=26&gp=0.jpg").then(res => console.log(res));
+
+#### sizer.widther
+
+- @name 获取图片的宽度
+- @param { src } [ string ] 图片地址 [ 访问路径式，based4 式，二进制式]
+- @return [ promise ] => [ number ]
+- @example sizer.widther("http://img5.imgtn.bdimg.com/it/u=1128579105,2742690848&fm=26&gp=0.jpg").then(res => console.log(res));
+
+#### sizer.heighter
+
+- @name 获取图片的高度
+- @param { src } [ string ] 图片地址 [ 访问路径式，based4 式，二进制式]
+- @return [ promise ] => [ number ]
+- @example sizer.widther("http://img5.imgtn.bdimg.com/it/u=1128579105,2742690848&fm=26&gp=0.jpg").then(res => console.log(res));
+
+#### sizer.volumer
+
+- @name 获取图片的体积
+- @param { src } [ string ] 图片地址 [ 访问路径式，based4 式，二进制式]
+- @return [ promise ] => [ number ]
+- @example sizer.widther("http://img5.imgtn.bdimg.com/it/u=1128579105,2742690848&fm=26&gp=0.jpg").then(res => console.log(res));
+
+#### transformer.baser
+
+- @name 图片转 base64 格式
+- @param { src } [ string ]
+- @params { type = image/png} [string ]
+- @return [ promise ] => [ string<base64>]
+- @example transformer.baser("http://img5.imgtn.bdimg.com/it/u=1128579105,2742690848&fm=26&gp=0.jpg").then(res => console.log(res));
+
+#### transformer.blober
+
+- @name 图片转 blob 格式
+- @param { src } [ string ]
+- @params { type = image/png} [string ]
+- @return [ promise ] => [ string<blob>]
+- @example transformer.baser("http://img5.imgtn.bdimg.com/it/u=1128579105,2742690848&fm=26&gp=0.jpg").then(res => console.log(res));
+
+#### typer
+
+- @name 获取图片资源的类型
+- @msg 通过再次请求该图片，获取该请求下的一些信息
+- @param { src } [ string ] 图片路径
+- @return [ promise ]
 
 ## 类式（需要实例化）
 
@@ -737,166 +896,6 @@ domer.scroller.top(this.$refs["outer"], scrollHeight);
 - @example isFreeNumber(".0") => false
 - @example isFreeNumber("-1") => false
 - @example isFreeNumber("+1") => false
-
-### Image\$
-
-#### getFileMessage
-
-- @name 获取本地文件资源的详细信息
-- @param { file } [ file ]
-- @return { object }
-
-#### getFileBlob
-
-- @name 获取本地资源文件的二进制流
-- @msg : 可以获取图片的二进制流直接用于页面显示
-- @param { file } [ file ]
-- @return [ promise ] => [ string ]
-
-#### getFileBase64
-
-- @name 获取本地资源文件的 base64 数据
-- @param { file } [ file ]
-- @return [ promise ] => [ string ]
-
-#### getBase64Type
-
-- @name 获取 based64 文件的类型
-- @param { base64 } [ string ]
-- @return { string }
-
-#### getBase64Size
-
-- @name 获取 base64 格式的图片的体积
-- @msg 必须是 base64 格式图片地址
-- @param { base64 } [ string ]
-- @return [ number ] 字节大小
-
-#### getBlobSize
-
-- @name 获取图片资源的体积
-- @msg 该方式不能获取源图片的体积，得到的是转换成 blob 格式之后的体积，由于 jpg、gif 等格式的图片转换成 png 格式体积会变化
-- @param { src } [ string ] 图片地址
-- @param { type } [ string ]
-- @return [ promise ] => [ number ]
-
-#### getType
-
-- @name 获取图片资源的类型
-- @msg 通过 http 请求该图片，获取该请求下的一些信息
-- @param { src } [ string ] 图片路径
-- @return [ promise ]
-
-#### getSize
-
-- @name 获取资源的体积
-- @msg 该方式能正确的获取资源的体积
-- @param { src } [ string ] 图片路径
-- @return [ promise ]
-
-#### transformSize
-
-- @name 尺寸格式化
-- @param { size } [ number ]
-- @return [ object ]
-
-#### getAspect
-
-- @name 获取图片的高宽
-- @param { src } [ string ] 图片地址 [ 访问路径式，based4 式，二进制式]
-- @return [ object ]
-
-#### transformBase64
-
-- @name 图片转 base64 格式
-- @param { src } [ string ]
-- @param { type = image/png } [ string ]
-- @return { string }
-- @msg JPG 转 PNG 文件大小通常会增加 5 倍以上，这是因为 JPG 是有损压缩，而 PNG 是无损压缩。
-- JPG 转为 PNG 图片的质量不会有变化，但大小会增加很多；而 PNG 转 JPG，会损失掉透明的部分（因为 JPG 不支持图片的透明），但文件大小会减少很多，根据不同的压缩比，可以达到 10 倍的压缩比
-
-#### transformBlob
-
-- @name 图片转 blob 格式
-- @param { src } [ string ]
-- @param { type = image/png } [ string ]
-- @return { string }
-- @msg 除 png 之外的图片尺寸都会变化
-
-#### getCompressQuality
-
-- @name 图片压缩-按质量
-- @param { src } [ string ]
-- @param { quality } [number] 压缩后的质量
-- @param { type = image/png } [ string ] 文件的类型，最好是先知道文件的类型，相同类型之间的压缩会更准确
-- @return: [ string ] base64
-
-#### getCompressWidth
-
-- @name 图片压缩-指定宽
-- @param { src } [ string ]
-- @param { width } [ number ]
-- @param { type = image/png } [ string ]
-- @return [ string ] base64
-
-#### getCompressHeight
-
-- @name 图片压缩-指定高度
-- @param { src } [ string ]
-- @param { height } [ number ]
-- @param { type = image/png } [ string ]
-- @return [ string ] base64
-
-#### getCompressAspect
-
-- @name 图片压缩=指定高和宽
-- @param { src } [ string ]
-- @param { width } [ number ]
-- @param { height } [ number ]
-- @param { type = image/png } [ string ]
-- @return: [ string ] base64
-- @msg 图片会被挤压
-
-#### getCompressRatio
-
-- @name 图片压缩-指定比率
-- @param { src } [ string ]
-- @param { ratio } [ number ]
-- @param { type = image/png } [ string ]
-- @return [ string ] base64
-
-#### getCompressSize
-
-- @name 图片压缩-指定体积的图片
-- @msg Base64 编码要求把 3 个 8 位字节（3 _ 8=24）转化为 4 个 6 位的字节（4 _ 6=24），之后在 6 位的前面补两个 0，形成 8 位一个字节的形式。 如果剩下的字符不足 3 个字节，则用 0 填充，输出字符使用’=’，因此编码后输出的文本末尾可能会出现 1 或 2 个’=’
-- @param { src } [ string ] 图片地址
-- @param { size = 200 \* 1024 } [ number ] | 200 \* 1024 压缩到指定的大小 需要精确到 Bytes
-- @param { range = 100 } [number ] | 10 \* 1024 容错范围即可 需要精确到 Bytes
-- @param { type = image/png } [ string ]
-- @return [ string ] base64
-
-```js
-let image = new Image$();
-let src = "http://img2.imgtn.bdimg.com/it/u=298887015,2313380003&fm=26&gp=0.jpg";
-image.getSize(src).then(res => {
-  console.log(image.transformSize(res));
-});
-image.getType(src).then(res => {
-  console.log(res);
-});
-image.getCompressAspect(src, 50, 50).then(res => {
-  console.log(res);
-});
-image.getCompressHeight(src, 50).then(res => {
-  console.log(res);
-});
-image.getCompressWidth(src, 50).then(res => {
-  console.log(res);
-});
-image.getCompressSize(src, 10 * 1024, 100).then(res => {
-  console.log(res);
-});
-```
 
 ### Storage([local=true])
 
