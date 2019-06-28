@@ -2,16 +2,16 @@ import classer from "./classer";
 import checker from "./checker";
 import heighter from "./heighter";
 import listener from "./listener";
-import offseter from "./offseter";
 import queryer from "./queryer";
 import scroller from "./scroller";
 
-export default { classer, checker, heighter, listener, offseter, queryer, scroller };
+export default { classer, checker, heighter, listener, queryer, scroller };
 
 // window.innerHeight 各大浏览器表现一致
 
 // clientHeight | scrollHeight | offsetHeight |  offsetTop | scrollTop
-// 在非document.body 和 document.documentElement下，各大浏览器的值均一致
+
+// 普通的dom元素，即在非document.body 和 document.documentElement下，各大浏览器的值均一致
 // clientHeight : 元素可见高度，包括padding，不包括border，滚动条，必须是块级元素
 // scrollHeight : 元素内部可滚动的像素
 // offsetHeight : 元素可见高度，包括padding，border，滚动条，也必须是块级元素
@@ -19,7 +19,72 @@ export default { classer, checker, heighter, listener, offseter, queryer, scroll
 // scrollTop : 内部的元素被卷起的高度，该值可读也可设置
 
 // 在document.body 和 document.documentElement下
-// document.body ( body不能设置 padding和border)
-// scrollHeight : 只有chrome会包括内部元素设置的margin属性，其他的均不包括
-// clientHeight :
-// offsetHeight :
+// height:400px,padding:20px,border:10px
+// wh - window.innerHeight
+// 小于wh时
+// 电脑端
+// document.body.clientHeight - 460
+// document.body.scrollHeight - 460
+// document.body.offsetHeight - 460
+// document.documentElement.clientHeight - wh
+// document.documentElement.scrollHeight - wh
+// document.documentElement.offsetHeight - 460
+//  手机端
+// document.body.clientHeight - 460
+// document.body.scrollHeight - wh
+// document.body.offsetHeight - 460
+// document.documentElement.clientHeight - wh
+// document.documentElement.scrollHeight - 460
+// document.documentElement.offsetHeight - 460
+
+// height:400px,padding:20px,border:10px,margin-bottom:20px
+// 电脑端
+// 谷歌
+// document.body.clientHeight - 460
+// document.body.scrollHeight - 480
+// document.body.offsetHeight - 460
+// document.documentElement.clientHeight - wh
+// document.documentElement.scrollHeight - wh
+// document.documentElement.offsetHeight - 480
+// 火狐 IE
+// document.body.clientHeight - 460
+// document.body.scrollHeight - 460
+// document.body.offsetHeight - 460
+// document.documentElement.clientHeight - wh
+// document.documentElement.scrollHeight - wh
+// document.documentElement.offsetHeight - 480
+// 手机端
+// document.body.clientHeight - 460
+// document.body.scrollHeight - wh
+// document.body.offsetHeight - 460
+// document.documentElement.clientHeight - wh
+// document.documentElement.scrollHeight - 480
+// document.documentElement.offsetHeight - 480
+
+// 大于wh时
+// height:1000px,padding:20px,border:10px
+// 电脑端 + 手机端
+// document.body.clientHeight - 1060
+// document.body.scrollHeight - 1060
+// document.body.offsetHeight - 1060
+// document.documentElement.clientHeight - wh
+// document.documentElement.scrollHeight - 1060
+// document.documentElement.offsetHeight - 1060
+
+// height:1000px,padding:20px,border:10px
+// 电脑端 + 谷歌 + 手机端
+// document.body.clientHeight - 1060
+// document.body.scrollHeight - 1080
+// document.body.offsetHeight - 1060
+// document.documentElement.clientHeight - wh
+// document.documentElement.scrollHeight - 1080
+// document.documentElement.offsetHeight - 1080
+// 电脑端 + 火狐 + IE
+// document.body.clientHeight - 1060
+// document.body.scrollHeight - 1060
+// document.body.offsetHeight - 1060
+// document.documentElement.clientHeight - wh
+// document.documentElement.scrollHeight - 1080
+// document.documentElement.offsetHeight - 1080
+
+// 由以上得知，document.documentElement.offsetHeight是文档的高度最好的期望值

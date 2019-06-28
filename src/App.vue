@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <div class="inner blue" ref="inner">
-      <p>height.document : {{ height.document }}</p>
-      <p>height.window : {{ height.window }}</p>
-      <p>height.inner : {{ height.inner }}</p>
+    <div class="outer blue" ref="outer">
+      <div class="inner green">
+        <div v-for="item in 10" :key="item">{{ item }}</div>
+      </div>
     </div>
   </div>
 </template>
@@ -19,17 +19,18 @@ export default {
         document: 0,
         window: 0,
         inner: 0
+      },
+      scroller: {
+        top: 0
       }
     };
   },
   components: {},
   mounted() {
     this.$nextTick(() => {
-      this.height.document = domer.heighter(document);
-      this.height.window = domer.heighter(window);
-      this.height.inner = domer.heighter(this.$refs["inner"]);
-      let bool = domer.checker(this.$refs["inner"]);
-      console.log(bool);
+      console.log(domer.queryer.byClassName("inner"));
+      console.log(domer.queryer.byIdName("app"));
+      console.log(domer.queryer.byTagName("body"));
     });
   },
   methods: {
@@ -41,14 +42,12 @@ export default {
 
 <style>
 .outer {
-  padding: 20px;
   height: 500px;
+  overflow: auto;
+  padding: 20px;
 }
 .inner {
-  height: 400px;
-  padding: 20px;
-  border: 10px solid black;
-  margin-bottom: 20px;
+  height: 1500px;
 }
 
 .red {

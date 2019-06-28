@@ -10,15 +10,129 @@
 
 #### checker
 
-- @name 判断一个值是否是 dom 元素
+- @name 判断是否是 dom 节点
+- @care
+- console.log(document.**proto**); // HTMLDocument
+- console.log(document.**proto**.**proto**); // Document
+- console.log(document.**proto**.**proto**.**proto**); // Node
+- console.log(document.**proto**.**proto**.**proto**.**proto**); // EventTarget
+-
+- console.log(window.**proto**); // Window
+- console.log(window.**proto**.**proto**); // WindowProperties
+- console.log(window.**proto**.**proto**.**proto**); // Node
+- console.log(window.**proto**.**proto**.**proto**.**proto**); // EventTarget
+-
+- console.log(document.body.**proto**); // HTMLBodyElement
+- console.log(document.body.**proto**.**proto**); // HTMLElement
+- console.log(document.body.**proto**.**proto**.**proto**); // Element
+- console.log(document.body.**proto**.**proto**.**proto**.**proto**); // Node
+- console.log(document.body.**proto**.**proto**.**proto**.**proto**.**proto**); // EventTarget
+-
+- console.log(document.documentElement.**proto**); // HTMLHtmlElement
+- console.log(document.documentElement.**proto**.**proto**); // HTMLElement
+- console.log(document.documentElement.**proto**.**proto**.**proto**); // Element
+- console.log(document.documentElement.**proto**.**proto**.**proto**.**proto**); // Node
+- console.log(document.documentElement.**proto**.**proto**.**proto**.**proto**.**proto**); // EventTarget
+- @param { elem } [ any ]
+- @return [ boolean ]
+
+#### checker.document
+
+- @name 判断是否是 document
+- @param { elem } [ any ]
+- @return [ boolean ]
+
+#### checker.window
+
+- @name 判断是否是 window
 - @param { elem } [ any ]
 - @return [ boolean ]
 
 #### classer
 
+- @name 获取元素的 class 属性
+- @param { elem } [ dom ] dom 元素
+- @return [ array ]
+
+#### classer.haser
+
+- @name 获取元素的中是否存在指定的 class 属性名
+- @param { elem } [ dom ] dom 元素
+- @param { className } [ string ] 指定的 class 名
+- @return [ boolean ]
+
+#### classer.adder
+
+- @name 添加指定的 class 属性名
+- @param { elem } [ dom ] dom 元素
+- @param { className } [ string ] 指定的 class 名
+- @return [ elem ]
+
+#### classer.remover
+
+- @name 移除指定的 class 属性名
+- @param { elem } [ dom ] dom 元素
+- @param { className } [ string ] 指定的 class 名
+- @return [ elem ]
+
 #### listener
 
+- @name 添加事件
+- @param { elem } [ element ]
+- @param { type } [ string ]
+- @param { handler } [ function ]
+- @return void
+
+#### listener.closer
+
+- @name 取消事件
+- @param { elem } [ element ]
+- @param { type } [ string ]
+- @param { handler } [ function ]
+- @return void
+
 #### queryer
+
+- @name 获取页面元素
+- @param { selector } [ string ]
+
+#### queryer.byIdName
+
+- @name 通过 id 获取页面元素
+- @param { selector } [ string ]
+
+#### queryer.byClassName
+
+- @name 通过 class 名获取页面元素
+- @param { selector } [ string ]
+
+#### queryer.byTagName
+
+- @name 通过 tag 名获取页面元素
+- @param { selector } [ string ]
+
+#### scroller
+
+- @name 获取最近的祖先元素是滚动元素的
+- @param { element } [ element ]
+- @param { rootParent = window } [ element ]
+- @return [ number ]
+
+#### scroller.top
+
+- @name 获取指定元素的滚动距离
+- @msg 当元素是 window 时，window 并没有 scrollTop 属性值，pageYOffset 代表该值
+- 当客户端为手机端时，得到的是 document.body 值，而 document.documentElement 值为 0 ，为电脑时，反之
+- @param { element } [ element ]
+- @param { top } [ number ]
+- @return
+- 当 top = null 时，则是获取值，否则是设置值
+
+```js
+// 使得某个元素滚动到底部
+let scrollHeight = this.$refs["outer"].scrollHeight;
+domer.scroller.top(this.$refs["outer"], scrollHeight);
+```
 
 ### object
 

@@ -1,43 +1,11 @@
 import checker from "./checker";
 /**
- * @name 获取完整的文档高度
+ * @name 获取最近的祖先元素是滚动元素的
+ * @param { element } [ element ]
+ * @param { rootParent = window } [ element ]
  * @return [ number ]
  */
-let scroller = function() {
-  return Math.max(document.body.scrollHeight || 0, document.documentElement.scrollHeight || 0);
-};
-
-/**
- * @name 获取完整的文档宽度
- * @return [ number ]
- */
-scroller.width = function() {
-  return Math.max(document.body.scrollWidth || 0, document.documentElement.scrollWidth || 0);
-};
-
-/**
- * @name 获取指定元素的滚动距离
- * @return [ number ]
- */
-scroller.top = function(element) {
-  if (!checker(element)) throw new Error("The first argument must be HTMLElement.");
-  return "scrollTop" in element ? element.scrollTop : element.pageYOffset;
-};
-
-/**
- * @name 获取文档的滚动距离
- * @return [ number ]
- */
-scroller.top.body = function() {
-  return document.documentElement && document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop;
-};
-/**
- * @name 获取当前元素最近的滚动的祖先元素
- * @param { element } [ element ] 当前元素
- * @param { rootParent = window } 默认返回的祖先元素
- * @return [ element ]
- */
-scroller.target = function(element, rootParent = window) {
+let scroller = function(element, rootParent = window) {
   if (!checker(element)) throw new Error("The first argument must be HTMLElement.");
   let node = element;
   while (node && node.tagName !== "HTML" && node.tagName !== "BODY" && node.nodeType === 1 && node !== rootParent) {
@@ -50,4 +18,38 @@ scroller.target = function(element, rootParent = window) {
   return rootParent;
 };
 
+/**
+ * @name 获取指定元素的滚动距离
+ * @msg 当元素是window时，window并没有scrollTop属性值，pageYOffset代表该值
+ * 当客户端为手机端时，得到的是 document.body值，而document.documentElement值为0 ，为电脑时，反之
+ * @param { element } [ element ]
+ * @param { top }  [ number ]
+ * @return
+ * 当 top = null时，则是获取值，否则是设置值
+ */
+scroller.top = function(element, top) {
+  if (top == null) {
+    let scrollTop = 0;
+    if (checker.window(element)) {
+      scrollTop = window.pageYOffset || document.body.scrollTop || document.documentElement.scrollTop;
+    } else {
+      scrollTop = element.scrollTop;
+    }
+    return scrollTop;
+  } else {
+    if (checker.window(element)) {
+      document.documentElement.scrollTop = top;
+      document.body.scrollTop = top;
+    } else {
+      element.scrollTop = top;
+    }
+  }
+};
+
 export default scroller;
+
+//document.body.scrollTop - 手机端支持 ， 否则为0
+//document.documentElement.scrollTop - 电脑端支持 ，否则为0
+
+// let scrollHeight = this.$refs["outer"].scrollHeight;
+// domer.scroller.top(this.$refs["outer"], scrollHeight);
