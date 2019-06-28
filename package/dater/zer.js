@@ -1,6 +1,7 @@
 /**
- * 补0
+ * @name 补0
  * @param {value} [number] 需要补0的数
+ * @return [ string ]
  */
 
 export default function setZero(value) {

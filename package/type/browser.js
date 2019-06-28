@@ -3,7 +3,7 @@
  * @return  [ string ]
  */
 
-export default function browserType() {
+export default function browser() {
   let userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
   let isOpera = userAgent.indexOf("Opera") > -1; //判断是否Opera浏览器
   let isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 && !isOpera; //判断是否IE浏览器

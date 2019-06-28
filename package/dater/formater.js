@@ -1,12 +1,15 @@
+import checker from "./checker";
 /**
- * 时间格式化
- * @param {date} date 需要格式化的时间
- * @param {fmt} fmt 格式化规则 yyyy-MM-dd HH:
+ * @name 时间格式化
+ * @param {date} [date] 需要格式化的时间
+ * @param {fmt} [ string ] 格式化规则 yyyy-MM-dd HH:mm:ss
+ * @example console.log(formater(new Date(), "yyyy-MM-dd HH:mm:ss ")); => 2019-06-28 18:19:16
  */
-export default function formater(date, fmt) {
-  if (!date) throw new Error("参数[date]不能为空！");
-  if (!fmt) throw new Error("参数[fmt]不能为空！");
-  date = new Date(date);
+let formater = function(date, fmt) {
+  let checkDate = new Date(date);
+  if (!checker(date)) throw new Error("The first argument must be a valid date.");
+  if (typeof fmt !== "string") throw new Error("The second argument must be string.");
+  date = checkDate;
   var o = {
     "M+": date.getMonth() + 1, //月份
     "d+": date.getDate(), //日
@@ -19,4 +22,7 @@ export default function formater(date, fmt) {
   if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (date.getFullYear() + "").substr(4 - RegExp.$1.length));
   for (var k in o) if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k] : ("00" + o[k]).substr(("" + o[k]).length));
   return fmt;
-}
+};
+
+export default formater;
+//console.log(formater("new Date()", "yyyy-MM-dd HH:mm:ss "));

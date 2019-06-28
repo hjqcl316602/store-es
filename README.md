@@ -6,6 +6,38 @@
 
 ## 对象式
 
+### dater
+
+#### checker
+
+- @name 验证一个数据是否是合法的时间格式
+- @param { date } [ any ]
+- @msg 当 date 是 null true 1 等值时，可以得到合法的时间
+- @return [ boolean ]
+- @example console.log(checker(new Date())); // => true
+
+#### formater
+
+- @name 时间格式化
+- @param {date} [date] 需要格式化的时间
+- @param {fmt} [ string ] 格式化规则 yyyy-MM-dd HH:mm:ss
+- @msg 当 date 是 null true 1 等值时，得到的是 1970 的数据
+- @example console.log(formater(new Date(), "yyyy-MM-dd HH:mm:ss ")); => 2019-06-28 18:19:16
+
+#### reverer
+
+- @name 获取剩余时间
+- @param { startTime } [string,number] 开始时间
+- @param { endTime } [string,number] 结束时间
+- @param { range } [string,number] 时间范围
+- @example console.log(reverser("2019-06-29", new Date(), 10 \* 1000));
+
+#### zer
+
+- @name 补 0
+- @param {value} [number] 需要补 0 的数
+- @return [ string ]
+
 ### domer
 
 #### checker
@@ -588,7 +620,7 @@ domer.scroller.top(this.$refs["outer"], scrollHeight);
 
 ### type
 
-#### browserType
+#### browser
 
 - @name 获取浏览器的类型
 - @return [ string ]

@@ -18,7 +18,6 @@ const isRegexp = is("regexp");
 
 export default {
   browser,
-
   ios,
   is,
   orientation,

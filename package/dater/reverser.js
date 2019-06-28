@@ -1,13 +1,17 @@
 import zer from "./zer";
-
+import checker from "./checker";
 /**
- * 获取剩余时间
- * @param {startTime} [string,number][require]  开始时间
- * @param {endTime} [string,number][require]   结束时间
- * @param {range} [string,number][require] 时间范围
+ * @name 获取剩余时间
+ * @param { startTime } [string,number]  开始时间
+ * @param { endTime } [string,number]   结束时间
+ * @param { range } [string,number] 时间范围
+ * @example console.log(reverser("2019-06-29", new Date(), 10 * 1000));
  */
 
-export default function reverse(startTime, endTime, range) {
+export default function reverser(startTime, endTime, range) {
+  if (!checker(startTime)) throw new Error("The first argument must be a valid date.");
+  if (!checker(endTime)) throw new Error("The second argument must be a valid date.");
+  if (typeof range !== "number") throw new Error("The third argument must be number.");
   let muster = [{ text: "日", value: 24 * 60 * 60 * 1000 }, { text: "时", value: 60 * 60 * 1000 }, { text: "分", value: 60 * 1000 }, { text: "秒", value: 1000 }];
   startTime = +new Date(startTime);
   endTime = +new Date(endTime);
@@ -39,3 +43,5 @@ export default function reverse(startTime, endTime, range) {
 
   return { muster, message: message };
 }
+
+//console.log(reverser("2019-06-29", new Date(), 10 * 1000));
