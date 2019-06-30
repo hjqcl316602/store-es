@@ -4,7 +4,7 @@ import checker from "./checker";
  * @param { createTime } [date]  创建时间
  * @param { currentTime } [date]   当前时间
  * @param { backTimeRange } [date] 倒计时范围
- * @param { type = 'day'}
+ * @param { type = 'day'} [ 'day','hour','minute','second']
  * @return { object }
  * code 标识 -1/当前时间小于起始时间 | 0/正在倒计时中... 1/当前时间大于起始时间与倒计时之和
  * memo 描述
@@ -66,5 +66,3 @@ reverser.minute = function(createTime, currentTime, backTimeRange) {
 reverser.second = function(createTime, currentTime, backTimeRange) {
   return reverser(createTime, currentTime, backTimeRange, "second");
 };
-
-

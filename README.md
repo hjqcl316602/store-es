@@ -30,7 +30,7 @@
 - @param { createTime } [date] 创建时间
 - @param { currentTime } [date] 当前时间
 - @param { backTimeRange } [date] 倒计时范围
-- @param { type = 'day'}
+- @param { type = 'day'} [ 'day','hour','minute','second']
 - @return { object }
 - code 标识 -1/当前时间小于起始时间 | 0/正在倒计时中... 1/当前时间大于起始时间与倒计时之和
 - memo 描述
@@ -87,7 +87,7 @@ console.table(res["storage"]);
 
 #### checker
 
-- @name 判断是否是 dom 节点
+- @name 判断元素类型
 - @care
 - console.log(document.**proto**); // HTMLDocument
 - console.log(document.**proto**.**proto**); // Document
@@ -110,20 +110,15 @@ console.table(res["storage"]);
 - console.log(document.documentElement.**proto**.**proto**.**proto**); // Element
 - console.log(document.documentElement.**proto**.**proto**.**proto**.**proto**); // Node
 - console.log(document.documentElement.**proto**.**proto**.**proto**.**proto**.**proto**); // EventTarget
-- @param { elem } [ any ]
+- @param { elem } [ any<require> ]
+- @param { type = 'dom'} [ 'dom','document','window']
 - @return [ boolean ]
+
+#### checker.dom
 
 #### checker.document
 
-- @name 判断是否是 document
-- @param { elem } [ any ]
-- @return [ boolean ]
-
 #### checker.window
-
-- @name 判断是否是 window
-- @param { elem } [ any ]
-- @return [ boolean ]
 
 #### classer
 

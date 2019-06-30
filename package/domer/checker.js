@@ -1,5 +1,5 @@
 /**
- * @name 判断是否是dom节点
+ * @name 判断元素类型
  * @care
  * console.log(document.__proto__); // HTMLDocument
  * console.log(document.__proto__.__proto__); // Document
@@ -22,30 +22,30 @@
  * console.log(document.documentElement.__proto__.__proto__.__proto__); // Element
  * console.log(document.documentElement.__proto__.__proto__.__proto__.__proto__); // Node
  * console.log(document.documentElement.__proto__.__proto__.__proto__.__proto__.__proto__); // EventTarget
- * @param { elem } [ any ]
+ * @param { elem } [ any<require> ]
+ * @param { type = 'dom'} [ 'dom','document','window']
  * @return [ boolean ]
  */
 
-let checker = function(elem) {
-  return elem != null && typeof elem === "object" && elem.nodeType === 1 && typeof elem.nodeName === "string";
+let checker = function(elem, type = "dom") {
+  if (elem == null) throw new Error("The argument must be require.");
+  if (type === "dom") {
+    return typeof elem === "object" && elem.nodeType === 1 && typeof elem.nodeName === "string";
+  } else if (type === "document") {
+    return typeof elem === "object" && elem.nodeType === 9 && elem.nodeName === "#document";
+  } else if (type === "window") {
+    return elem === elem.window;
+  }
 };
-
-/**
- * @name 判断是否是document
- * @param { elem } [ any ]
- * @return [ boolean ]
- */
-checker.document = function(document) {
-  return document != null && typeof document === "object" && document.nodeType === 9 && document.nodeName === "#document";
+checker.dom = function(elem) {
+  return checker(elem, "dom");
 };
-/**
- * @name 判断是否是window
- * @param { elem } [ any ]
- * @return [ boolean ]
- */
-checker.window = function(window) {
-  return window != null && window === window.window;
+checker.document = function(elem) {
+  return checker(elem, "document");
 };
-
-//console.log(checker.document(document));
+checker.window = function(elem) {
+  return checker(elem, "window");
+};
 export default checker;
+
+//console.log(checker.window(window));
