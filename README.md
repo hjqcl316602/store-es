@@ -1005,44 +1005,51 @@ console.log(arr);
 - @name 获取图片的高宽
 - @param { src } [ string ] 图片地址 [ 访问路径式，based4 式，二进制式]
 - @return [ promise ] => [ number ]
+- @param { type} ["height-width", "height", "width", "volume"] volume(体积)
 - @example sizer("http://img5.imgtn.bdimg.com/it/u=1128579105,2742690848&fm=26&gp=0.jpg").then(res => console.log(res));
 
-#### sizer.widther
+#### sizer.height
 
 - @name 获取图片的宽度
 - @param { src } [ string ] 图片地址 [ 访问路径式，based4 式，二进制式]
 - @return [ promise ] => [ number ]
-- @example sizer.widther("http://img5.imgtn.bdimg.com/it/u=1128579105,2742690848&fm=26&gp=0.jpg").then(res => console.log(res));
 
-#### sizer.heighter
+#### sizer.width
 
 - @name 获取图片的高度
 - @param { src } [ string ] 图片地址 [ 访问路径式，based4 式，二进制式]
 - @return [ promise ] => [ number ]
-- @example sizer.widther("http://img5.imgtn.bdimg.com/it/u=1128579105,2742690848&fm=26&gp=0.jpg").then(res => console.log(res));
 
-#### sizer.volumer
+#### sizer.volume
 
 - @name 获取图片的体积
 - @param { src } [ string ] 图片地址 [ 访问路径式，based4 式，二进制式]
 - @return [ promise ] => [ number ]
-- @example sizer.widther("http://img5.imgtn.bdimg.com/it/u=1128579105,2742690848&fm=26&gp=0.jpg").then(res => console.log(res));
 
-#### transformer.baser
+#### transformer
 
-- @name 图片转 base64 格式
+- @name 图片格式转换
 - @param { src } [ string ]
-- @params { type = image/png} [string ]
-- @return [ promise ] => [ string<base64>]
-- @example transformer.baser("http://img5.imgtn.bdimg.com/it/u=1128579105,2742690848&fm=26&gp=0.jpg").then(res => console.log(res));
+- @param { type } ["base64", "blob"]
+- @return [ promise ]
 
-#### transformer.blober
+```js
+transformer("http://img5.imgtn.bdimg.com/it/u=1128579105,2742690848&fm=26&gp=0.jpg", "blob").then(res => console.log(res)); //image/jpeg
+transformer.blob("http://img5.imgtn.bdimg.com/it/u=1128579105,2742690848&fm=26&gp=0.jpg").then(res => console.log(res)); //image/jpeg
+transformer.base64("http://img5.imgtn.bdimg.com/it/u=1128579105,2742690848&fm=26&gp=0.jpg").then(res => console.log(res)); //image/jpeg
+```
 
-- @name 图片转 blob 格式
+#### transformer.base64
+
+- @name 图片格式转 base64
 - @param { src } [ string ]
-- @params { type = image/png} [string ]
-- @return [ promise ] => [ string<blob>]
-- @example transformer.baser("http://img5.imgtn.bdimg.com/it/u=1128579105,2742690848&fm=26&gp=0.jpg").then(res => console.log(res));
+- @return [ promise ]
+
+#### transformer.blob
+
+- @name 图片格式转 blob
+- @param { src } [ string ]
+- @return [ promise ]
 
 #### typer
 

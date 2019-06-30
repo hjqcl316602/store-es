@@ -1,19 +1,13 @@
-let transformer = {};
 /**
- * @name 图片转base64格式
+ * @name 图片格式转换
  * @param { src } [ string ]
- * @params { type = image/png} [string ]
- * @return [ promise ] => [ string<base64>]
- * @example transformer.baser("http://img5.imgtn.bdimg.com/it/u=1128579105,2742690848&fm=26&gp=0.jpg").then(res => console.log(res));
+ * @param { type } ["base64", "blob"]
+ * @return [ promise ]
  */
 
-transformer.baser = function(src, type = "image/png") {
-  if (typeof src !== "string") {
-    throw new Error("The first argument must be string.");
-  }
-  if (typeof type !== "string") {
-    throw new Error("The second argument must be string.");
-  }
+let transformer = function(src, type = "base64") {
+  if (typeof src !== "string") throw new Error("The first argument must be string.");
+  if (["base64", "blob"].findIndex(item => item === type) === -1) throw new Error("The third argument must be in ['base64', 'blob' ].");
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       let image = new Image();
@@ -27,9 +21,20 @@ transformer.baser = function(src, type = "image/png") {
           canvas.height = image.height;
           let ctx = canvas.getContext("2d");
           ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
-          let dataurl = canvas.toDataURL(type, 1);
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-          resolve(dataurl);
+          if (type === "base64") {
+            let dataurl = canvas.toDataURL(type, 1);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            resolve(dataurl);
+          } else {
+            canvas.toBlob(
+              function(blob) {
+                resolve(blob);
+              },
+              type,
+              1
+            );
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+          }
         } catch (e) {
           reject(e);
         }
@@ -40,54 +45,14 @@ transformer.baser = function(src, type = "image/png") {
     }, 0);
   });
 };
-
-/**
- * @name  图片转blob格式
- * @param { src } [ string ]
- * @param { type = image/png } [ string ]
- * @return  [ promise] => [ string<blob> ]
- * @msg   除png之外的图片尺寸都会变化
- * @example transformer.blober("http://img5.imgtn.bdimg.com/it/u=1128579105,2742690848&fm=26&gp=0.jpg").then(res => console.log(res));
- */
-transformer.blober = function(src, type = "image/png") {
-  if (typeof src !== "string") {
-    throw new Error("The first argument must be string.");
-  }
-  if (typeof type !== "string") {
-    throw new Error("The second argument must be string.");
-  }
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      let image = new Image();
-      image.src = src;
-      image["crossOrigin"] = "Anonymous";
-      image.onload = () => {
-        try {
-          let canvas = document.createElement("canvas");
-          //document.body.appendChild(canvas)
-          canvas.width = image.width;
-          canvas.height = image.height;
-          let ctx = canvas.getContext("2d");
-          ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
-          canvas.toBlob(
-            function(blob) {
-              resolve(blob);
-            },
-            type,
-            1
-          );
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-        } catch (e) {
-          reject({ message: "Fail to loaded the picture." });
-        }
-      };
-      image.onerror = () => {
-        reject({ message: "Fail to loaded the picture." });
-      };
-    }, 0);
-  });
+transformer.base64 = function(src) {
+  return transformer(src, "base64");
 };
-
+transformer.blob = function(src) {
+  return transformer(src, "blob");
+};
 export default transformer;
-//transformer.baser("http://img5.imgtn.bdimg.com/it/u=1128579105,2742690848&fm=26&gp=0.jpg").then(res => console.log(res)); //image/jpeg
-//transformer.blober("http://img5.imgtn.bdimg.com/it/u=1128579105,2742690848&fm=26&gp=0.jpg").then(res => console.log(res)); //image/jpeg
+
+// transformer("http://img5.imgtn.bdimg.com/it/u=1128579105,2742690848&fm=26&gp=0.jpg", "blob").then(res => console.log(res)); //image/jpeg
+// transformer.blob("http://img5.imgtn.bdimg.com/it/u=1128579105,2742690848&fm=26&gp=0.jpg").then(res => console.log(res)); //image/jpeg
+// transformer.base64("http://img5.imgtn.bdimg.com/it/u=1128579105,2742690848&fm=26&gp=0.jpg").then(res => console.log(res)); //image/jpeg
