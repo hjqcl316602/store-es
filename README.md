@@ -26,11 +26,56 @@
 
 #### reverer
 
-- @name 获取剩余时间
-- @param { startTime } [string,number] 开始时间
-- @param { endTime } [string,number] 结束时间
-- @param { range } [string,number] 时间范围
-- @example console.log(reverser("2019-06-29", new Date(), 10 \* 1000));
+- @name 获取倒计时信息
+- @param { createTime } [date] 创建时间
+- @param { currentTime } [date] 当前时间
+- @param { backTimeRange } [date] 倒计时范围
+- @param { type = 'day'}
+- @return { object }
+- code 标识 -1/当前时间小于起始时间 | 0/正在倒计时中... 1/当前时间大于起始时间与倒计时之和
+- memo 描述
+- storage 当 code=0 时，倒计时详情
+
+#### reverer.day
+
+- @name 获取倒计时信息
+- @msg 按天
+- @param { createTime } [date] 创建时间
+- @param { currentTime } [date] 当前时间
+- @param { backTimeRange } [date] 倒计时范围
+- @return { object }
+
+#### reverer.hour
+
+- @name 获取倒计时信息
+- @msg 按小时
+- @param { createTime } [date] 创建时间
+- @param { currentTime } [date] 当前时间
+- @param { backTimeRange } [date] 倒计时范围
+- @return { object }
+
+#### reverer.minute
+
+- @name 获取倒计时信息
+- @msg 按分钟
+- @param { createTime } [date] 创建时间
+- @param { currentTime } [date] 当前时间
+- @param { backTimeRange } [date] 倒计时范围
+- @return { object }
+
+#### reverer.second
+
+- @name 获取倒计时信息
+- @msg 按秒
+- @param { createTime } [date] 创建时间
+- @param { currentTime } [date] 当前时间
+- @param { backTimeRange } [date] 倒计时范围
+- @return { object }
+
+```js
+let res = reverser.hour("2019-06-30 12:49:00", new Date(), 60 * 1000);
+console.table(res["storage"]);
+```
 
 #### zer
 
