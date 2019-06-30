@@ -9,6 +9,7 @@
 let throttler = function(fn, delay, type = "timeout") {
   if (typeof fn !== "function") throw new Error("The first argument must be function.");
   if (!Number.isInteger(delay) || delay < 0) throw new Error("The second argument must be int number , and it must be not less than 0.");
+  if (["timeout", "time"].findIndex(item => item === type) === -1) throw new Error("The third argument must be in ['timeout', 'time'].");
   if (type === "timeout") {
     let timeout = null;
     let time = 0;

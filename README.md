@@ -179,18 +179,20 @@ console.table(res["storage"]);
 
 - @name 获取页面元素
 - @param { selector } [ string ]
+- @param { type ='class'} [ 'class','id','tag']
+- @return [ element ]
 
-#### queryer.byIdName
+#### queryer.id
 
 - @name 通过 id 获取页面元素
 - @param { selector } [ string ]
 
-#### queryer.byClassName
+#### queryer.class
 
 - @name 通过 class 名获取页面元素
 - @param { selector } [ string ]
 
-#### queryer.byTagName
+#### queryer.tag
 
 - @name 通过 tag 名获取页面元素
 - @param { selector } [ string ]
@@ -324,6 +326,14 @@ test();
 - @param { delay } 间隔多少秒后执行方法
 - @param { type } [ 'timeout','time']
 - @return [ function ]
+
+```js
+methods: {
+  hanlder: funer.throttler.timeout(function(e) {
+    console.log(e);
+  }, 2000);
+}
+```
 
 #### throttler.timeout
 

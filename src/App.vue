@@ -1,11 +1,11 @@
 <template>
-  <div id="app">
-    <input type="file" @change="change" />
+  <div id="app" class="app">
+    <button @click="hanlder">单击</button>
   </div>
 </template>
 
 <script>
-import { domer, imager } from "../package/index";
+import { domer, imager, funer } from "../package/index";
 console.log(imager);
 export default {
   name: "app",
@@ -17,14 +17,9 @@ export default {
     this.$nextTick(() => {});
   },
   methods: {
-    hanlder() {},
-    change(e) {
-      let file = e.target.files[0];
-      let message = imager.filer.baser(file).then(res => {
-        console.log(res);
-        console.log(imager.baser.size(res));
-      });
-    }
+    hanlder: funer.throttler.timeout(function(e) {
+      console.log(e);
+    }, 2000)
   }
 };
 </script>
