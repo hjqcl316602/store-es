@@ -7,7 +7,7 @@ import type from "./type/index.js";
 import object from "./object/index.js";
 import domer from "./domer/index.js";
 import string from "./string/index.js";
-import fun from "./fun/index.js";
+import funer from "./funer/index.js";
 import number from "./number/index.js";
 import regex from "./regex/index.js";
 import ajax from "./ajax/index.js";
@@ -27,4 +27,4 @@ import EventEmeitter from "./event-emeitter/index.js";
 
 import Calc from "./calc/index.js";
 
-export { ajax, dater, type, array, object, domer, string, fun, number, regex, lang, imager, Storage, Cookie, Hex, Url, Query, Check, EventEmeitter, Calc };
+export { ajax, dater, type, array, object, domer, string, funer, number, regex, lang, imager, Storage, Cookie, Hex, Url, Query, Check, EventEmeitter, Calc };

@@ -116,9 +116,21 @@ console.table(res["storage"]);
 
 #### checker.dom
 
+- @name 判断是否是 dom 节点
+- @param { elem } [ any<require> ]
+- @return [ boolean ]
+
 #### checker.document
 
+- @name 判断是否是 document
+- @param { elem } [ any<require> ]
+- @return [ boolean ]
+
 #### checker.window
+
+- @name 判断是否是 window
+- @param { elem } [ any<require> ]
+- @return [ boolean ]
 
 #### classer
 
@@ -204,6 +216,133 @@ console.table(res["storage"]);
 // 使得某个元素滚动到底部
 let scrollHeight = this.$refs["outer"].scrollHeight;
 domer.scroller.top(this.$refs["outer"], scrollHeight);
+```
+
+### funer
+
+#### beforer
+
+- @name 方法执行前函数
+- @msg 只支持同步函数
+- @param { fn } [function] 执行的方法
+- @param { beforefn } [function] 方法执行前需要执行的方法
+- @param [ function ]
+
+```js
+let dod = beforer(
+  function() {
+    console.log("do something.");
+  },
+  function() {
+    console.log("before.");
+  }
+);
+dod();
+```
+
+#### binder
+
+- @name 函数绑定执行上下文
+- @param { fn } [function] 方法
+- @param { context } [any] 执行的上下文
+- @return [ function ]
+
+```js
+let bin = bind(
+  function(age) {
+    console.log(this, age);
+  },
+  { name: "hjq" }
+);
+
+bin("1111");
+```
+
+#### curryer
+
+- @name 函數柯里化
+- @msg
+- 只传递给函数一部分参数来调用它，让它返回一个函数去处理剩下的参数
+- 可以任意传参，到达预期的时候触发函数执行返回值（可以是参数为空的时候）
+- @param { fn } [ function ]
+- @param { ..args }
+- @return [ function ]
+
+```js
+let add = function(...args) {
+  return args.reduce((prex, next) => prex + next);
+};
+let curryFn = curryer(add, 0);
+
+console.log(curryFn(1, 2, 3)(4)(5, 6, 7, 8)(9, 10)());
+```
+
+#### debouncer
+
+- @name 执行方法去抖动
+- @msg 如果一个函数持续地触发，那么只在它结束后过一段时间只执行一次
+- 使用闭包的作用，独立每个的 bounce，互相不影响
+- @param { fn } [function] 执行的方法
+- @param { delay } 等待多少时间触发
+- @return [ function ]
+
+#### delayer
+
+- @name 延迟多少时间触发事件
+- @param {fn} [function] 触发的方法
+- @param { wait } 等待的时长
+- @param { ..args} 方法的参数
+- @return [ function ]
+
+#### partialer
+
+- @name 偏函數
+- @msg
+- 创建一个调用另一部分参数或变量已经预置的函数
+- 可以先进行一些参数的设置
+- @param { fn } [ function ]
+- @param {...args }
+- @return [ function ]
+
+```js
+let test = delayer(
+  function(...args) {
+    console.log(...args);
+  },
+  2000,
+  "hjq",
+  "hjsh"
+);
+test();
+```
+
+#### throttler
+
+- @name 执行方法节流-定时器式
+- @msg 就是指连续触发事件但是在 n 毫秒中只执行一次函数，
+- @param { fn } [function]执行方法
+- @param { delay } 间隔多少秒后执行方法
+- @param { type } [ 'timeout','time']
+- @return [ function ]
+
+#### throttler.timeout
+
+#### throttler.time
+
+#### uncurryer
+
+- @name 传入一个现有函数，反柯里化会返回一个新的函数，该新函数接受的第一个实参将绑定为 fn 中的 this 的上下文，其他参数将传递给 fn 作为参数
+- @msg 是对 js 内置的其他方法的借调，而不用自己去实现一遍
+- @param { fn } 需要反柯里化的函数
+- @return { function } 返回一个新的函数
+
+```js
+let split = uncurryer(String.prototype.split);
+console.log(split("a,b,c", ","));
+let push = uncurry(Array.prototype.push);
+let arr = [1, 2, 3, 4];
+push(arr, 1, 2, 3, 4);
+console.log(arr);
 ```
 
 ### object
