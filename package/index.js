@@ -18,7 +18,7 @@ import imager from "./imager/index.js";
  */
 
 import Storage from "./storage/index.js";
-import Cookie from "./cookie/index.js";
+//import Cookie from "./cookie/index.js";
 import Hex from "./hex/index.js";
 import Url from "./url/index.js";
 import Query from "./query/index.js";
@@ -27,4 +27,4 @@ import EventEmeitter from "./event-emeitter/index.js";
 
 import Calc from "./calc/index.js";
 
-export { ajax, dater, type, array, object, domer, string, funer, number, regex, lang, imager, Storage, Cookie, Hex, Url, Query, Check, EventEmeitter, Calc };
+export { ajax, dater, type, array, object, domer, string, funer, number, regex, lang, imager, Storage, Hex, Url, Query, Check, EventEmeitter, Calc };

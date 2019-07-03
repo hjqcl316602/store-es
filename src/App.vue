@@ -1,46 +1,32 @@
 <template>
-  <div id="app" class="app">
-    <button @click="hanlder">单击</button>
+  <div id="app">
+    <div>
+      dsd sss
+    </div>
   </div>
 </template>
 
 <script>
-import { domer, imager, funer } from "../package/index";
-console.log(imager);
 export default {
-  name: "app",
-  data() {
-    return {};
-  },
+  name: "App",
   components: {},
-  mounted() {
-    this.$nextTick(() => {});
+  data() {
+    return {
+      value: "red"
+    };
   },
-  methods: {
-    hanlder: funer.throttler.timeout(function(e) {
-      console.log(e);
-    }, 2000)
+  mounted() {
+    setTimeout(() => {
+      this.value = "blue";
+    }, 2000);
   }
 };
 </script>
 
 <style>
-.outer {
-  height: 500px;
-  overflow: auto;
-  padding: 20px;
-}
-.inner {
-  height: 1500px;
-}
-
-.red {
-  background: red;
-}
-.blue {
-  background: blue;
-}
-.green {
-  background: green;
+.flex-box {
+  height: 50px;
+  background-color: red;
+  color: #fff;
 }
 </style>

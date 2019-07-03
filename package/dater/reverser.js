@@ -11,7 +11,7 @@ import checker from "./checker";
  * storage 当code=0时，倒计时详情
  */
 
-let reverser = function(createTime, currentTime, backTimeRange, type = "day") {
+let reverser = function (createTime, currentTime, backTimeRange, type = "day") {
   if (!checker(createTime)) throw new Error("The first argument must be a valid date.");
   if (!checker(currentTime)) throw new Error("The second argument must be a valid date.");
   if (!Number.isInteger(backTimeRange) || backTimeRange < 0) throw new Error("The third argument must be int number,and it must be not less than 0.");
@@ -54,15 +54,17 @@ let reverser = function(createTime, currentTime, backTimeRange, type = "day") {
   return { type: 0, memo: "正在倒计时中...", storage };
 };
 
-reverser.day = function(createTime, currentTime, backTimeRange) {
+reverser.day = function (createTime, currentTime, backTimeRange) {
   return reverser(createTime, currentTime, backTimeRange, "day");
 };
-reverser.hour = function(createTime, currentTime, backTimeRange) {
+reverser.hour = function (createTime, currentTime, backTimeRange) {
   return reverser(createTime, currentTime, backTimeRange, "hour");
 };
-reverser.minute = function(createTime, currentTime, backTimeRange) {
+reverser.minute = function (createTime, currentTime, backTimeRange) {
   return reverser(createTime, currentTime, backTimeRange, "minute");
 };
-reverser.second = function(createTime, currentTime, backTimeRange) {
+reverser.second = function (createTime, currentTime, backTimeRange) {
   return reverser(createTime, currentTime, backTimeRange, "second");
 };
+
+export default reverser

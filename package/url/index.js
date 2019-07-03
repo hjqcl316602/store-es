@@ -4,21 +4,23 @@
  * @Author: huangjunquan
  * @Date: 2019-06-12 11:17:47
  * @LastEditors: huangjunquan
- * @LastEditTime: 2019-06-25 16:47:52
+ * @LastEditTime: 2019-07-03 17:44:52
  */
 /**
  * @name 编码和解码
  * @msg 通过对三个函数的分析，我们可以知道：escape()除了 ASCII 字母、数字和特定的符号外，对传进来的字符串全部进行转义编码，因此如果想对URL编码，最好不要使用此方法。
  * 而encodeURI() 用于编码整个URI,因为URI中的合法字符都不会被编码转换。encodeURIComponent方法在编码单个URIComponent（指请求参 数）应当是最常用的，它可以将参数中的中文、特殊字符进行转义，而不会影响整个URL。
  */
-export default function Url() {}
+export default function Url() {
+
+}
 /**
  * @name 字符串编码
  * @msg 该方法不会对 ASCII 字母和数字进行编码，也不会对下面这些 ASCII 标点符号进行编码： - _ . ! ~ * ' ( ) 。其他所有的字符都会被转义序列替换。
  * @param { string } [ string ]
  * @return [ string ]
  */
-Url.prototype.escape = function(string) {
+Url.prototype.escape = function (string) {
   if (typeof string !== "string") {
     throw new Error("The argument must be string.");
   }
@@ -30,7 +32,7 @@ Url.prototype.escape = function(string) {
  * @param { string } [ string ]
  * @return [ string ]
  */
-Url.prototype.unescape = function(string) {
+Url.prototype.unescape = function (string) {
   if (typeof string !== "string") {
     throw new Error("The argument must be string.");
   }
@@ -42,7 +44,7 @@ Url.prototype.unescape = function(string) {
  * @param { string } [ string ]
  * @return [ string ]
  */
-Url.prototype.encodeURI = function(string) {
+Url.prototype.encodeURI = function (string) {
   if (typeof string !== "string") {
     throw new Error("The argument must be string.");
   }
@@ -54,7 +56,7 @@ Url.prototype.encodeURI = function(string) {
  * @param { string } [ string ]
  * @return [ string ]
  */
-Url.prototype.decodeURI = function(string) {
+Url.prototype.decodeURI = function (string) {
   if (typeof string !== "string") {
     throw new Error("The argument must be string.");
   }
@@ -66,7 +68,7 @@ Url.prototype.decodeURI = function(string) {
  * @param { string } [ string ]
  * @return [ string ]
  */
-Url.prototype.encodeURIComponent = function(string) {
+Url.prototype.encodeURIComponent = function (string) {
   if (typeof string !== "string") {
     throw new Error("The argument must be string.");
   }
@@ -78,7 +80,7 @@ Url.prototype.encodeURIComponent = function(string) {
  * @param { string } [ string ]
  * @return [ string ]
  */
-Url.prototype.decodeURIComponent = function(string) {
+Url.prototype.decodeURIComponent = function (string) {
   if (typeof string !== "string") {
     throw new Error("The argument must be string.");
   }
