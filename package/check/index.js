@@ -4,7 +4,7 @@
  * @Author: huangjunquan
  * @Date: 2019-06-12 11:17:47
  * @LastEditors: huangjunquan
- * @LastEditTime: 2019-06-24 10:49:50
+ * @LastEditTime: 2019-07-04 18:17:57
  * @msg : 首先会判断是否是必填项； 是，则先判断是否有值，再进行后续的验证判断；否，先判断是否有值，无，则跳过该数据的后续验证，有，则继续后续验证、
  * @msg : 支持的类型 regex | len | function
  */
@@ -25,12 +25,12 @@ export default function Check() {
  * @param { message } [ string ] 错误提示语
  * @return [ object ] 当前实例
  */
-Check.prototype.set = function(data, isRequire = false, message = "") {
+Check.prototype.set = function (data, isRequire = false, message = "") {
   if (typeof data !== "string") {
     throw new Error("The first argument must be string.");
   }
   if (typeof isRequire !== "boolean") {
-    throw new Error("The second argument must be bollean.");
+    throw new Error("The second argument must be boolean.");
   }
   if (isRequire && typeof message !== "string") {
     throw new Error("While the second argument is true,the third argument must be string.");
@@ -60,7 +60,7 @@ Check.prototype.set = function(data, isRequire = false, message = "") {
  * @param { len } [ number ] 指定长度
  * @return [ object ]
  */
-Check.prototype.len = function(message, len) {
+Check.prototype.len = function (message, len) {
   if (typeof message !== "string") {
     throw new Error("The first argument must be string.");
   }
@@ -84,7 +84,7 @@ Check.prototype.len = function(message, len) {
  * @param { min } [ number ] 最小长度
  * @return [ object ]
  */
-Check.prototype.minLen = function(message, min) {
+Check.prototype.minLen = function (message, min) {
   if (typeof message !== "string") {
     throw new Error("The first argument must be string.");
   }
@@ -111,7 +111,7 @@ Check.prototype.minLen = function(message, min) {
  * @param { max } [ number ] 最大长度
  * @return [ object ]
  */
-Check.prototype.maxLen = function(message, max) {
+Check.prototype.maxLen = function (message, max) {
   if (typeof message !== "string") {
     throw new Error("The first argument must be string.");
   }
@@ -136,7 +136,7 @@ Check.prototype.maxLen = function(message, max) {
  * @return [ object ]
  */
 
-Check.prototype.rangeLen = function(message, min, max) {
+Check.prototype.rangeLen = function (message, min, max) {
   if (typeof message !== "string") {
     throw new Error("The first argument must be string.");
   }
@@ -164,7 +164,7 @@ Check.prototype.rangeLen = function(message, min, max) {
  * @param { type } [ string ] 指定的正则类型
  * @return [ object ]
  */
-Check.prototype.regex = function(message, type) {
+Check.prototype.regex = function (message, type) {
   if (typeof message !== "string") {
     throw new Error("The first argument must be string.");
   }
@@ -192,7 +192,7 @@ Check.prototype.regex = function(message, type) {
  * @return [ object ]
  */
 
-Check.prototype.check = function(message, callback) {
+Check.prototype.check = function (message, callback) {
   if (typeof message !== "string") {
     throw new Error("The first argument must be string.");
   }
@@ -214,7 +214,7 @@ Check.prototype.check = function(message, callback) {
  * @param { string } [ string ]
  * @return [ boolean ]
  */
-Check.prototype._isRequire = function(string) {
+Check.prototype._isRequire = function (string) {
   if (typeof string !== "string") {
     throw new Error("The argument must be string.");
   }

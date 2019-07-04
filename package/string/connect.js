@@ -20,7 +20,7 @@ export default function connect(string, connect = "-", len = 4) {
   }
 
   let regexp = new RegExp(`([\\s\\S])(?=([\\S\\s]{${len}})+$)`, "g");
-  return string.replace(regexp, function(a, b, c) {
+  return string.replace(regexp, function (a, b, c) {
     return a + connect;
   });
 }
@@ -34,7 +34,7 @@ export default function connect(string, connect = "-", len = 4) {
  * @example connect("13980464237"," ",4) => 1398 0464 237 
  */
 
-connect.start = function(string, connect = "-", len = 4) {
+connect.start = function (string, connect = "-", len = 4) {
   if (typeof string !== "string") {
     throw new Error("The first argument must be string.");
   }
@@ -46,8 +46,8 @@ connect.start = function(string, connect = "-", len = 4) {
   }
 
   let regexp = new RegExp(`(?<=^([\\S\\s]{${len}})+)([\\s\\S])`, "g");
-  console.log(regexp);
-  return string.replace(regexp, function(a, b, c) {
+  //console.log(regexp);
+  return string.replace(regexp, function (a, b, c) {
     return connect + a;
   });
 };
